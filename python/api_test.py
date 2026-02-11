@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
 from .main_test import generate_music
-from gptapi import analyze_emotion
+from .gptapi import analyze_emotion
 from pydantic import BaseModel
 import asyncio
 import time

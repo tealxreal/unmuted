@@ -1,7 +1,7 @@
 import os, re
 from pydub import AudioSegment
 from pypinyin import pinyin, Style
-from melody_test import combine_melody_audio
+from .melody_test import combine_melody_audio
 from config import get_emotion_path
 
 INITIALS = ['b', 'c', 'ch', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 'sh', 't', 'w', 'x', 'y', 'z', 'zh']

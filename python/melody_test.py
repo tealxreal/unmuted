@@ -2,7 +2,7 @@ import os
 from pydub import AudioSegment
 import subprocess
 from config import get_emotion_path
-from gptapi import analyze_emotion
+from .gptapi import analyze_emotion
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHORD_DIR = os.path.join(BASE_DIR, "chord_note_test")

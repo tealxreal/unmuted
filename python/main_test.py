@@ -3,11 +3,11 @@ import re
 from pypinyin import pinyin, Style
 from pydub import AudioSegment
 from datetime import datetime
-from chord_test import combine_audio, distribute_beats
-from melody_test import assign_rhythm_lengths, get_rhythm_pattern
-from effect_test import insert_effect, get_effect_index
-from config import get_chords, get_single_notes, get_emotion_path
-from gptapi import analyze_emotion
+from .chord_test import combine_audio, distribute_beats
+from .melody_test import assign_rhythm_lengths, get_rhythm_pattern
+from .effect_test import insert_effect, get_effect_index
+from .config import get_chords, get_single_notes, get_emotion_path
+from .gptapi import analyze_emotion
 
 # 常數設定
 
