@@ -4,6 +4,7 @@ FROM python:3.11-slim
 # 設定工作目錄
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y ffmpeg
 # 複製 requirements.txt 並安裝套件
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
