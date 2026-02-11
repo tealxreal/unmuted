@@ -21,7 +21,10 @@ app.mount(
 
 @app.get("/")
 async def read_index():
-    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+    index_path = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    
 class SentenceInput(BaseModel):
     sentence: str
 
