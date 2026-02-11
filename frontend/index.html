@@ -683,6 +683,10 @@ async function generateMusic() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ sentence })
             });
+
+            console.log('response ok:', response.ok);
+            console.log('headers:', response.headers);
+
             if (!response.ok) {
                 throw new Error('生成失敗');
             }
