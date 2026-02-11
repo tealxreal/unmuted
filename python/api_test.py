@@ -54,7 +54,7 @@ async def generate(req: GenerateRequest):
 
         return FileResponse(
             audio_path,
-            media_type="audio/wav",
+            media_type="audio/mpeg",
             filename=os.path.basename(audio_path)
         )
 
