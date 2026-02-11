@@ -1,7 +1,7 @@
 import os
 from pydub import AudioSegment
 import subprocess
-from config import get_emotion_path
+from .config import get_emotion_path
 from .gptapi import analyze_emotion
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
