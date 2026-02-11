@@ -76,8 +76,6 @@ async def delete_old_files():
                     print(f"Deleted old file: {file_path}")
         await asyncio.sleep(3600)  # 每小時掃一次
 
-if __name__ == "__main_test__":
-    import uvicorn
+if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     loop.create_task(delete_old_files())  # 啟動背景任務
-    uvicorn.run("api_test:app", host="0.0.0.0", port=8000)
