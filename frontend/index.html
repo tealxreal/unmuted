@@ -430,7 +430,6 @@
     const inputView = document.getElementById('input-view');
     const loadingView = document.getElementById('loading');
     const playerView = document.getElementById('player-view');
-    const progressBar = document.getElementById('progress-bar');
 
     const canvas = document.getElementById('noise');
     const ctx = canvas.getContext('2d');
@@ -592,13 +591,6 @@ function updateBackground() {
     bg.style.backgroundImage = gradients;
 }
 setInterval( updateBackground, 1000 / 8);
-
-audioPlayer.addEventListener('timeupdate', () => {
-    if (!audioPlayer.duration) return;
-    const progress =
-        (audioPlayer.currentTime / audioPlayer.duration) * 100;
-    progressBar.value = progress;
-});
 
 function switchScene(from, to) {
     from.classList.remove('hidden');
