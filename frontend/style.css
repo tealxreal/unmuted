@@ -1,0 +1,748 @@
+body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: rgb(47, 47, 47);
+            font-family:"Noto Sans", "微軟正黑體",sans-serif;
+            background-size: cover;
+            position: relative;
+            
+            scroll-padding-top: 0px;
+            overscroll-behavior-y: contain;
+            overflow: visible;
+            scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
+            /* ✅ 吸附設定放這裡（因為是 body 在滾） */
+            
+        }
+        html {  
+            overflow-y: scroll; 
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;   /* ✅ snap 放在真正滾的容器 */
+            scroll-behavior: auto;  
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+         .gradient {
+            background: #323C4A;
+            background-image: linear-gradient(#97ADCF, #E3D9BE);
+        }
+        .page {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;  /* 垂直置中 */
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0; 
+            
+            background: transparent;
+
+            scroll-snap-align: start;
+            box-sizing: border-box;  /* 保證 padding 不會影響高度計算 */
+        }
+        .page::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background: rgba(0,0,0,0.20); /* 想更暗就調大 */
+            pointer-events:none;
+        }
+        .page > *{
+            position: relative;
+            z-index: 1;
+        }
+        .page-content{
+            height: 100%;
+            padding: 0px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* 取代很多 margin */
+        }
+        /* ✅ 背景層 */
+#bg{
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: #000; /* 當圖片還沒載入的底色 */
+}
+
+#bgTrack{
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.bgSlide{
+  height: 100vh;                 /* 每張剛好一屏 */
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+        #experience-view {
+            display: flex;
+            flex-direction: row;
+            padding: 0 60px;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        #experience-view .page-content{
+            display: flex;
+            gap: 108px;
+        }
+        .experience-left{ 
+            flex: 1; 
+        display: flex;
+    flex-direction: column;   /* 垂直排列 */
+    align-items: center;      /* 水平置中 */
+    justify-content: center;  /* 整組在區塊內垂直置中 */
+    margin: 10px; }
+        .experience-right{ 
+            flex: 1;
+            margin: 10px;
+        display: flex;
+    flex-direction: column;   /* 垂直排列 */
+    align-items: center;      /* 水平置中 */
+    justify-content: center;  /* 整組在區塊內垂直置中 */
+    gap: 36px; }
+    /* 標題群組：你要它在哪裡就改 top/left */
+.title-group{
+  position: static;
+  margin-top: -60px;    /* 你要更靠上就改小 */
+  text-align: left;
+  align-items: center;
+}
+        .title {
+            text-align: center;
+            margin-top: -25px ;
+            font-size: clamp(64px, 10vw, 160px);
+            color: #e4f1ff;
+            letter-spacing: -0.05em;
+            transform: scaleY(0.6);
+        }
+        .title2 { 
+            text-align: left;
+            margin-top: -200px ;
+            margin-left: 120px;
+            font-size: clamp(32px, 4vw, 40px);
+            color: #e4f1ff;
+            
+            letter-spacing: 0.05em;
+            transform: scaleY(0.6);
+        }
+        .title3 { 
+            text-align: right;
+            margin-top: -200px ;
+            margin-right: 120px;
+            font-size: clamp(24px, 2vw, 30px);
+            color: #e4f1ff90;
+            letter-spacing: 0em;
+            transform: scaleY(0.6);
+        }
+        .topline{
+            align-items: center;
+            width: min(1366px, 110vw);
+            height: 1px;
+            background: rgba(232,255,255,0.72);
+            margin-top: -55px;
+        }
+        .description-wrapper {
+            position: absolute;
+            top: 55%;
+            text-align: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        /* 預設：不跑動畫，停在初始狀態 */
+            #home-view .line {
+            align-items: center;
+            border-radius: 20px;
+            background-color: #e4f1ff2b;
+            box-shadow:
+              0 0 6px rgba(255, 255, 255, 0.152);
+            padding: 8px 15px;
+            white-space: nowrap;
+            font-size: 16px;
+            color: #e8ffff;
+            opacity: 0;
+            animation: none;
+            transform: translateX(90%);
+        }
+        /* 只有主畫面被啟用時才跑 */
+        #home-view.is-active .line1{
+            animation: flowText 10s linear infinite;
+            animation-delay: 0s; 
+        }
+        #home-view.is-active .line2{
+            animation: flowText 12s linear infinite;
+            animation-delay: 1.8s; 
+        }
+        #home-view.is-active .line3{
+            animation: flowText 14s linear infinite;
+            animation-delay: 2.7s; 
+        }
+        @keyframes flowText {
+            0% {
+                transform: translateX(90%);
+                opacity: 0;
+            }
+            20%{opacity: 1;}
+            
+            30%{opacity: 1;}
+            70%{opacity: 1;}
+            
+            80%{opacity: 1;}
+            100% {
+                transform: translateX(-90%);
+                opacity: 0;
+            }
+        }
+        .about-text {
+            font-size: clamp(64px, 9vw, 140px);
+            color: #e4f1ff;
+            text-align: center;
+        
+            margin-top: -80px;
+            transform: scale( 1.2, 0.6);
+            letter-spacing: -0.08em;
+        }
+        .about-layout{
+            align-items: stretch; /* 讓下面 row 可以吃滿寬 */
+        }
+        .about-row{
+            width: 100%;
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-top: -50px;
+        }
+        .hashtag-wrapper {
+            position: static;
+            flex: 0 0 400px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 44px;
+        }
+        .hashtag {
+            font-size: 32px;
+            color: #e8ffff;
+            transform: scaleY(0.8);
+        }
+        .concept-container {
+            flex:1;
+            border: 1.5px solid #e4f1ffaf;
+            border-radius: 6px;
+            width: 50vw;
+            margin-left: auto; 
+            display: flex;
+            padding: 24px 50px;
+            justify-content: flex-start;
+            box-shadow:
+            0 0 12px #e4f1ff91,
+            0 0 30px #e4f1ffb3;
+
+        }
+        .concept {
+            text-align: left;
+            right:0 ;
+            font-size: 16px;
+            color: #e4f1ff;
+            line-height: 1.5;
+            white-space: pre-line; 
+        }
+/* ===== About 滾動跟隨轉場：初始位置（在畫面外） ===== */
+.fx1206{
+  --fx-x: 0px;
+  --fx-y: 0px;
+  --fx-o: 0;
+  opacity: var(--fx-o);
+  transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1.2, 0.6);
+  will-change: transform, opacity;
+}
+.fx06{
+  --fx-x: 0px;
+  --fx-y: 0px;
+  --fx-o: 0;
+  opacity: var(--fx-o);
+  transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1, 0.6);
+  will-change: transform, opacity;
+}
+.fx08{
+  --fx-x: 0px;
+  --fx-y: 0px;
+  --fx-o: 0;
+  opacity: var(--fx-o);
+  transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1, 0.8);
+  will-change: transform, opacity;
+}
+.fx{
+  --fx-x: 0px;
+  --fx-y: 0px;
+  --fx-o: 0;
+  opacity: var(--fx-o);
+  transform: translate3d(var(--fx-x), var(--fx-y),0);
+  will-change: transform, opacity;
+}
+.fx-up{
+  --fx-y:120px;
+}
+.fx-left{
+  --fx-x:-140px;
+}
+.fx-right{
+  --fx-x:140px;
+}
+.fx-right2{
+  --fx-x:180px;
+}
+        .glow-texth2 {
+            font-size: clamp(46px, 6vw, 54px); 
+            letter-spacing: -0.08em;
+            transform: scaleY(0.6);
+            color: #e4f1ff;
+            text-shadow:
+                0 0 6px rgba(255, 255, 255, 0.921),
+                0 0 22px rgba(255, 255, 255, 0.529),
+        }
+        .glow-textt {
+            color: #e4f1ff9e;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-shadow:
+                0 0 22px rgba(255, 255, 255, 0.597),
+                0 0 25px rgba(255, 255, 255, 0.385),
+        }
+        /* 右側兩顆按鈕：左右並排 */
+.action-row{
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+}
+/* 小提示字：同 glow-textt 字型即可 */
+.gen-hint{
+  margin-top: -20px;   /* 讓它靠近按鈕底下一點，覺得太近就調成 -10 或 0 */
+  opacity: 0.9;
+}
+        .container {
+            width: 100%;
+            position: relative;
+            background: rgba(0, 0, 0, 0.307);
+            backdrop-filter: blur(0px);
+            z-index: 1;
+        }
+        textarea {
+            width: 50%;
+            height: 100px;
+            resize: none;
+            padding: 12px;
+
+            background: none;
+            border: none;
+            border-radius: 4px;
+
+            font-size: 16px;
+            color: #e8ffff;
+
+            box-shadow:
+                0 0 1px rgba(255,255,255,0.8),
+                0 0 12px rgba(226,242,255,0.3),
+                inset 0 0 8px rgba(255,255,255,0.08);
+
+            outline: none;
+        }
+        textarea::placeholder {
+            color: rgba(232, 255, 255, 0.483);
+            font-size: 12px;
+            }
+            .hidden { 
+                opacity: 0; 
+                pointer-events: none; }
+            /* 中央提示：只在有音樂播放時顯示 */
+            .tap-to-pause{
+                position: fixed;
+                inset: 0;
+                display: grid;
+                place-items: center;
+                pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
+                z-index: 2000;
+
+                font-size: 14px;
+                color: rgba(232,255,255,0.9);
+                text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
+            }
+            /* ✅ 外框 + 呼吸燈：用 pseudo element 做框跟底 */
+.tap-to-pause::before{
+  content: "";
+  position: absolute;
+
+  /* 盒子大小：你可以調整 */
+  width: min(180px, 45vw);
+  padding: 14px 18px; /* 這行不會生效在 pseudo 上，用下面 height 取代 */
+  height: 40px;
+
+  border: 0px solid rgba(232,255,255,0.65);
+  border-radius: 20px;
+
+  background: rgba(0, 0, 0, 0.059);
+  backdrop-filter: blur(4px);
+
+  /* 讓框在正中央 */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  /* 呼吸燈：亮度＋外發光 */
+  animation: breatheGlow 1.8s ease-in-out infinite;
+}
+
+/* ✅ 文字本身也一起輕微呼吸 */
+.tap-to-pause{
+  animation: breatheText 1.8s ease-in-out infinite;
+}
+
+@keyframes breatheGlow{
+  0%{
+    opacity: 0.55;
+    filter: brightness(0.95);
+    box-shadow:
+      0 0 0 rgba(232,255,255,0),
+      0 0 8px rgba(232,255,255,0.08),
+      inset 0 0 10px rgba(232,255,255,0.05);
+  }
+  50%{
+    opacity: 1;
+    filter: brightness(1.12);
+    box-shadow:
+      0 0 12px rgba(232,255,255,0.22),
+      0 0 30px rgba(232,255,255,0.10),
+      inset 0 0 14px rgba(232,255,255,0.08);
+  }
+  100%{
+    opacity: 0.55;
+    filter: brightness(0.95);
+    box-shadow:
+      0 0 0 rgba(232,255,255,0),
+      0 0 8px rgba(232,255,255,0.08),
+      inset 0 0 10px rgba(232,255,255,0.05);
+  }
+}
+
+@keyframes breatheText{
+  0%{
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+  50%{
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  100%{
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+.tap-to-pause.is-hidden{
+  display: none;
+}
+            .tap-to-pause.is-hidden{
+                display: none; /* 直接消失，最不會出包 */
+            } 
+        button {
+            font-family: "Noto Sans", "微軟正黑體", sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            left:0;
+        }
+        .emotion-btn,
+        #clear-btn,
+        #generate-btn {
+            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            border: 1.5px solid rgba(255, 255, 255, 0.761);
+            border-radius: 20px;
+            backdrop-filter: none;
+            
+            padding: 6px 16px;
+            color: #e8ffff;
+            cursor: pointer;
+
+            transition:
+                transform 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                filter 0.18s ease;
+        }
+        #play-btn {
+            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            border: 2.5px solid rgba(255, 255, 255, 0.761);
+            border-radius: 20px;
+            backdrop-filter: none;
+            box-shadow:
+            0 0 12px rgba(232,255,255,0.35),
+            0 0 28px rgba(232,255,255,0.18);
+            padding: 6px 16px;
+            color: #e8ffff;
+            cursor: pointer;
+
+            transition:
+                transform 0.18s cubic-bezier(0.34,1.56,0.64,1),
+                filter 0.18s ease;
+        }
+        
+        /* 避免 disabled 還吃到 hover */
+#play-btn:disabled:hover{
+  transform: none;
+  opacity: 0.35;
+  filter: grayscale(1);
+  background: rgba(0,0,0,0.55);
+}
+/* ✅ Play 按鈕：disabled 時一定暗 */
+#play-btn:disabled,
+#play-btn[disabled]{
+  opacity: 0.28;
+  filter: grayscale(1) brightness(0.7);
+  background: rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.25);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+        .emotion-btn:hover,
+        #clear-btn:hover,
+        #generate-btn:hover,
+        #play-btn:hover {
+            background: rgba(0, 0, 0, 0.597);
+            transform: scale(1.06);
+            opacity: 0.85;
+            filter: brightness(1.2);
+        }
+        .emotion-btn:active,
+        #generate-btn:active,
+        #clear-btn:active,
+        #play-btn:active {
+            transform: scale(1) translateY(1px);
+        }
+        .experience-left,
+        .experience-right {
+            width: 40%;
+        }
+        .experience-left h3,
+        .experience-right h3 {
+           font-size: 22px;
+           margin-bottom: 20px;
+        }
+        .emotion-buttons {
+            width: 150px;
+            padding: 0;
+            align-items: center; 
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        /* ====== 六圓分支流程圖（不合流） ====== */
+.flow6{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+
+  /* 由左至右：圓 / 線 / 圓 / 分支器 / 圓 / 線 / 圓 */
+  grid-template-columns: 160px 64px 160px 74px 160px 64px 160px;
+
+  align-items: center;
+  justify-content: center;
+
+  row-gap: 46px;
+  column-gap: 0px;
+
+  width: min(1100px, 92vw);
+  margin: 24px auto 0;
+  position: relative;
+}
+
+.fnode{
+  width: 140px;
+  height: 140px;
+  border: 2px solid rgba(255,255,255,0.85);
+  border-radius: 999px;
+  background: transparent;
+
+  display: grid;
+  place-items: center;
+  text-align: center;
+
+  color: rgb(232, 255, 255);
+  font-size: 18px;
+  line-height: 1.25;
+  padding: 10px;
+}
+
+/* 主線的圓跨兩列，確保「分支前的圓」水平置中對齊兩分支 */
+.span2{ grid-row: 1 / span 2; justify-self: center; }
+
+.top{ grid-row: 1; justify-self: center; }
+.bottom{ grid-row: 2; justify-self: center; }
+
+/* 水平線（帶箭頭；不想要箭頭就把 ::after 刪掉） */
+.hline{
+  height: 2px;
+  background: rgba(255,255,255,0.75);
+  align-self: center;
+  position: relative;
+}
+.hline::after{
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid rgba(255,255,255,0.75);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+/* Grid 位置 */
+.s1{ grid-column: 1; }
+.l12{ grid-column: 2; }
+.s2{ grid-column: 3; }
+.split{ grid-column: 4; grid-row: 1 / span 2; }
+
+.a1{ grid-column: 5; }
+.la12{ grid-column: 6; }
+.a2{ grid-column: 7; }
+
+.b1{ grid-column: 5; }
+.lb12{ grid-column: 6; }
+.b2{ grid-column: 7; }
+.branch-lines{
+  position: relative;
+  width: 74px;
+  height: 100%;
+}
+
+/* 往上分支 */
+.line-up{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 105px;
+  height: 2px;
+  background: rgba(255,255,255,0.75);
+
+  transform-origin: left center;
+  transform: rotate(-45deg);
+}
+
+/* 往下分支 */
+.line-down{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 105px;
+  height: 2px;
+  background: rgba(255,255,255,0.75);
+
+  transform-origin: left center;
+  transform: rotate(45deg);
+}
+/* 小螢幕微縮避免擠爆（可留可刪） */
+@media (max-width: 1100px){
+  .flow6{
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+#scroll-orb{
+  position: fixed;
+  right: 20px;
+  top: 20px;                 /* 初始值，JS 會動態改 top */
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+  color: rgb(232, 255, 255);
+  font-size: 32px;
+  line-height: 1;
+
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.391);
+  pointer-events: none;      /* 不干擾點擊 */
+  z-index: 2500;
+  will-change: transform;
+}
+        #loading {
+            margin-top: 20px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 16px;
+        }
+        #input-view {
+            position: relative;
+        }    
+@media screen and (max-width: 1366px) and (orientation: landscape) {
+    body {
+        font-size: 16px;
+    }
+
+    .page {
+        padding: 40px 50px;
+    }
+    /* 主標題 */
+    .title {
+        font-size: 16vw;
+        text-align:center;
+    }
+    /* 右上按鈕 */
+    .home-right {
+        bottom: 40px;
+        gap: 250px;
+    }
+    /* 互動頁 */
+    #experience-view {
+        align-items: flex-start;
+        padding-top: 80px;
+    }
+    .experience-left,
+    .experience-right {
+        width: 48%;
+    }
+    /* 情緒標題 */
+    .experience-left h3,
+    .experience-right h3 {
+        font-size: 30px;
+        color: #e8ffff;
+    }
+    /* 按鈕尺寸放大（觸控友好） */
+    button {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+    .emotion-buttons {
+        gap: 16px;
+    }
+    textarea {
+        height: 120px;
+        font-size: 16px;
+    }
+}
+*, *::before, *::after { box-sizing: border-box; }
+/* ===== 完全隱藏 scrollbar ===== */
+
+html, body {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE / 舊 Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;               /* Chrome / Safari / Edge */
+}
