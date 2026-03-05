@@ -3,855 +3,135 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>「Unmuted：」</title>
-
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family:"Noto Sans", "微軟正黑體",sans-serif;
-            
-            background-repeat: no-repeat;
-            background-size: 110% 110%;
-            position: relative;
-            background-color: rgba(126, 126, 126, 0.835);
-        }
-
-        .glow-text {
-            font-size: 76px; 
-            transform: translateX(-7%);
-            color: #e4f1ff;
-            position:absolute;
-            bottom:10%;
-            height: 100%;
-            text-shadow:
-                0 0 2px rgba(255, 255, 255, 0.921),
-                0 0 22px rgba(255, 255, 255, 0.529),
-                0 0 25px rgba(255, 255, 255, 0.436),
-                0 0 30px rgba(255, 255, 255, 0.427);
-        }
-        .glow-texth2 {
-            font-size: 30px; 
-            color: #e4f1ff;
-            text-shadow:
-                0 0 6px rgba(255, 255, 255, 0.921),
-                0 0 22px rgba(255, 255, 255, 0.529),
-                0 0 25px rgba(255, 255, 255, 0.436),
-                0 0 30px rgba(255, 255, 255, 0.427);
-        }
-        .glow-textt {
-            color: #e4f1ff;
-            text-shadow:
-                0 0 22px rgba(255, 255, 255, 0.529),
-                0 0 25px rgba(255, 255, 255, 0.436),
-                0 0 30px rgba(255, 255, 255, 0.427);
-        }
-        .gradient {
-            background: #323C4A;
-            background-image: linear-gradient(#97ADCF, #E3D9BE);
-        }
-
-        .container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.237);
-            backdrop-filter: blur(6px);
-            border-radius: 2px;
-            padding: 32px 24px;
-        }
-
-        textarea {
-            align-items: center;
-            height: 80px;
-            width:360px;
-            resize: none;
-            padding: 10px;
-            font-size: 14px;
-            color: #e8ffff;
-            background: none;
-            box-shadow:
-        0 0 1px rgba(255, 255, 255, 0.86),
-        0 0 12px rgba(226, 242, 255, 0.328),
-        inset 0 0 8px rgba(255,255,255,0.08);
-            border: none;
-            border-radius: 4px;
-            outline: none;
-            }
-        textarea::placeholder {
-            color: rgba(232, 255, 255, 0.483);
-            }
-        button {
-            margin-top: 12px;
-            padding: 8px 20px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .glass-button {
-            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
-            backdrop-filter: blur(5px);
-            padding: 8px 20px;
-            font-size: 14px;
-            color: #e8ffff;
-            cursor: pointer;
-        }
-        .interactive-btn {
-            transition:
-                transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-                filter 0.18s ease;
-            will-change: transform;
-        }
-        .interactive-btn:hover {
-            transform: scale(1.06);
-            opacity: 0.8;
-            filter: brightness(1.2);
-        }
-        .interactive-btn:active {
-            transform: scale(1) translateY(1px);
-        }
-        #loading {
-            margin-top: 20px;
-        }
-        audio {
-            width: 100%;
-            margin-top: 16px;
-        }
-        #input-view {
-            position: relative;
-        }
-        .back-to-start {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 4px 10px;
-            font-size: 12px;
-            margin: 0;
-        }
-        #noise {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
-
-            opacity: 0.12;
-            mix-blend-mode: overlay;
-        }
-        .scene {
-            position: absolute;
-            inset: 0;
-            overflow: hidden; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: none;
-            width: 100%; 
-            height: 100%;
-            
-        }
-        .hidden {
-            display: none;
-            opacity: 0;
-        }
-        .scene:not(.hidden) {
-            pointer-events: auto;
-        }
-        .scene-content {
-            transition:
-                transform 0.8s cubic-bezier(0.02, 1, 0.56, 1),
-                opacity 0.6s ease;
-            transform-origin: center;
-            transform-style: preserve-3d;
-            width:500px
-        }
-        .scene.exiting .scene-content {
-            transform: scale(1.7) translateZ(20px);
-            opacity: 0;
-        }
-        /* 進入動畫最終狀態 */
-        .scene.entered .scene-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .scene.entering .scene-content {
-            transform: scale(1.7);
-            opacity: 0;
-        }
-        .intro-wrapper {
-            position: absolute;
-            width: 80%;
-            height: 500px;
-        }
-        /* 玻璃對話框 */
-        .dialog {
-            position: absolute;
-            max-width: 420px;
-            height: 18px;
-            
-            padding: 14px 18px;
-            border: none;
-            border-radius: 25px;
-            box-shadow:
-        0 0 1px rgba(255, 255, 255, 0.86),
-        0 0 12px rgba(200, 230, 255, 0.328),
-        inset 0 0 8px rgba(255,255,255,0.08);
-            background: none;
-            color:#ffffff;
-            font-size: 15px;
-            line-height: 1.2;
-
-            opacity: 0;
-            transform: translateY(10px) scale(0.95);
-            transition: opacity 0.6s ease, transform 0.6s ease; 
-        }
-
-        .dialog-1 { top: 18%; left: 30%; animation: float1 5s ease-in-out infinite;}
-        .dialog-2 { top: 30%; left: 25%; animation: float2 5.5s ease-in-out infinite;}
-        .dialog-3 { top: 42%; left: 37%; animation: float3 4s ease-in-out infinite;}
-        .dialog-4 { top: 54%; left: 32%; animation: float4 6s ease-in-out infinite;}
-        .dialog-5 { top: 66%; left: 50%; animation: float5 4s ease-in-out infinite;}
-        /* 出現狀態 */
-        .dialog.show {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        
-        }
-        .skip-hint {
-            position: absolute;
-            top: 90px;
-            right: 28px;
-            font-size: 13px;
-            color: #ffffff93;
-        }
-        .continue-hint {
-            position: absolute;
-            text-align: center;
-            bottom: 50px;
-            width: 100%;
-            
-            font-size: 14px;
-            color: #ffffff;
-            letter-spacing: 2px;
-            animation: hintPulse 2.5s ease-in-out infinite;
-        }
-        @keyframes float1 {
-            0%   { transform: translate(0, 0) scale(1); }
-            50%  { transform: translate(3px, -4px) scale(1.01); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes float2 {
-            0%   { transform: translate(0, 0) scale(1); }
-            50%  { transform: translate(-2px, 4px) scale(1.01); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes float3 {
-            0%   { transform: translate(0, 0) scale(1); }
-            50%  { transform: translate(-3px, 2px) scale(1.01);}
-            100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes float4 {
-            0%   { transform: translate(0, 0) scale(1); }
-            50%  { transform: translate(4px, -3px) scale(1.01); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-        @keyframes float5 {
-            0%   { transform: translate(0, 0) scale(1); }
-            50%  { transform: translate(3px, 1px) scale(1.01); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-        .start-hint {
-            position: relative;
-            height:100%;
-            top: 100px;
-            font-size: 14px;
-            letter-spacing: 0.15em;
-            color:#ffffff;
-            opacity: 0.9;
-            animation: hintPulse 2.5s ease-in-out infinite;
-        }
-        @keyframes hintPulse {
-            0%   { opacity: 0.4; }
-            50%  { opacity: 1; }
-            100% { opacity: 0.4; }
-        } 
-        .back-hint {
-            position: absolute;
-            top: 33px;
-            left: -82px;
-            font-size: 13px;
-            color: #ffffff93;
-        }
-        .input-hint {
-            position: absolute;
-            text-align: center;
-            bottom: -60px;
-            width: 100%;
-            
-            font-size: 14px;
-            color: #ffffff;
-            letter-spacing: 2px;
-            animation: hintPulse 2.5s ease-in-out infinite;
-        }
-        #wave-canvas {
-            position: absolute;
-            scale: 4;
-            transform: scaleY(5);
-            left:-5px;
-            bottom: 30px;
-            width: 100%;
-            margin-top: 1000px;
-            filter:
-                drop-shadow(0 0 6px rgba(200, 230, 255, 0.571))
-                drop-shadow(0 0 12px rgba(200, 230, 255, 0.306));
-            opacity: 0.9;
-        }
-        .home-hint {
-            position: absolute;
-            bottom: -180px;
-            right:-53px;
-            font-size: 14px;
-            color: #ffffff;
-            animation: hintPulse 2.5s ease-in-out infinite;
-        }
-        .play-hint {
-            position: absolute;
-            bottom: -220px;
-            width:100%;
-            font-size: 14px;
-            color: #ffffff;
-        }
-        .again-hint {
-            position: absolute;
-            bottom: -180px;
-            left: -53px;
-            font-size: 14px;
-            color: #ffffff;
-            animation: hintPulse 2.5s ease-in-out infinite;
-        }
-        .countdown-hint {
-            position: absolute;
-            bottom: -180px;
-            width:100%;
-            font-size: 14px;
-            color: #ffffff;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class = "stacked-linear">
-
+<body>
+<div id="bg" aria-hidden="true">
+    <div id="bgTrack">
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd1.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd2.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd3.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd4.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd5.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd6.png')"></div>
+      <!-- 下面這三張是「複製一份」用來無縫循環 -->
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd1.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd2.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd3.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd4.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd5.png')"></div>
+      <div class="bgSlide" style="background-image:url('/static/pic/bkgd6.png')"></div>
+    </div>
+  </div>
 <div class="container">
 
-    <!-- 🌱 起始畫面 -->
-    <div id="start-view" class="scene hidden">
-        <div class="scene-content">
-            <h1 class="glow-text">「Unmuted：」</h1>
-            <div class="glow-textt start-hint" >－點擊空白鍵開始－</div>
+    <!-- 🌿 主畫面 -->
+    <section id="home-view" class="page">
+        
+        <div class="title-group">
+            <div class="title3 fx06 fx-right">2026@tealxreal</div>
+            <div class="topline"></div>
+            <h1 class="title fx06 fx-left">「Unmuted:」</h1>
+            <div class="title2 fx06 fx-left">#文字轉音樂裝置系統</div>
+        </div>
+        <div class="description-wrapper">
+            <div class="line line1">最近是否有話難以言說？</div>
+            <div class="line line2">「Unmuted:」將您的話語轉變為聲音，</div>
+            <div class="line line3">作為被理解之外的，另一種表達。</div>
+        </div>
+    </section>
+
+    <!-- 🌿 理念介紹頁 -->
+    <section id="concept-view" class="page">
+        <div class="page-content about-layout">
+            <h2 class = "about-text fx1206 fx-up">About 「Unmuted:」</h2>
+            <div class="about-row">
+            <div class="hashtag-wrapper fx08 fx-left">
+                <div class="hashtag">#TextToMusic</div>
+                <div class="hashtag">#WindChime</div>
+                <div class="hashtag">#BeyondWords</div>
+            </div>
+            <div class = "concept-container fx fx-right">
+            <div class = "concept fx fx-right2">/
+            人類以各種溝通形式互動，以此互相認識、理解、表達。
+            當然也必定存在著無法輕易傳遞的話語，
+            礙於身分或時機，發不出聲音。
+            /
+            這些話擁有情緒、需要一個「Unmuted：」的機會。
+            成為樂音的文字雖然無法被解讀，卻終於擁有了自己的聲音。
+            /
+            「Unmuted：」結合風鈴受風吹動發聲的特性，
+            淡化難言之語箇中的情緒色彩，留下單一的聲音，
+            由話者決定將文字背後的故事銘記、遺忘，或封存。</div>
+            </div>
             </div>
         </div>
-    <!-- 🌱 文字畫面 -->
-    <div id="intro-scene" class="scene hidden">
-        <div class="scene-content intro-wrapper">
-        <!-- 對話框區 -->
-         <!-- 右上角跳過提示 -->
-            <div class="skip-hint hidden">↵ Enter 跳過</div>
-            <div class="dialog dialog-1 glow-textt">
-            你好，歡迎來到「Unmuted：」。
-            </div>
-            <div class="dialog dialog-2 glow-textt">
-            最近過得如何呢？
-            </div>
-            <div class="dialog dialog-3 glow-textt">
-            如果有難以說出口的話，
-            </div>
-            <div class="dialog dialog-4 glow-textt">
-            可以告訴「Unmuted：」，將話語轉變為樂音，
-            </div>
-            <div class="dialog dialog-5 glow-textt">
-            作為被理解之外的，另一種表達。
-            </div>
-        <!-- 底部提示 -->
-            <div class="continue-hint hidden">
-            － 按下空白鍵繼續 －
+    </section>
+    <!-- 🌿 互動體驗頁 -->
+    <section id="experience-view" class="page">
+
+        <div class="experience-left fx fx-left">
+            <h2 class = "glow-texth2">Music Preview</h2>
+            <p class = glow-textt>- 請選擇想聆聽的音色 -</p>
+            <div class=emotion-buttons>
+                <button class="emotion-btn" data-emotion="surprise">Surprise</button>
+                <button class="emotion-btn" data-emotion="joy">Joy</button>
+                <button class="emotion-btn" data-emotion="calm">Calm</button>
+                <button class="emotion-btn" data-emotion="sadness">Sadness</button>
+                <button class="emotion-btn" data-emotion="fear">Fear</button>
+                <button class="emotion-btn" data-emotion="anger">Anger</button>
             </div>
         </div>
-    </div>
-    <!-- ✏️ 輸入畫面 -->
-    <div id="input-view" class="scene hidden">
-        <div class="scene-content">
-            <div class="back-hint">esc 返回主畫面</div>
-            <h2 class="glow-textt">今天想說什麼呢？</h2>
+        <div class="experience-right fx fx-right">
+            <h2 class = glow-texth2>Start Generating</h2>
             <textarea 
-            id="sentence" 
-            maxlength="200"
-            placeholder="隨意寫點東西吧"
-            required></textarea>
-            <br>
-            <div class = "input-hint">－按下Enter鍵送出－</div>
-        </div>
-    </div>
-    <!-- ⏳ Loading -->
-    <div id="loading" class="scene hidden">
-        <div class="scene-content">
-        <p class = "glow-texth2">音樂生成中…</p>
-        </div>
-    </div>
+                id="user-input"
+                maxlength="200"
+                placeholder="今天想說什麼呢："
+            ></textarea>
 
-    <!-- 🎧 播放畫面 -->
-    <div id="player-view" class="scene hidden">
-        <div class="scene-content">
-        <audio id="audio-player"></audio>
-        <canvas id="wave-canvas"></canvas>
-        <div style="margin-top: 6px;">
-            <div class="again-hint glow-textt">Ｆ鍵 / 再次輸入</div>
-            <div class="home-hint glow-textt">空白鍵 / 返回主畫面</div>
-            <div class="play-hint" id="replay-countdown"></div>
-            <div class="countdown-hint" id="idle-countdown"></div>
-        </div>  
+            <div class="action-row">
+                <button id="generate-btn">確認送出</button>
+                <button id="clear-btn">清除</button>
+                <!-- ✅ 一開始就顯示，但 disabled -->
+                <button id="play-btn" disabled>播放音樂</button>
+            </div>
+            <p class="glow-textt">- 生成時間約10-15秒 -</p>   
+        </div> 
+    </section>
+    <!-- 🌿 系統流程頁 -->
+    <section id="system-view" class="page">
+        <div class="page-content">
+            <h2 class = "glow-texth2 fx06 fx-right2">How 「Unmuted：」 Works</h2>
+            <div class="flow6 fx fx-left" aria-label="Workflow with split at step 2">
+                <!-- 主線：Step 1 -->
+                <div class="fnode span2 s1">使用者<br>輸入文字</div>
+                <div class="hline span2 l12"></div>
+                <!-- 分支點：Step 2 -->
+                <div class="fnode span2 s2">AI 辨識情緒</div>
+                <div class="branch-lines split">
+                    <div class="line-up"></div>
+                    <div class="line-down"></div>
+                </div>
+                <!-- 上分支：兩步 -->
+                <div class="fnode top a1">演算法<br>合成音樂片段</div>
+                <div class="hline top la12"></div>
+                <div class="fnode top a2">音樂輸出</div>
+                <!-- 下分支：兩步 -->
+                <div class="fnode bottom b1">風鈴短冊輸出</div>
+                <div class="hline bottom lb12"></div>
+                <div class="fnode bottom b2">掛於風鈴下</div>
+            </div>
         </div>
-    </div>
+    </section>
 </div>
-<canvas id="noise"></canvas>
-<script>
-    const startBtn = document.getElementById('start-btn');
-    const submitBtn = document.getElementById('submit-btn');
-    const backBtn = document.getElementById('back-btn');
-    const backToStartBtn = document.getElementById('back-to-start-btn');
-
-    const sentenceInput = document.getElementById('sentence');
-    const audioPlayer = document.getElementById('audio-player');
-
-    const startView = document.getElementById('start-view');
-    const inputView = document.getElementById('input-view');
-    const loadingView = document.getElementById('loading');
-    const playerView = document.getElementById('player-view');
-
-    const canvas = document.getElementById('noise');
-    const ctx = canvas.getContext('2d');
-    const bg = document.body;
-    const introScene = document.getElementById('intro-scene');
-    const inputScene = document.getElementById('input-view'); // 你原本的輸入畫面 scene
-    const dialogs = introScene.querySelectorAll('.dialog');
-    const continueHint = introScene.querySelector('.continue-hint');
-    const skipHint = introScene.querySelector('.skip-hint');    
-    let introFinished = false;
-    let introSkipped = false;
-    let isGenerating = false;
-    let audioCtx, analyser, source;
-    let waveCanvas, waveCtx;
-    let waveData;
-    let smoothedValues = [];
-    let replayTimer = null;
-    let replayCountdown = 5;
-    let idleTimer = null;
-    let idleCountdown = 60;
-    let isPlaying = false;
-    let isDrawingWave = false;
-
-function initWaveform() {
-    if (audioCtx) return;
-
-    audioCtx = new AudioContext();
-    source = audioCtx.createMediaElementSource(audioPlayer);
-    analyser = audioCtx.createAnalyser();
-
-    analyser.fftSize = 512;
-    waveData = new Uint8Array(analyser.frequencyBinCount);
-
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    waveCanvas = document.getElementById('wave-canvas');
-    waveCtx = waveCanvas.getContext('2d');
-
-    resizeWaveCanvas();
-}
-function resizeWaveCanvas() {
-    waveCanvas.width = waveCanvas.offsetWidth * window.devicePixelRatio;
-    waveCanvas.height = waveCanvas.offsetHeight * window.devicePixelRatio;
-    waveCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
-}
-window.addEventListener('resize', resizeWaveCanvas);
-
-function drawWave() {
-    if (!analyser || !isDrawingWave) return;
-    analyser.getByteTimeDomainData(waveData);
-    const w = waveCanvas.width / window.devicePixelRatio;
-    const h = waveCanvas.height / window.devicePixelRatio;
-    const centerY = h / 2;
-    waveCtx.clearRect(0, 0, w, h);
-    const barCount = 160;
-    const barWidth = w / barCount;
-    // 初始化平滑值
-    if (smoothedValues.length !== barCount) {
-        smoothedValues = Array(barCount).fill(0);
-    }
-    for (let i = 0; i < barCount; i++) {
-        const dataIndex = Math.floor(i / barCount * waveData.length);
-        let v = (waveData[dataIndex] - 128) / 128;
-        // 平滑處理 (速度變慢)
-        smoothedValues[i] = smoothedValues[i] * 0.7 + v * 0.3;
-        // 放大波幅
-        let amplitude = smoothedValues[i] * 70 * (0.5 + Math.sin(i * 0.3 + Date.now() * 0.002) * 0.5);
-        // 多層線增加厚度
-        for (let layer = 0; layer < 3; layer++) {
-            waveCtx.strokeStyle = `rgba(245, 255, 255, ${0.25 + Math.abs(smoothedValues[i]) * 0.4 * (1 - layer * 0.3)})`;
-            waveCtx.lineWidth = 0.3 + layer; // 線條加粗
-            waveCtx.beginPath();
-            waveCtx.moveTo(i * barWidth, centerY - amplitude * (1 - layer * 0.3));
-            waveCtx.lineTo(i * barWidth, centerY + amplitude * (1 - layer * 0.3));
-            waveCtx.stroke();
-        }
-    }
-    requestAnimationFrame(drawWave);
-}
-
-    // ▶️ 起始畫面 → 輸入畫面
-    startView.classList.remove('hidden');
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        drawNoise();
-    }
-
-    function drawNoise() {
-        const imageData = ctx.createImageData(canvas.width, canvas.height);
-        const data = imageData.data;
-        for (let i = 0; i < data.length; i += 4) {
-            const value = Math.random() * 255;
-            data[i]     = 0;      // R
-            data[i + 1] = 0;      // G
-            data[i + 2] = 0;      // B
-            data[i + 3] = value;  // Alpha → 顆粒強弱
-        }
-            ctx.putImageData(imageData, 0, 0);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-function random(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-// 每一層的「目前位置」與「移動方向」
-const layers = [
-    { x: 6.7, y: 6.7, dx: random(1, 2), dy:random(1, 2),
-        rgb: '221, 178, 250',
-        alpha: 0.5,
-        radius: '90%'
-    },
-    { x: 100, y: 100, dx: random(-2, -1), dy:random(1, 2),
-        rgb: '155, 202, 232',
-        alpha: 0.8,
-        radius: '90%'
-    },
-    { x: 65, y: 0, dx: random(1, 2), dy:random(-1,-2),
-        rgb: '28, 51, 79',
-        alpha: 0.8,
-        radius: '70%'
-    },
-    { x: 0, y: 75, dx: random(1,2), dy:random(-1, -2),
-        rgb: '24, 34, 47',
-        alpha: 0.8,
-        radius: '70%'
-    }
-];
-
-// 可活動的區間
-const bounds = {
-    xMin: 0,
-    xMax: 100,
-    yMin: 0,
-    yMax: 100
-};
-function updateBackground() {
-    // 更新位置
-    layers.forEach(layer => {
-        layer.x += layer.dx;
-        layer.y += layer.dy;
-
-        if (layer.x <= 0 || layer.x >= 100) layer.dx *= -1;
-        if (layer.y <= 0 || layer.y >= 100) layer.dy *= -1;
-    });
-
-    // 組 radial-gradient 字串
-    const gradients = layers.map(layer => `
-        radial-gradient(
-            circle at ${layer.x.toFixed(2)}% ${layer.y.toFixed(2)}%,
-            rgba(${layer.rgb}, ${layer.alpha}),
-            rgba(255,255,255,0) ${layer.radius}
-        )
-        `).join(',');
-
-    // 套到 body
-    bg.style.backgroundImage = gradients;
-}
-setInterval( updateBackground, 1000 / 8);
-
-function switchScene(from, to) {
-    from.classList.remove('hidden');
-    from.classList.add('exiting'); 
-    setTimeout(() => { 
+<div id="tap-to-pause" class="tap-to-pause is-hidden" aria-live="polite">
+  △ 點擊任意處以暫停音樂
+</div>
+<div id="scroll-orb" aria-hidden="true">♫</div>
+    <script src="/static/main.js"></script>
     
-    from.classList.add('hidden');
-    from.classList.remove('exiting');
-    to.classList.add('entering'); 
-    to.classList.remove('hidden');  
-    
-        requestAnimationFrame(() => {   
-            to.classList.add('entered');
-        });
-        setTimeout(() => {
-            to.classList.remove('entering');
-            to.classList.remove('entered');
-        }, 200);
-    }, 800); // ⚠️ 要跟 CSS transition 時間一致
-}
-function resetIntro() {
-    // 1️⃣ 重置所有對話框
-    dialogs.forEach(dialog => {
-        dialog.classList.remove('show');
-    });
-
-    // 2️⃣ 隱藏底部提示
-    continueHint.classList.add('hidden');
-
-    // 3️⃣ 重置狀態 flag
-    introFinished = false;
-    introSkipped = false;
-
-    // 4️⃣ 清掉 introScene 上殘留的動畫 class
-    introScene.classList.remove('entering', 'entered', 'exiting');
-}
-const TRANSITION_TIME = 600; // 要和 switchScene 的時間一致
-const EXTRA_DELAY = 1000;    // 你要的 1 秒延遲
-function startIntro() {
-    // 先切場（跑 exiting / entering 動畫）
-    switchScene(startView, introScene);
-
-    // ⭐ 等轉場動畫跑完 + 1 秒緩衝
-    
-
-    setTimeout(() => {
-
-        dialogs.forEach((dialog, index) => {
-
-            setTimeout(() => {
-            skipHint.classList.remove('hidden');
-        }, 1200);
-            setTimeout(() => {
-                if (introSkipped) return;
-                dialog.classList.add('show');
-                }, 
-            index * 1700);
-        });
-
-        // 全部對話框出現後，才顯示「空白鍵繼續」
-        setTimeout(() => {
-            if (introSkipped) return;
-            continueHint.classList.remove('hidden');
-            introFinished = true;
-        }, dialogs.length * 1700 + 500);
-
-    }, TRANSITION_TIME + EXTRA_DELAY);
-}
-async function generateMusic() {
-    if (isGenerating) return;
-    isGenerating = true;
-    const sentence = sentenceInput.value.trim();
-        if (!sentence) {
-            alert('請輸入文字');
-            isGenerating = false;
-            return;
-        }
-        switchScene(inputView, loadingView);
-        try {
-            const response = await fetch('/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sentence })
-            });
-
-            console.log('response ok:', response.ok);
-            console.log('headers:', response.headers);
-
-            if (!response.ok) {
-                throw new Error('生成失敗');
-            }
-            const blob = await response.blob();
-            const url = URL.createObjectURL(blob);
-            audioPlayer.src = url;
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            switchScene(loadingView, playerView);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            initWaveform();
-            audioCtx.resume();
-            isDrawingWave = true;
-            await audioPlayer.play();
-            drawWave();
-            startIdleCountdown();
-            sentenceInput.value = '';
-
-        } catch (err) {
-            alert('生成音樂失敗，請再試一次');
-            switchScene(loadingView, inputView);
-            }finally {
-        isGenerating = false;
-        }
-        audioPlayer.addEventListener('play', () => {
-            isPlaying = true;
-            clearInterval(replayTimer);
-            document.getElementById('replay-countdown').textContent = '';
-        });
-
-        audioPlayer.addEventListener('ended', () => {
-            isPlaying = false;
-            startReplayCountdown();
-        });
-}
-function startReplayCountdown() {
-    replayCountdown = 5;
-    const el = document.getElementById('replay-countdown');
-    el.textContent = `${replayCountdown} 秒後再次播放`;
-    replayTimer = setInterval(() => {
-        if (isPlaying) {
-            clearInterval(replayTimer);
-            el.textContent = '';
-            return;
-        }
-        replayCountdown--;
-        if (replayCountdown <= 0) {
-            clearInterval(replayTimer);
-            el.textContent = '';
-            audioPlayer.currentTime = 0;
-            audioPlayer.play();
-        } else {
-            el.textContent = `${replayCountdown} 秒後再次播放`;
-        }
-    }, 1000);
-}
-function startIdleCountdown() {
-    clearInterval(idleTimer);
-    idleCountdown = 60;
-    const el = document.getElementById('idle-countdown');
-    el.textContent = `${idleCountdown} 秒後自動返回`;
-
-    idleTimer = setInterval(() => {
-        idleCountdown--;
-
-        if (idleCountdown <= 0) {
-            clearInterval(idleTimer);
-            audioPlayer.pause();
-            audioPlayer.src = '';
-            switchScene(playerView, startView);
-        } else {
-            el.textContent = `${idleCountdown} 秒後自動返回`;
-        }
-    }, 1000);
-}
-document.addEventListener('keydown', (e) => {
-    if (e.repeat) return;
-    // Enter：隨時跳過
-    if (e.code === 'Enter' ){
-        if (!introFinished || !introScene.classList.contains('hidden')) {
-            e.preventDefault();
-            introSkipped = true;
-            introFinished = true;
-            switchScene(introScene, inputView);
-            return; 
-        }
-        //生成音樂    
-        if (!inputView.classList.contains('hidden')) {
-            e.preventDefault();
-            generateMusic();
-            return;   
-        }
-    }
-    if (e.code === 'Escape') {
-        if (!inputView.classList.contains('hidden')) {
-            e.preventDefault();
-            sentenceInput.value = '';
-            switchScene(inputView, startView);
-            return; 
-        }
-    }
-    if (e.key.toLowerCase() === 'f' ){
-        if(!playerView.classList.contains('hidden')) {
-        e.preventDefault();
-        // 🛑 停止音樂
-            audioPlayer.pause();
-            audioPlayer.currentTime = 0;
-             // 🛑 停止波形繪製
-            isDrawingWave = false;
-            if (waveCtx && waveCanvas) {
-                waveCtx.clearRect(
-                  0,
-                  0,
-                 waveCanvas.width,
-                 waveCanvas.height
-                );
-            }
-            // 🛑 清除所有倒數計時
-            if (replayTimer) {
-                clearTimeout(replayTimer);
-                replayTimer = null;
-            }
-            if (idleTimer) {
-                clearInterval(idleTimer);
-                idleTimer = null;
-            }
-        switchScene(playerView, inputView );
-        return; 
-        }
-    }
-    if (e.code === 'Space') {
-    e.preventDefault();
-    // 只有在起始畫面才能開始
-        if (!startView.classList.contains('hidden')) {
-            resetIntro();   // ⭐ 重置前導動畫
-            startIntro();   // ⭐ 切換到前導畫面
-            return;
-        }
-    // 前導畫面中，且動畫完成後，空白鍵才繼續
-        if (!introScene.classList.contains('hidden') && introFinished) {
-            
-            switchScene(introScene, inputView);
-            return;
-        }
-    
-        if (!playerView.classList.contains('hidden')) {
-            audioPlayer.pause();
-            sentenceInput.value = '';
-            audioPlayer.currentTime = 0;
-             // 🛑 停止波形繪製
-            isDrawingWave = false;
-            if (waveCtx && waveCanvas) {
-                waveCtx.clearRect(
-                  0,
-                  0,
-                 waveCanvas.width,
-                 waveCanvas.height
-                );
-            }
-            // 🛑 清除所有倒數計時
-            if (replayTimer) {
-                clearTimeout(replayTimer);
-                replayTimer = null;
-            }
-            if (idleTimer) {
-                clearInterval(idleTimer);
-                idleTimer = null;
-            }
-            switchScene(playerView, startView);
-            return;
-        }
-    }
-});
-</script>
 </body>
 </html>
