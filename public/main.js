@@ -43,7 +43,7 @@ emotionButtons.forEach(btn => {
         const emotion = btn.dataset.emotion;
 
         // 這裡改成你的實際音檔路徑
-        previewAudio.src = `static/audio/${emotion}.mp3`;
+        previewAudio.src = `/audio/${emotion}.mp3`;
 
         previewAudio.currentTime = 0;
         previewAudio.play();
