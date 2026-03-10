@@ -53,7 +53,7 @@ def insert_effect(melody_audio, sentence: str, raw_duration: int, melody_notes: 
 
     
     EFFECTFULL_DIR = os.path.join(EFFECT_DIR, emotion)
-    melody_audio, raw_duration, emotion = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
+    #melody_audio, raw_duration, sentence, emotion = combine_melody_audio(melody_notes, rhythm_lengths, sentence, emotion)
     effect_index = get_effect_index(sentence)
     emotion = os.path.basename(emotion)
     if effect_index is None:

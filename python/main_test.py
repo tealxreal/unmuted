@@ -144,8 +144,9 @@ async def generate_music(sentence: str, emotion: str):
 
     #melody_audio, raw_duration = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
     #主旋律加音效
-    melody_with_effect = insert_effect(_, sentence, _, melody_notes, rhythm_lengths, emotion)
-
+    melody_with_effect = insert_effect(melody_audio, sentence, raw_duration, melody_notes, rhythm_lengths, emotion)
+    melody_audio = melody_audio
+    raw_duration = raw_duration
     final = chord_audio.overlay(melody_with_effect)
     
     if emotion == "SURPRISE":
