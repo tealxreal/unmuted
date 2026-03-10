@@ -84,7 +84,8 @@ async function generateMusic() {
     generateBtn.textContent = "生成中...";
     playBtn.disabled = true;
     try {
-        const response = await fetch("/generate", {
+        const API_BASE = "https://www.unmuted.tw";
+        const response = await fetch(`${API_BASE}/generate`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ sentence: text })
