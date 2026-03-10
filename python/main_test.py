@@ -127,7 +127,7 @@ async def generate_music(sentence: str, emotion: str):
     sentence = sentence
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     final_audio_path = os.path.join(OUTPUT_DIR, f"{timestamp}_{emotion}.mp3")
-
+    print(final_audio_path)
     # 轉換並分析
     groups = group_sentence(sentence)      
     chords, weights,_, _, rhythm_seed, melody_notes = hash_groups(groups, emotion)
