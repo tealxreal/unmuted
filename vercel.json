@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/generate",
+      "destination": "https://unmuted.onrender.com/generate"
+    }
+  ]
+}

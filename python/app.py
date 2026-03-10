@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
@@ -76,6 +77,17 @@ async def delete_old_files():
                     os.remove(file_path)
                     print(f"Deleted old file: {file_path}")
         await asyncio.sleep(3600)  # 每小時掃一次
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://你的-vercel-網址.vercel.app",
+        "https://你的正式網域",  # 之後如果綁自己的網域
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
