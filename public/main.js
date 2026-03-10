@@ -84,7 +84,7 @@ async function generateMusic() {
     generateBtn.textContent = "生成中...";
     playBtn.disabled = true;
     try {
-        const API_BASE = "unmuted-git-main-tealxreals-projects.vercel.app";
+        const API_BASE = "https://unmuted-theta.vercel.app";
         const response = await fetch(`${API_BASE}/generate`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

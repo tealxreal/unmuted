@@ -14,11 +14,11 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://unmuted-theta.vercel.app",
         "https://www.unmuted.tw",
         "https://unmuted.tw",
         "https://unmuted.onrender.com/",
-        "https://unmuted-git-main-tealxreals-projects.vercel.app",
-  # 之後如果綁自己的網域
+         # 之後如果綁自己的網域
     ],
     allow_credentials=True,
     allow_methods=["*"],
