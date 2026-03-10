@@ -51,11 +51,11 @@ def get_effect_index(sentence):
 
 def insert_effect(melody_audio, sentence: str, raw_duration: int, melody_notes: list, rhythm_lengths: list, emotion: str) -> AudioSegment:
 
-    emotion = os.path.basename(emotion)
+    
     EFFECTFULL_DIR = os.path.join(EFFECT_DIR, emotion)
-    melody_audio, raw_duration = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
+    melody_audio, raw_duration, emotion = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
     effect_index = get_effect_index(sentence)
-
+    emotion = os.path.basename(emotion)
     if effect_index is None:
         return melody_audio
 
