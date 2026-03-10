@@ -81,8 +81,8 @@ async def delete_old_files():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://你的-vercel-網址.vercel.app",
-        "https://你的正式網域",  # 之後如果綁自己的網域
+        "https://unmuted-theta.vercel.app/",
+        "https://www.unmuted.tw",  # 之後如果綁自己的網域
     ],
     allow_credentials=True,
     allow_methods=["*"],
