@@ -60,8 +60,8 @@ async def generate(req: GenerateRequest):
         emotion = analyze_emotion(sentence)
         print("GPTemotion:", emotion)
         audio_path = await generate_music(
-            sentence=sentence,
-            emotion=emotion,
+            #sentence=sentence,
+            #emotion=emotion,
         )
 
         if not os.path.exists(audio_path):
