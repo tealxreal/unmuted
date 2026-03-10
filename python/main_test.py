@@ -136,7 +136,7 @@ async def generate_music(sentence: str, emotion: str):
     #effect_index = get_effect_index(sentence)
     #melody_audio, raw_duration = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
     #和弦音檔
-    chord_audio = combine_audio(chords, beat_durations, sentence)
+    chord_audio = combine_audio(chords, beat_durations, sentence,emotion)
     chord_audio = chord_audio.fade_out(150).apply_gain(+3)
 
     if emotion == "JOY":
