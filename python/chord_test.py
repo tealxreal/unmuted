@@ -33,7 +33,7 @@ def distribute_beats(weights):
 def combine_audio(chords, beat_durations, sentence: str, emotion:str):
 
     #emotion = os.path.basename(emotion)
-    #emotion = analyze_emotion(sentence)
+    emotion = analyze_emotion(_)
 
     emotion_dir = os.path.join(CHORD_DIR, emotion)
     

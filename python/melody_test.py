@@ -59,7 +59,7 @@ def combine_melody_audio(melody_notes, rhythm_lengths, sentence: str ,emotion: s
     current_duration = 0
 
     #emotion = os.path.basename(emotion)
-    #emotion = analyze_emotion(sentence)
+    emotion = analyze_emotion(_)
     print(emotion)
     
     for rhythm_key in rhythm_lengths:
