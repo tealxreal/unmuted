@@ -123,6 +123,8 @@ def hash_groups(groups, emotion: str):
 async def generate_music(sentence: str, emotion: str):
     #emotion = os.path.basename(emotion)
     #emotion = analyze_emotion(_)
+    emotion = emotion
+    sentence = sentence
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     final_audio_path = os.path.join(OUTPUT_DIR, f"{timestamp}_{emotion}.mp3")
 

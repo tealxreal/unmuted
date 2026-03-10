@@ -57,7 +57,7 @@ def combine_melody_audio(melody_notes, rhythm_lengths,emotion: str):
     output = AudioSegment.silent(duration=0)
     melody_ptr = 0
     current_duration = 0
-
+    emotion = emotion
     #emotion = os.path.basename(emotion)
     #emotion = analyze_emotion(sentence)
     print(emotion)
