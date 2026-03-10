@@ -10,6 +10,18 @@ import asyncio
 import time
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://unmuted-theta.vercel.app",
+        "https://www.unmuted.tw",
+        "https://unmuted.tw",  # 之後如果綁自己的網域
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
 FRONTEND_DIR = os.path.join(PROJECT_ROOT, "frontend")
@@ -78,15 +90,7 @@ async def delete_old_files():
                     print(f"Deleted old file: {file_path}")
         await asyncio.sleep(3600)  # 每小時掃一次
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "*",  # 之後如果綁自己的網域
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
