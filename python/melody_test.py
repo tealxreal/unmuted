@@ -51,13 +51,14 @@ def assign_rhythm_lengths(pattern_seed):
     return rhythm_lengths
 
 # 主旋律音檔
-def combine_melody_audio(melody_notes, rhythm_lengths,emotion: str):
+def combine_melody_audio(melody_notes, rhythm_lengths,sentence:str, emotion: str):
     
     beat_ms = (TOTAL_DURATION_SEC * 1000) / TOTAL_BEATS
     output = AudioSegment.silent(duration=0)
     melody_ptr = 0
     current_duration = 0
     emotion = emotion
+    sentence = sentence
     #emotion = os.path.basename(emotion)
     #emotion = analyze_emotion(sentence)
     print(emotion)
