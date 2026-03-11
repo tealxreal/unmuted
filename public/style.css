@@ -233,7 +233,6 @@ body {
         }
         .hashtag-wrapper {
             position: static;
-            flex: 0 0 400px;
             text-align: center;
             display: flex;
             flex-direction: row;
@@ -246,22 +245,16 @@ body {
             transform: scaleY(0.8);
         }
         .concept-container {
-            
             border: 1.5px solid #e4f1ffaf;
             border-radius: 6px;
             width: 50vw;
-            margin-left: auto; 
-            display: flex;
-            padding: 24px 50px;
-            justify-content: flex-start;
+            padding: 4px 50px;
             box-shadow:
             0 0 12px #e4f1ff91,
             0 0 30px #e4f1ffb3;
-
         }
         .concept {
-            text-align: left;
-            right:0 ;
+            text-align: center;
             font-size: 16px;
             color: #e4f1ff;
             line-height: 1.5;
