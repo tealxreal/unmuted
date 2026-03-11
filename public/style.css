@@ -9,13 +9,11 @@ body {
             
             scroll-padding-top: 0px;
             overscroll-behavior-y: auto;
-            scroll-snap-type: y mandatory;
             scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
         }
         html {  
             overflow-y: auto; 
             overflow-x: hidden;
-            
         }
         html, body {
             margin: 0;
@@ -42,7 +40,7 @@ body {
             margin: 0; 
             background: transparent;
             scroll-snap-align: start;
-            scroll-snap-type: y proximity;
+            scroll-snap-type: y mandatory;
             box-sizing: border-box;  /* 保證 padding 不會影響高度計算 */
         }
         .page::before{
