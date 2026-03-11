@@ -413,9 +413,9 @@ body {
 }
             .tap-to-pause{
                 position: fixed;
-                inset: 0;
-                display: grid;
-                place-items: center;
+                left: clamp(20px, 8vw, 120px);   /* 偏左但會隨螢幕調整 */
+                top: 50%;
+                transform: translateY(-50%);
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
 
@@ -427,15 +427,11 @@ body {
 .tap-to-pause::before{
   content: "";
   position: absolute;
-
   /* 盒子大小：你可以調整 */
   width: min(180px, 45vw);
-  padding: 14px 18px; /* 這行不會生效在 pseudo 上，用下面 height 取代 */
   height: 40px;
-
   border: 0px solid rgba(232,255,255,0.65);
   border-radius: 20px;
-
   background: rgba(0, 0, 0, 0.059);
   backdrop-filter: blur(4px);
 
