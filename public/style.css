@@ -218,22 +218,14 @@ body {
     padding: 32px 20px;
     box-sizing: border-box;
 }
-
-.concept-block {
-    width: 100%;
-    max-width: 100dvw;
-    min-height: 90dvh;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-
+.concept-block{
+    position: static;
+    margin: 0;  
+    text-align: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-
-    text-align: center;
+    gap: 10px;
 }
         .about-text {
             margin: 0;
@@ -243,14 +235,6 @@ body {
             transform: scale( 1.2, 0.6);
             letter-spacing: -0.05em;
             line-height: 1;
-        }
-        .hashtag-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            margin: 0;
         }
         .hashtag {
             font-size: clamp(24px, 4vw, 32px);
