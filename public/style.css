@@ -429,7 +429,7 @@ body {
   content: "";
   position: absolute;
   /* 盒子大小：你可以調整 */
-  height: min(180px, 45vw);
+  height: min(160px, 40vw);
   width: 40px;
   border: 0px solid rgba(232,255,255,0.65);
   border-radius: 20px;
