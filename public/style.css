@@ -348,7 +348,7 @@ body {
     z-index: -1;
     pointer-events: none;
 }
-        textarea {
+        #experience-view-1 textarea {
             width: 50%;
             height: 100px;
             resize: none;
@@ -573,12 +573,12 @@ body {
            margin-bottom: 20px;
         }
         .emotion-buttons {
-            width: 150px;
-            padding: 0;
-            align-items: center; 
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: min(90vw, 700px);
         }
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
