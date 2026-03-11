@@ -238,11 +238,12 @@ body {
             text-align: center;
             align-items: center;
             display: flex;
+            min-width: 95dvw;
             flex-direction: row;
             gap: 18px;
         }
         .hashtag {
-            font-size: 28px;
+            font-size: (22px, 3vw, 26px);
             align-items: center;
             font-weight: 700;
             color: #e8ffff;
