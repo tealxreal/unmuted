@@ -262,46 +262,35 @@ stopAllAudio = function(){
   _stopAllAudio();
   showTapHint(false);
 };
+//滾動音符
 (() => {
   const orb = document.getElementById("scroll-orb");
-  if (!orb) return;
-
+  const container = document.querySelector(".container");
+  if (!orb || !container) return;
   const margin = 20;
-  const scroller = document.scrollingElement || document.documentElement;
-
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-
   let ticking = false;
-
   function update() {
     ticking = false;
-
-    const scrollTop = scroller.scrollTop;
-    const scrollMax = Math.max(0, scroller.scrollHeight - window.innerHeight);
+    const scrollTop = container.scrollTop;
+    const scrollMax = Math.max(0, container.scrollHeight - container.clientHeight);
     const t = scrollMax ? clamp(scrollTop / scrollMax, 0, 1) : 0;
 
     const orbH = orb.getBoundingClientRect().height || 44;
-    const yRange = window.innerHeight - margin * 2 - orbH;
-    const y = yRange * t;
-
+    const yRange = container.clientHeight - margin * 2 - orbH;
+    const y = Math.max(0, yRange * t);
     const rot = 360 * 3 * t;
 
-    // ✅ 強制寫到 style 上（最不容易被 CSS 蓋）
     orb.style.transform = `translate3d(0, ${y}px, 0) rotate(${rot}deg)`;
   }
-
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(update);
   }
-
-  // ✅ 同時掛：root scroll 常常只打到 window
-  document.querySelector(".container").addEventListener("scroll", onScroll, { passive: true })
-  scroller.addEventListener("scroll", onScroll, { passive: true });
-
+  container.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", () => requestAnimationFrame(update));
-
+  window.addEventListener("load", update);
   // --- Debug：你可以先留著，看是不是有在跑 ---
   let n = 0;
   function debugOncePerSecond() {

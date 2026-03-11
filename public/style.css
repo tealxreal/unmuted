@@ -693,10 +693,10 @@ body {
 }
 #scroll-orb{
   position: fixed;
-  right: 20px;
+  right: 16px;
   top: 20px;                 /* 初始值，JS 會動態改 top */
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
 
   display: grid;
   place-items: center;
