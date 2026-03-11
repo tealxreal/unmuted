@@ -17,7 +17,6 @@ body {
         html {  
             overflow-y: scroll; 
             overflow-x: hidden;
-            scroll-snap-type: y mandatory;   /* ✅ snap 放在真正滾的容器 */
             scroll-behavior: auto;  
         }
         html, body {
@@ -72,12 +71,14 @@ body {
   z-index: -10;
   overflow: hidden;
   background: #000; /* 當圖片還沒載入的底色 */
+  pointer-events: none;
 }
 
 #bgTrack{
   position: absolute;
   inset: 0;
   will-change: transform;
+  pointer-events: none;
 }
 
 .bgSlide{
@@ -86,6 +87,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  pointer-events: none;
 }
         #experience-view {
             display: flex;
@@ -347,7 +349,7 @@ body {
     inset: 0;
     background: rgba(0, 0, 0, 0.307);
     z-index: -1;
-    
+    pointer-events: none;
 }
         textarea {
             width: 50%;
