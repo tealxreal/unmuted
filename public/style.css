@@ -243,8 +243,9 @@ body {
             gap: 18px;
         }
         .hashtag {
-            font-size: (22px, 3vw, 26px);
+            font-size: (22px, 3vw, 36px);
             align-items: center;
+            text-align: center;
             font-weight: 700;
             color: #e8ffff;
             transform: scaleY(0.8);
@@ -252,8 +253,8 @@ body {
         .concept-container {
             border: none;
             align-items: center;
-            width: 90vw;
-            padding: 4px 18px;
+            width: 80vw;
+            padding: 4px 2px;
         }
         .concept {
             text-align: center;
