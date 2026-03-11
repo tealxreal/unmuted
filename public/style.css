@@ -349,7 +349,7 @@ body {
     pointer-events: none;
 }
         #experience-view-1 textarea {
-            width: 50%;
+            width: 45%;
             height: 100px;
             resize: none;
             padding: 12px;
@@ -358,15 +358,12 @@ body {
             background: none;
             border: none;
             border-radius: 4px;
-
             font-size: 16px;
             color: #e8ffff;
-
             box-shadow:
                 0 0 1px rgba(255,255,255,0.8),
                 0 0 12px rgba(226,242,255,0.3),
                 inset 0 0 8px rgba(255,255,255,0.08);
-
             outline: none;
         }
         textarea::placeholder {
@@ -574,7 +571,7 @@ body {
         }
         .emotion-buttons {
             display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
