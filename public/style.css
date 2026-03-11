@@ -9,14 +9,13 @@ body {
             
             scroll-padding-top: 0px;
             overscroll-behavior-y: auto;
-            scroll-snap-type: y proximity;
+            scroll-snap-type: y mandatory;
             scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
         }
         html {  
             overflow-y: auto; 
             overflow-x: hidden;
-            scroll-behavior: auto;  
-            
+            scroll-snap-type: y mandatory;
         }
         html, body {
             margin: 0;
@@ -24,6 +23,7 @@ body {
             width: 100%;
             min-height: 100%;
             overflow-x: hidden;
+            scroll-behavior: auto;
         }
          .gradient {
             background: #323C4A;
