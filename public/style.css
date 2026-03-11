@@ -744,13 +744,11 @@ body {
         align-items: flex-start;
         padding-top: 80px;
     }
-    .experience-left,
-    .experience-right {
-        width: 48%;
+    .experience-block {
+        width: 90%;
     }
     /* 情緒標題 */
-    .experience-left h3,
-    .experience-right h3 {
+    .experience-block h3 {
         font-size: 30px;
         color: #e8ffff;
     }
