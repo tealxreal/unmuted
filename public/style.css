@@ -380,14 +380,12 @@ body {
                 pointer-events: none; }
             /* 中央提示：只在有音樂播放時顯示 */
             .start-hint{
-                position: fixed;
-                inset: 0;
-                display: grid;
+                position: relative;
                 bottom: 5%;
                 text-align: center;
                 pointer-events: none;
                 z-index: 2000;
-                font-size: 14px;
+                font-size: 18px;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
                 animation: breatheText 1.8s ease-in-out infinite;
