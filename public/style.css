@@ -355,6 +355,7 @@ body {
             padding: 12px;
             left: 50%;
             transform: translateX(-50%);
+            align-items: center;
             background: none;
             border: none;
             border-radius: 4px;
@@ -574,6 +575,7 @@ body {
             flex-direction: column;
             left: 50%;
             transform: translateX(-50%);
+            align-items: center;
             gap: 12px;
         }
         /* ====== 六圓分支流程圖（不合流） ====== */
