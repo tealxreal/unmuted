@@ -99,7 +99,7 @@ body {
         .experience-block{ 
             width: 100%;
             max-width: 90dvw;
-            min-height: 70dvh;
+            min-height: 90dvh;
             display: flex;
             flex-direction: column;  
             justify-content: center;  
@@ -580,7 +580,7 @@ body {
         .experience-block h3
          {
            font-size: 22px;
-           margin-bottom: 8px;
+           margin-bottom: 0px;
         }
         .emotion-buttons {
             display: flex;
