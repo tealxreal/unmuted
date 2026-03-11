@@ -367,3 +367,10 @@ clearBtn.addEventListener("click", () => {
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
 });
+//計算字數
+const counter = document.getElementById("char-count");
+if (textarea && counter) {
+  textarea.addEventListener("input", () => {
+    counter.textContent = textarea.value.length;
+  });
+}

@@ -377,6 +377,13 @@ body {
             color: rgba(232, 255, 255, 0.483);
             font-size: 12px;
             }
+            .char-counter{
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: rgba(232,255,255,0.483);
+    text-align: left;
+    letter-spacing: 0.05em;
+}
             .hidden { 
                 opacity: 0; 
                 pointer-events: none; }
