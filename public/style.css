@@ -335,19 +335,10 @@ body {
   margin-top: -20px;   /* 讓它靠近按鈕底下一點，覺得太近就調成 -10 或 0 */
   opacity: 0.9;
 }
-.containerblack {
-            min-width: 100vw;
-            min-width: 100dvw;
-            position: fixed;
-            inset:0;
-            background: rgba(0, 0, 0, 0.307);
-            backdrop-filter: blur(0px);
-            z-index: 0;
-        }
         .container {
             min-width: 100%;  
             position: relative;
-            background: none;
+            background: rgba(0, 0, 0, 0.307);
             backdrop-filter: blur(0px);
             z-index: 1;
         }
