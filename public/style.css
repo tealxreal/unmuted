@@ -215,6 +215,7 @@ body {
             font-size: clamp(64px, 9vw, 84px);
             color: #e4f1ff;
             text-align: center;
+            align-items: center;
             font-weight: 800;
             margin-top: 0px;
             transform: scale( 1.2, 0.6);
@@ -228,19 +229,21 @@ body {
             display: flex;
             flex-direction: column;
             gap: 18px;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
             margin-top: 0px;
         }
         .hashtag-wrapper {
             position: static;
             text-align: center;
+            align-items: center;
             display: flex;
             flex-direction: row;
             gap: 18px;
         }
         .hashtag {
             font-size: 28px;
+            align-items: center;
             font-weight: 700;
             color: #e8ffff;
             transform: scaleY(0.8);
@@ -253,6 +256,7 @@ body {
         }
         .concept {
             text-align: center;
+            align-items: center;
             font-size: 16px;
             color: #e4f1ff;
             line-height: 1.5;
