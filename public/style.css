@@ -6,14 +6,15 @@ body {
             font-family:"Noto Sans", "微軟正黑體",sans-serif;
             background-size: cover;
             position: relative;
-            
             scroll-padding-top: 0px;
             overscroll-behavior-y: auto;
-            scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
+            scroll-behavior: auto; 
+            scroll-snap-type: y proximity;
         }
         html {  
             overflow-y: auto; 
             overflow-x: hidden;
+            scroll-behavior: auto;
         }
         html, body {
             margin: 0;
@@ -21,7 +22,6 @@ body {
             width: 100%;
             min-height: 100%;
             overflow-x: hidden;
-            scroll-behavior: auto;
         }
          .gradient {
             background: #323C4A;
@@ -40,7 +40,6 @@ body {
             margin: 0; 
             background: transparent;
             scroll-snap-align: start;
-            scroll-snap-type: y mandatory;
             box-sizing: border-box;  /* 保證 padding 不會影響高度計算 */
         }
         .page::before{
