@@ -345,11 +345,11 @@ body {
             z-index: 1;
         }
         .container {
-            min-width: 100vw;  
+            min-width: 100%;  
             position: relative;
-            background: rgba(0, 0, 0, 0);
+            background: none;
             backdrop-filter: blur(0px);
-            z-index: 10;
+            z-index: 0;
         }
         textarea {
             width: 50%;
