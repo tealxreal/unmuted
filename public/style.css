@@ -225,6 +225,7 @@ body {
         .about-row{
             width: 100%;
             display: flex;
+            flex-direction: column;
             gap: 18px;
             align-items: flex-start;
             justify-content: space-between;
@@ -239,7 +240,8 @@ body {
             gap: 18px;
         }
         .hashtag {
-            font-size: 32px;
+            font-size: 28px;
+            font-weight: 700;
             color: #e8ffff;
             transform: scaleY(0.8);
         }
