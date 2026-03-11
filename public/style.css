@@ -347,7 +347,7 @@ body {
     inset: 0;
     background: rgba(0, 0, 0, 0.307);
     z-index: -1;
-    pointer-events: none;
+    
 }
         textarea {
             width: 50%;
