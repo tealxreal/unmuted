@@ -5,7 +5,7 @@ from pydub import AudioSegment
 from datetime import datetime
 from .chord_test import combine_audio, distribute_beats
 from .melody_test import assign_rhythm_lengths, get_rhythm_pattern
-from .effect_test import insert_effect, get_effect_index
+#from .effect_test import insert_effect, get_effect_index
 from .config import get_chords, get_single_notes, get_emotion_path
 from .gptapi import analyze_emotion
 
@@ -131,8 +131,10 @@ async def generate_music(sentence: str, emotion: str):
     # 轉換並分析
     groups = group_sentence(sentence)      
     chords, weights,_, _, rhythm_seed, melody_notes = hash_groups(groups, emotion)
+    melody_notes = melody_notes
     beat_durations = distribute_beats(weights)
     rhythm_lengths = assign_rhythm_lengths(rhythm_seed)
+    rhythm_lengths = rhythm_lengths
     #effect_index = get_effect_index(sentence)
     #melody_audio, raw_duration = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
     #和弦音檔
@@ -144,8 +146,8 @@ async def generate_music(sentence: str, emotion: str):
 
     #melody_audio, raw_duration = combine_melody_audio(melody_notes, rhythm_lengths, emotion)
     #主旋律加音效
-    melody_with_effect = insert_effect(_, sentence, _, melody_notes, rhythm_lengths, emotion)
-    final = chord_audio.overlay(melody_with_effect)
+    #melody_with_effect = insert_effect(_, sentence, _, melody_notes, rhythm_lengths, emotion)
+    final = chord_audio #.overlay(melody_with_effect)
     
     if emotion == "SURPRISE":
         final = final.apply_gain(+3)
