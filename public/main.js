@@ -364,10 +364,10 @@ updateFX();
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
+    counter.textContent = 0;
     playBtn.classList.add("hidden-btn");
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
-    counter.textContent = textarea.value.length;
 });
 //計算字數
 const counter = document.getElementById("char-count");
