@@ -381,7 +381,7 @@ body {
             /* 中央提示：只在有音樂播放時顯示 */
             .start-hint{
                 position: relative;
-                bottom: 5%;
+                top: 5%;
                 text-align: center;
                 pointer-events: none;
                 z-index: 2000;
