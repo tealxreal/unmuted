@@ -413,11 +413,13 @@ body {
 }
             .tap-to-pause{
                 position: fixed;
-                top: clamp(20px, 8vw, 120px);   /* 偏左但會隨螢幕調整 */
-                place-items: center;
+                left: clamp(20px, 8vw, 120px);   /* 偏左但會隨螢幕調整 */
+                top: 50%;
+                transform: translateY(-50%);
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
-
                 font-size: 14px;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
@@ -427,8 +429,8 @@ body {
   content: "";
   position: absolute;
   /* 盒子大小：你可以調整 */
-  width: min(180px, 45vw);
-  height: 40px;
+  height: min(180px, 45vw);
+  width: 40px;
   border: 0px solid rgba(232,255,255,0.65);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.059);
