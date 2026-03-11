@@ -57,7 +57,7 @@ body {
         .page-content{
             height: 100%;
             width: 100dvw;
-            padding: 8px 20px;
+            padding: 28px 20px;
             display: flex;
             flex-direction: column;
             gap: 20px; /* 取代很多 margin */
@@ -211,57 +211,66 @@ body {
                 opacity: 0;
             }
         }
+        #concept-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 20px;
+    box-sizing: border-box;
+}
+
+.concept-block {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    text-align: center;
+}
         .about-text {
-            font-size: clamp(44px, 8vw, 64px);
+            margin: 0;
+            font-size: clamp(36px, 7vw, 64px);
             color: #e4f1ff;
-            text-align: center;
-            align-items: center;
             font-weight: 800;
-            margin-top: 0px;
             transform: scale( 1.2, 0.6);
-            letter-spacing: -0.08em;
-        }
-        .about-layout{
-            align-items: stretch; /* 讓下面 row 可以吃滿寬 */
-        }
-        .about-row{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 0px;
+            letter-spacing: -0.05em;
+            line-height: 1;
         }
         .hashtag-wrapper {
-            position: static;
-            text-align: center;
-            align-items: center;
             display: flex;
-            min-width: 95dvw;
-            flex-direction: row;
-            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 14px 20px;
+            margin: 0;
         }
         .hashtag {
-            font-size: (22px, 3vw, 36px);
-            align-items: center;
-            text-align: center;
+            font-size: clamp(16px, 2.2vw, 24px);
             font-weight: 700;
             color: #e8ffff;
             transform: scaleY(0.8);
+            white-space: nowrap;
         }
         .concept-container {
-            border: none;
-            align-items: center;
-            width: 80vw;
-            padding: 4px 2px;
+            width: 100%;
+            max-width: 760px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         .concept {
-            text-align: center;
-            align-items: center;
-            font-size: 16px;
-            color: #e4f1ff;
+            margin: 0;
+            font-size: clamp(15px, 1.6vw, 18px);
             line-height: 1.5;
+            color: #e4f1ff;
+            text-align: center;
             white-space: pre-line; 
         }
 /* ===== About 滾動跟隨轉場：初始位置（在畫面外） ===== */
@@ -717,15 +726,15 @@ body {
 }
 #scroll-orb{
   position: fixed;
-  right: 16px;
+  right: 6px;
   top: 20px;                 /* 初始值，JS 會動態改 top */
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
 
   display: grid;
   place-items: center;
   color: rgb(232, 255, 255);
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1;
 
   text-shadow: 0 0 14px rgba(255, 255, 255, 0.391);
@@ -765,6 +774,9 @@ body {
     #experience-view {
         align-items: flex-start;
         padding-top: 80px;
+    }
+    #concept-view {
+        padding: 24px 16px;
     }
     .experience-block {
         width: 100%;
