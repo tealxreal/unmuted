@@ -140,7 +140,7 @@ function stopAllAudio() {
 }
 
 (() => {
-  const pages = document.querySelectorAll(".page");
+  const pages = document.querySelectorAll("html");
   if (!pages.length) return;
   let currentPageId = null;
   // 觀察每一頁，哪一頁進入「主要可見」就算切頁

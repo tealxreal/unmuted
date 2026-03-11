@@ -10,8 +10,6 @@ body {
             scroll-padding-top: 0px;
             overscroll-behavior-y: auto;
             scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
-            /* ✅ 吸附設定放這裡（因為是 body 在滾） */
-            
         }
         html {  
             overflow-y: auto; 
