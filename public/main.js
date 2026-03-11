@@ -360,12 +360,14 @@ function onScroll(){
 document.querySelector(".container").addEventListener("scroll", onScroll,{passive:true})
 window.addEventListener("resize",updateFX);
 updateFX();
+//清除
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
     playBtn.classList.add("hidden-btn");
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
+    counter.textContent = textarea.value.length;
 });
 //計算字數
 const counter = document.getElementById("char-count");
