@@ -323,8 +323,8 @@ body {
         /* 右側兩顆按鈕：左右並排 */
 .action-row{
   display: flex;
-  flex-wrap: nowrap;
-  gap: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -497,7 +497,8 @@ body {
         button {
             font-family: "Noto Sans", "微軟正黑體", sans-serif;
             font-size: 12px;
-            
+            white-space: nowrap;
+            padding: 10px 14px;
             letter-spacing: 0.05em;
             display: inline-flex;
             justify-content: center;
