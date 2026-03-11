@@ -583,7 +583,11 @@ body {
         .experience-block h3
          {
            font-size: 22px;
-           margin-bottom: 0px;
+           margin: 0px;
+        }
+        .experience-block h2
+         {
+           margin: 0px;
         }
         .emotion-buttons {
             display: flex;
