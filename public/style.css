@@ -128,9 +128,9 @@ body {
             transform: scaleY(0.6);
         }
         .title2 { 
-            text-align: left;
-            margin-top: -200px ;
-            margin-left: 120px;
+            text-align: center;
+            margin-top: -100px ;
+            align-items: center;
             font-size: clamp(32px, 4vw, 40px);
             color: #e4f1ff;
             
