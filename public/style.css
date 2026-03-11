@@ -215,7 +215,7 @@ body {
             color: #e4f1ff;
             text-align: center;
         
-            margin-top: -80px;
+            margin-top: 0px;
             transform: scale( 1.2, 0.6);
             letter-spacing: -0.08em;
         }
@@ -225,18 +225,18 @@ body {
         .about-row{
             width: 100%;
             display: flex;
-            gap: 48px;
+            gap: 18px;
             align-items: flex-start;
             justify-content: space-between;
-            margin-top: -50px;
+            margin-top: 0px;
         }
         .hashtag-wrapper {
             position: static;
             flex: 0 0 400px;
-            text-align: left;
+            text-align: center;
             display: flex;
-            flex-direction: column;
-            gap: 44px;
+            flex-direction: row;
+            gap: 18px;
         }
         .hashtag {
             font-size: 32px;
