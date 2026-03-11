@@ -298,7 +298,7 @@ body {
   will-change: transform, opacity;
 }
 .fx-up{
-  --fx-y:120px;
+  --fx-y:220px;
 }
 .fx-left{
   --fx-x:-140px;
@@ -380,7 +380,7 @@ body {
             
             .start-hint{
                 position: absolute;
-                bottom: max(20px, env(safe-area-inset-bottom));
+                bottom: 20px;
                 text-align: center;
                 pointer-events: none;
                 z-index: 2000;
