@@ -1,6 +1,6 @@
 body {
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             background-color: rgb(47, 47, 47);
             font-family:"Noto Sans", "微軟正黑體",sans-serif;
             background-size: cover;
@@ -23,7 +23,6 @@ body {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow-x: hidden;
         }
          .gradient {
             background: #323C4A;
@@ -336,7 +335,7 @@ body {
   opacity: 0.9;
 }
         .container {
-            min-width: 100%;  
+            width: 100%;
             position: relative;
             background: rgba(0, 0, 0, 0.307);
             backdrop-filter: blur(0px);
