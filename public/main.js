@@ -141,7 +141,8 @@ function stopAllAudio() {
 
 (() => {
   const pages = document.querySelectorAll(".page");
-  if (!pages.length) return;
+  const container = document.querySelector(".container");
+  if (!pages.length || !container) return;
   let currentPageId = null;
   // 觀察每一頁，哪一頁進入「主要可見」就算切頁
   const io = new IntersectionObserver((entries) => {
@@ -162,13 +163,13 @@ function stopAllAudio() {
     }
     currentPageId = newId;
   }, {
-    // threshold 設多一點，吸附過程比較穩
-    threshold: [0.2, 0.8]
+    root: container,
+    threshold: [0.2, 0.5, 0.8]
   });
 
   pages.forEach(p => io.observe(p));
 
-  // 初始設定：把第一個當成 current
+  pages.forEach(p => io.observe(p));
   currentPageId = pages[0].id || null;
 })();
 
