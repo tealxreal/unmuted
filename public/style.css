@@ -129,9 +129,9 @@ body {
         }
         .title2 { 
             text-align: center;
-            margin-top: -100px ;
+            margin-top: -80px ;
             align-items: center;
-            font-size: clamp(32px, 4vw, 40px);
+            font-size: clamp(28px, 3vw, 36px);
             color: #e4f1ff;
             
             letter-spacing: 0.05em;
@@ -160,7 +160,7 @@ body {
             align-items: center;
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 20px;
         }
         /* 預設：不跑動畫，停在初始狀態 */
             #home-view .line {
