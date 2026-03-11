@@ -212,7 +212,7 @@ body {
             }
         }
         .about-text {
-            font-size: clamp(64px, 9vw, 84px);
+            font-size: clamp(44px, 8vw, 64px);
             color: #e4f1ff;
             text-align: center;
             align-items: center;
