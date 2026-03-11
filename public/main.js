@@ -279,7 +279,7 @@ stopAllAudio = function(){
     const orbH = orb.getBoundingClientRect().height || 44;
     const yRange = container.clientHeight - margin * 2 - orbH;
     const y = Math.max(0, yRange * t);
-    const rot = 360 * 3 * t;
+    const rot = 360 * 4 * t;
 
     orb.style.transform = `translate3d(0, ${y}px, 0) rotate(${rot}deg)`;
   }
