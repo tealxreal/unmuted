@@ -259,6 +259,8 @@ body {
             text-align: center;
             transform: scaleY(0.8);
             white-space: nowrap;
+            display: flex;
+            justify-content: center;
         }
         .concept-container {
             width: 100%;
@@ -274,6 +276,7 @@ body {
             line-height: 1.5;
             color: #e4f1ff;
             text-align: center;
+            justify-content: center;
             white-space: pre-line; 
         }
 /* ===== About 滾動跟隨轉場：初始位置（在畫面外） ===== */
