@@ -9,6 +9,7 @@ body {
             
             scroll-padding-top: 0px;
             overscroll-behavior-y: auto;
+            scroll-snap-type: y proximity;
             scroll-behavior: auto;      /* 先不要 smooth，避免你誤判吸附是否發生 */
         }
         html {  
