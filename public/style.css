@@ -245,13 +245,10 @@ body {
             transform: scaleY(0.8);
         }
         .concept-container {
-            border: 1.5px solid #e4f1ffaf;
-            border-radius: 6px;
+            border: none;
+            
             width: 50vw;
             padding: 4px 50px;
-            box-shadow:
-            0 0 12px #e4f1ff91,
-            0 0 30px #e4f1ffb3;
         }
         .concept {
             text-align: center;
