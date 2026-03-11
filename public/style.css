@@ -415,7 +415,6 @@ body {
                 position: fixed;
                 top: clamp(20px, 8vw, 120px);   /* 偏左但會隨螢幕調整 */
                 place-items: center;
-                transform: translateY(-50%);
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
 
