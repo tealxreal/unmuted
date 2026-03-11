@@ -221,7 +221,8 @@ body {
 
 .concept-block {
     width: 100%;
-    max-width: 960px;
+    max-width: 100dvw;
+    min-height: 90dvh;
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
@@ -252,7 +253,7 @@ body {
             margin: 0;
         }
         .hashtag {
-            font-size: clamp(16px, 2.2vw, 24px);
+            font-size: clamp(24px, 4vw, 32px);
             font-weight: 700;
             color: #e8ffff;
             transform: scaleY(0.8);
