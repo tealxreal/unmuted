@@ -211,10 +211,10 @@ body {
             }
         }
         .about-text {
-            font-size: clamp(64px, 9vw, 140px);
+            font-size: clamp(64px, 9vw, 84px);
             color: #e4f1ff;
             text-align: center;
-        
+            font-weight: 800;
             margin-top: 0px;
             transform: scale( 1.2, 0.6);
             letter-spacing: -0.08em;
@@ -246,7 +246,7 @@ body {
             transform: scaleY(0.8);
         }
         .concept-container {
-            flex:1;
+            
             border: 1.5px solid #e4f1ffaf;
             border-radius: 6px;
             width: 50vw;
