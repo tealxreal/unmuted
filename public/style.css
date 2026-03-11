@@ -143,8 +143,8 @@ body {
         .title3 { 
             text-align: right;
             margin-top: 0px ;
-            margin-right: 120px;
-            font-size: clamp(24px, 2vw, 30px);
+            margin-right: 0px;
+            font-size: clamp(20px, 2vw, 26px);
             color: #e4f1ff90;
             letter-spacing: 0em;
             transform: scaleY(0.6);
