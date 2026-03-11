@@ -561,12 +561,11 @@ body {
         #play-btn:active {
             transform: scale(1) translateY(1px);
         }
-        .experience-left,
-        .experience-right {
+        .experience-block {
             width: 40%;
         }
-        .experience-left h3,
-        .experience-right h3 {
+        .experience-block h3
+         {
            font-size: 22px;
            margin-bottom: 20px;
         }
