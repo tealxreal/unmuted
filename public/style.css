@@ -497,7 +497,7 @@ body {
         button {
             font-family: "Noto Sans", "微軟正黑體", sans-serif;
             font-size: 12px;
-            flex: 1 1 0;
+            
             letter-spacing: 0.05em;
             display: inline-flex;
             justify-content: center;
