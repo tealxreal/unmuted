@@ -696,13 +696,13 @@ body {
   position: fixed;
   right: 16px;
   top: 20px;                 /* 初始值，JS 會動態改 top */
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 
   display: grid;
   place-items: center;
   color: rgb(232, 255, 255);
-  font-size: 32px;
+  font-size: 28px;
   line-height: 1;
 
   text-shadow: 0 0 14px rgba(255, 255, 255, 0.391);
@@ -744,7 +744,7 @@ body {
         padding-top: 80px;
     }
     .experience-block {
-        width: 90%;
+        width: 95%;
     }
     /* 情緒標題 */
     .experience-block h3 {
@@ -754,13 +754,14 @@ body {
     /* 按鈕尺寸放大（觸控友好） */
     button {
         font-size: 16px;
-        padding: 12px 24px;
+        padding: 10px 18px;
     }
     .emotion-buttons {
-        gap: 16px;
+        gap: 12px;
     }
     textarea {
         height: 120px;
+        width:50%;
         font-size: 16px;
     }
 }
