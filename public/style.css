@@ -83,33 +83,28 @@ body {
   background-repeat: no-repeat;
   pointer-events: none;
 }
-        #experience-view {
+        .experience-page {
             display: flex;
-            flex-direction: row;
-            padding: 0 60px;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            padding: 40px 24px;
             box-sizing: border-box;
         }
         #experience-view .page-content{
             display: flex;
             gap: 108px;
         }
-        .experience-left{ 
-            flex: 1; 
-        display: flex;
-    flex-direction: column;   /* 垂直排列 */
-    align-items: center;      /* 水平置中 */
-    justify-content: center;  /* 整組在區塊內垂直置中 */
-    margin: 10px; }
-        .experience-right{ 
-            flex: 1;
-            margin: 10px;
-        display: flex;
-    flex-direction: column;   /* 垂直排列 */
-    align-items: center;      /* 水平置中 */
-    justify-content: center;  /* 整組在區塊內垂直置中 */
-    gap: 36px; }
+        .experience-block{ 
+            width: 100%;
+            max-width: 90dvw;
+            min-height: 70dvh;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;  
+            gap: 24px;
+            text-align: center;
+            box-sizing: border-box; 
+        }
     /* 標題群組：你要它在哪裡就改 top/left */
 .title-group{
   position: static;
