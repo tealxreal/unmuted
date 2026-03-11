@@ -323,9 +323,11 @@ body {
         /* 右側兩顆按鈕：左右並排 */
 .action-row{
   display: flex;
+  flex-wrap: nowrap;
   gap: 14px;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 /* 小提示字：同 glow-textt 字型即可 */
 .gen-hint{
@@ -352,13 +354,15 @@ body {
 }
         textarea {
             display: block;
-            width: min(90vw, 680px);
+            width: 100%;
+            max-width: 680px;
             height: 100px;
             resize: none;
             padding: 12px;
             margin: 0 auto;
             align-items: center;
             background: none;
+            box-sizing: border-box;
             border: none;
             border-radius: 4px;
             font-size: 16px;
@@ -493,10 +497,12 @@ body {
         button {
             font-family: "Noto Sans", "微軟正黑體", sans-serif;
             font-size: 12px;
+            flex: 1 1 0;
             letter-spacing: 0.05em;
             display: inline-flex;
             justify-content: center;
             align-items: center;
+            box-sizing: border-box;
         }
         .emotion-btn,
         #clear-btn,
