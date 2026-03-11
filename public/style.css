@@ -768,12 +768,13 @@ body {
 *, *::before, *::after { box-sizing: border-box; }
 /* ===== 完全隱藏 scrollbar ===== */
 
-html, body {
+html, body, .container {
   scrollbar-width: none;       /* Firefox */
   -ms-overflow-style: none;    /* IE / 舊 Edge */
 }
 
 html::-webkit-scrollbar,
+.container::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;               /* Chrome / Safari / Edge */
 }

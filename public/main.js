@@ -297,7 +297,7 @@ stopAllAudio = function(){
   }
 
   // ✅ 同時掛：root scroll 常常只打到 window
-  window.addEventListener("scroll", onScroll, { passive: true });
+  document.querySelector(".container").addEventListener("scroll", onScroll, { passive: true })
   scroller.addEventListener("scroll", onScroll, { passive: true });
 
   window.addEventListener("resize", () => requestAnimationFrame(update));
@@ -368,7 +368,7 @@ function onScroll(){
     raf = null;
   });
 }
-window.addEventListener("scroll",onScroll,{passive:true});
+document.querySelector(".container").addEventListener("scroll", onScroll,{passive:true})
 window.addEventListener("resize",updateFX);
 updateFX();
 const clearBtn = document.getElementById("clear-btn");
