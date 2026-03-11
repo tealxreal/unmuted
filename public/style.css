@@ -90,7 +90,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 18px;
+            padding: 20px 0px;
             box-sizing: border-box;
         }
         #experience-view-1,
@@ -101,7 +101,7 @@ body {
         }
         .experience-block{ 
             width: 100%;
-            max-width: 95dvw;
+            max-width: 100dvw;
             min-height: 90dvh;
             display: flex;
             flex-direction: column;  
