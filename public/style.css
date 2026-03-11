@@ -571,11 +571,10 @@ body {
         }
         .emotion-buttons {
             display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    width: min(90vw, 700px);
+            flex-direction: column;
+    
+            align-items: center;
+            gap: 12px;
         }
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
