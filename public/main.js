@@ -373,4 +373,7 @@ updateFX();
 const clearBtn = document.getElementById("clear-btn");
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
+    playBtn.classList.add("hidden-btn");
+    playBtn.classList.remove("visible-btn");
+    playBtn.disabled = true;
 });
