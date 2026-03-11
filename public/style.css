@@ -329,7 +329,7 @@ body {
 .action-row{
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -360,7 +360,7 @@ body {
         textarea {
             display: block;
             width: 100%;
-            max-width: 680px;
+            max-width: 580px;
             height: 100px;
             resize: none;
             padding: 12px;
