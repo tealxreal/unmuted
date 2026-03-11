@@ -336,8 +336,8 @@ body {
 }
         .container {
             min-width: 100vw;
-            
-            position: fixed;
+            min-width: 100dvw;
+            position: relative;
             background: rgba(0, 0, 0, 0.307);
             backdrop-filter: blur(0px);
             z-index: 1;
