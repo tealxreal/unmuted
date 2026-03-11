@@ -348,7 +348,7 @@ body {
     z-index: -1;
     pointer-events: none;
 }
-        #experience-view-1 textarea {
+        textarea {
             width: 45%;
             height: 100px;
             resize: none;
