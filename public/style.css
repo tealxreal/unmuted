@@ -637,12 +637,13 @@ body {
   border: 0.5px solid rgba(255, 255, 255, 0.087);
   font-size: 18px;
   text-align: center;
+  margin: 150px 150px;
   font-weight: 700;
   color: #e8ffff;
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: spin 4s linear infinite, loadingglow 2s ease-in-out infinite alternate;
+    animation: loadingglow 2s ease-in-out infinite alternate;
 }
 @keyframes spin{
     0%{
