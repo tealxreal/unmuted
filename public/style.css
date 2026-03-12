@@ -631,11 +631,11 @@ body {
   width: min(62vw, 420px);
   height: min(62vw, 420px);
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.392);
+  border: 0.5px solid rgba(255, 255, 255, 0.087);
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: loadingglow 3s ease-in-out infinite;
+    animation: spin 4s linear infinite, loadingglow 3s ease-in-out infinite alternate;
 }
 @keyframes spin{
     0%{
@@ -648,14 +648,15 @@ body {
 @keyframes loadingglow {
     0% {
         box-shadow: 0 0 2px #dfffffcd,
-                    0 0 6px #dcffffa1;
+                    0 0 6px #dcffff53;
     }
     100%{
-        box-shadow: 0 0 2px #e8ffffcd,
-                    0 0 6px #e8ffff81,
-                    0 0 10px #e8ffff61,
-                    0 0 16px #e8ffff41,
-                    0 0 24px #e8ffff20;
+        box-shadow: 0 0 6px #e8ffffcd,
+                    0 0 8px #e8ffffb6,
+                    0 0 16px #e8ffff81,
+                    0 0 22px #e8ffff61,
+                    0 0 32px #e8ffff41,
+                    0 0 56px #e8ffff20;
 
     }
 }
