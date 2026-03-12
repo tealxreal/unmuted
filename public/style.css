@@ -515,6 +515,7 @@ body {
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
+            z-index: 100;
         }
         .emotion-btn,
         #clear-btn,
@@ -609,7 +610,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  background: rgba(5, 8, 18, 0.083);
+  backdrop-filter: blur(6px);
+  z-index: 4000;
   opacity: 1;
   pointer-events: auto;
 }
@@ -628,14 +631,14 @@ body {
 /* 大圓 */
 .loading-ring {
   position: relative;
-  width: min(62vw, 420px);
-  height: min(62vw, 420px);
+  width: min(50vw, 300px);
+  height: min(50vw, 300px);
   border-radius: 50%;
   border: 0.5px solid rgba(255, 255, 255, 0.087);
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: spin 4s linear infinite, loadingglow 3s ease-in-out infinite alternate;
+    animation: spin 4s linear infinite, loadingglow 2s ease-in-out infinite alternate;
 }
 @keyframes spin{
     0%{
