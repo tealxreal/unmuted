@@ -627,13 +627,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-.loading-text {
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  color: #e8ffffbb;
-  text-align: center;
-}
 /* 大圓 */
 .loading-ring {
   position: relative;
@@ -641,7 +634,15 @@ body {
   height: min(50vw, 300px);
   border-radius: 50%;
   border: 0.5px solid rgba(255, 255, 255, 0.087);
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #e8ffffbb;
+  text-align: center;
+  pointer-events: none;
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
