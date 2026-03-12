@@ -241,7 +241,7 @@ body {
             font-weight: 700;
             color: #e8ffff;
             text-align: center;
-            transform: scaleY(0.8);
+            transform: scaleY(0.6);
             white-space: nowrap;
             display: flex; 
             justify-content: center;
@@ -601,6 +601,76 @@ body {
             gap: 12px;
             margin: 0 auto;
         }
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 1;
+  pointer-events: auto;
+}
+.loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+/* 中央整組 */
+.loading-ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 大圓 */
+.loading-ring {
+  position: relative;
+  width: min(82vw, 620px);
+  height: min(82vw, 620px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.392);
+  box-shadow:
+    0 0 20px rgba(160, 255, 253, 0.08),
+    inset 0 0 24px rgba(255, 255, 255, 0.04);
+}
+
+/* 跑動的光點 */
+.loading-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #dff4ff;
+  box-shadow:
+    0 0 10px rgba(223, 244, 255, 0.95),
+    0 0 24px rgba(153, 229, 255, 0.95),
+    0 0 42px rgba(120, 210, 255, 0.75);
+  transform:
+    rotate(0deg)
+    translateY(calc(-1 * min(41vw, 310px)))
+    translateY(7px);
+  transform-origin: center center;
+  animation: dotOrbit 2.8s linear infinite;
+}
+@keyframes dotOrbit {
+  from {
+    transform:
+      rotate(0deg)
+      translateY(calc(-1 * min(41vw, 310px)))
+      translateY(7px);
+  }
+  to {
+    transform:
+      rotate(360deg)
+      translateY(calc(-1 * min(41vw, 310px)))
+      translateY(7px);
+  }
+}
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
   display: grid;
@@ -716,15 +786,15 @@ body {
 }
 #scroll-orb{
   position: fixed;
-  right: 6px;
-  top: 20px;                 /* 初始值，JS 會動態改 top */
-  width: 30px;
-  height: 30px;
+  right: 4px;
+  top: 10px;                 /* 初始值，JS 會動態改 top */
+  width: 24px;
+  height: 24px;
 
   display: grid;
   place-items: center;
   color: rgb(232, 255, 255);
-  font-size: 24px;
+  font-size: 16px;
   line-height: 1;
 
   text-shadow: 0 0 14px rgba(255, 255, 255, 0.391);
@@ -749,6 +819,9 @@ body {
 
     .page {
         padding: 40px 20px;
+    }
+    .hashtag {
+        font-size: 18;
     }
     /* 主標題 */
     .title {

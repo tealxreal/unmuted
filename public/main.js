@@ -72,7 +72,7 @@ generateBtn.addEventListener("click", () => {
 textarea.addEventListener("input", () => {
   generatedAudioURL = null;
   playBtn.disabled = true;
-  playBtn.textContent = "播放音樂";
+  playBtn.textContent = "播放 ▶︎";
 });
 
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
@@ -84,6 +84,7 @@ async function generateMusic() {
     generateBtn.textContent = "生成中...";
     playBtn.disabled = true;
     try {
+        showLoading();
         const API_BASE = "https://unmuted.onrender.com";
         const response = await fetch(`${API_BASE}/generate`, {
             method: "POST",
@@ -92,7 +93,7 @@ async function generateMusic() {
         });
 
         if (!response.ok) throw new Error("生成失敗");
-
+        hideLoading();
         const blob = await response.blob();
         generatedAudioURL = URL.createObjectURL(blob);
         generatedAudio.src = generatedAudioURL;
@@ -101,10 +102,11 @@ async function generateMusic() {
         playBtn.classList.add("visible-btn");
         playBtn.classList.remove("hidden-btn");
         playBtn.disabled = false;
-
+        hideLoading();
     } catch (err) {
         alert("生成失敗，請再試一次");
         playBtn.disabled = true;
+        hideLoading();
     }
 
     generateBtn.disabled = false;
@@ -267,7 +269,7 @@ stopAllAudio = function(){
   const orb = document.getElementById("scroll-orb");
   const container = document.querySelector(".container");
   if (!orb || !container) return;
-  const margin = 20;
+  const margin = 10;
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   let ticking = false;
   function update() {
@@ -375,4 +377,15 @@ if (textarea && counter) {
   textarea.addEventListener("input", () => {
     counter.textContent = textarea.value.length;
   });
+}
+const loadingOverlay = document.getElementById("loadingOverlay");
+function showLoading() {
+  if (!loadingOverlay) return;
+  loadingOverlay.classList.remove("hidden");
+  loadingOverlay.setAttribute("aria-hidden", "false");
+}
+function hideLoading() {
+  if (!loadingOverlay) return;
+  loadingOverlay.classList.add("hidden");
+  loadingOverlay.setAttribute("aria-hidden", "true");
 }
