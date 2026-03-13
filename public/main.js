@@ -1,3 +1,14 @@
+const analysisResult = document.getElementById("analysisResult");
+function showAnalysisResult(text) {
+  if (!analysisResult) return;
+  analysisResult.textContent = text;
+  analysisResult.classList.remove("hidden");
+}
+function hideAnalysisResult() {
+  if (!analysisResult) return;
+  analysisResult.textContent = "";
+  analysisResult.classList.add("hidden");
+}
 (() => {
   const home = document.getElementById("home-view");
   if (!home) return;
@@ -311,8 +322,6 @@ stopAllAudio = function(){
   window.addEventListener("resize", () => requestAnimationFrame(update));
   window.addEventListener("load", update);
 
-  requestAnimationFrame(debugOncePerSecond);
-
   update();
 })();
 
@@ -397,15 +406,4 @@ function hideLoading() {
   loadingOverlay.classList.add("hidden");
   document.documentElement.classList.remove("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "true");
-}
-const analysisResult = document.getElementById("analysisResult");
-function showAnalysisResult(text) {
-  if (!analysisResult) return;
-  analysisResult.textContent = text;
-  analysisResult.classList.remove("hidden");
-}
-function hideAnalysisResult() {
-  if (!analysisResult) return;
-  analysisResult.textContent = "";
-  analysisResult.classList.add("hidden");
 }
