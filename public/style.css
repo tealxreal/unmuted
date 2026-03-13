@@ -179,22 +179,24 @@ body {
             }
         .enter-interaction-btn{
             position: absolute;
-            bottom: 50px;
+            bottom: 70px;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
-            border: 1.5px solid rgba(255, 255, 255, 0.761);
+            border: none;
             border-radius: 20px;
             backdrop-filter: none;
             padding: 6px 16px;
             color: #e8ffff;
             cursor: pointer;
-            box-shadow: 0 0 2px #e8ffffa4,
-                        0 0 6px #e8ffff41;
+            box-shadow: 0 0 2px #e8ffffa4;
             animation: shine 2.6s ease-in-out infinite;
         }
         .enter-interaction-btn:hover {
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
             background: rgba(0, 0, 0, 0.597);
             transform: scale(1.06);
             opacity: 0.85;
