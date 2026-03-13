@@ -211,6 +211,7 @@ function stopAllAudio() {
     if (currentPageId && newId !== currentPageId) {
       stopAllAudio();
       hideAnalysisResult();
+      playBtn.disabled = true;
       textarea.value = "";
       counter.textContent = 0;
     }

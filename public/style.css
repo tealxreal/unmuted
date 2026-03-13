@@ -264,7 +264,8 @@ body {
         }
         .concept {
             margin: 0;
-            font-size: clamp(15px, 1.6vw, 18px);
+            font-size: clamp(12px, 1.2vw, 15px);
+            transform: scaleY(0.8);
             line-height: 1.5;
             color: #e4f1ff;
             text-align: left;
