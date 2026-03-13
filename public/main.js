@@ -18,7 +18,7 @@ const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn")
 /* =========================
    切頁時停止播放
 ========================= */
-
+const previewAudio = new Audio(); // 試聽專用播放器
 function stopAllAudio() {
     // 試聽音
   if (!previewAudio.paused) {
@@ -178,7 +178,7 @@ function hideAnalysisResult() {
   io.observe(home);
 })();
 const emotionButtons = document.querySelectorAll(".emotion-btn");
-const previewAudio = new Audio(); // 試聽專用播放器
+
 
 emotionButtons.forEach(btn => {
     btn.addEventListener("click", () => {

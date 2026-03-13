@@ -565,8 +565,8 @@ body {
             padding: 6px 16px;
             color: #e8ffff;
             cursor: pointer;
-            box-shadow: 0 0 2px #e8ffffd3,
-                        0 0 6px #e8ffff83;
+            box-shadow: 0 0 2px #e8ffffa4,
+                        0 0 6px #e8ffff41;
             animation: shine 2.6s ease-in-out infinite;
         }
         .enter-interaction-btn:hover {
@@ -577,8 +577,8 @@ body {
         }
         @keyframes shine{
             0%{
-                box-shadow: 0 0 2px #e8ffffcd,
-                        0 0 6px #e8ffffce;
+                box-shadow: 0 0 2px #e8ffffaf,
+                        0 0 6px #e8ffff84;
             }
             50%{
                 box-shadow: 0 0 2px #e8ffffe5,
@@ -588,8 +588,8 @@ body {
                             0 0 50px #e8ffff49;
             }
             100%{
-                box-shadow: 0 0 2px #e8ffffcd,
-                        0 0 6px #e8ffffce;
+                box-shadow: 0 0 2px #e8ffffaf,
+                        0 0 6px #e8ffff84;;
             }
         }
         .emotion-btn,
