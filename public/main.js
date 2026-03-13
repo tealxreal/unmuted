@@ -25,6 +25,7 @@ closeInteractionBtns.forEach(btn => {
     setMode("main");
   });
 });
+setMode("main");
 function setMode(mode) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -37,14 +38,14 @@ function setMode(mode) {
     
     currentMainIndex = 0;
     if (mainPages[0]) {
-      mainPages[0].scrollIntoView({ behavior: "instant", block: "start" });
+      mainPages[0].scrollIntoView({ behavior: "auto", block: "start" });
     }
     document.body.classList.remove("interaction-mode");
     document.body.classList.add("main-mode");
   } else {
     currentInteractionIndex = 0;
     if (interactionPages[0]) {
-      interactionPages[0].scrollIntoView({ behavior: "instant", block: "start" });
+      interactionPages[0].scrollIntoView({ behavior: "auto", block: "start" });
     }
     document.body.classList.remove("main-mode");
     document.body.classList.add("interaction-mode");
