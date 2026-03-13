@@ -29,17 +29,19 @@
 <div class="container">
 
     <!-- 🌿 主畫面 -->
-    <section id="home-view" class="page">
+    <section id="home-view" class="page" data-group="main">
         
         <div class="title-group">
             <div class="title3 fx06 fx-right">2026@tealxreal</div>
             <h1 class="title fx06 fx-left">「Unmuted:」</h1>
             <p class="title2 fx06 fx-left">#文字轉音樂裝置系統</p>
+            <button id="enter-interaction-btn" class="enter-interaction-btn">點此進入互動頁面
+            </button>
         </div>
         <div class="start-hint fx fx-up">︽<br>上滑看介紹</div>
     </section>
     <!-- 🌿 理念介紹頁 -->
-    <section id="concept-view" class="page">
+    <section id="concept-view" class="page" data-group="main">
         <div class="concept-block">
             <p class = "about-text fx1206 fx-up">「　：」</p>
             <div class="hashtag fx06 fx-left">#TextToMusic<br>#WindChime<br>#BeyondWords</div>
@@ -59,9 +61,13 @@
         </div>
         <div class="start-hint fx fx-up">︽<br>開始互動</div>
     </section>
+    <section id="interaction-intro-view" class="page" data-group="interaction">
+        <button class="close-interaction-btn" type="button">✕</button>
+    </section>
     <!-- 🌿 互動體驗頁1 -->
-    <section id="experience-view-1" class="page experience-page">
+    <section id="experience-view-1" class="page experience-page" data-group="interaction">
         <div class="experience-block fx fx-right">
+            <button class="close-interaction-btn" type="button">✕</button>
             <p class = glow-texth2>Start Generating<br>/開始互動</p>
             <p id="analysisResult" class = "analysis-result hidden"></p>
             <textarea 
@@ -91,8 +97,9 @@
         <div class="start-hint fx fx-up">︽<br>其他情緒音色試聽</div> 
     </section>
     <!-- 🌿 互動體驗頁2 -->
-    <section id="experience-view-2" class="page experience-page">
+    <section id="experience-view-2" class="page experience-page" data-group="interaction">
         <div class="experience-block fx fx-left">
+            <button class="close-interaction-btn" type="button">✕</button>
             <p class = "glow-texth2">Music Preview<br>/音色試聽</p>
             <p class = "glow-textt">「請點擊想試聽的音色：」</p>
             <div class="emotion-buttons">
@@ -106,9 +113,11 @@
         </div>
         <div class="start-hint fx fx-up">︽<br>流程介紹</div> 
     </section>
-    
+    <section id="catalog-view" class="page" data-group="interaction">
+        <button class="close-interaction-btn" type="button">✕</button>
+    </section>
     <!-- 🌿 系統流程頁 -->
-    <section id="system-view" class="page">
+    <section id="system-view" class="page" data-group="main">
         <div class="system-block">
             <h2 class = "glow-texth2 fx06 fx-right2">How 「Unmuted：」 Works</h2>
             <div class="flow6 fx fx-left" aria-label="Workflow grid">

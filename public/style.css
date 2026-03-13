@@ -54,6 +54,9 @@ body {
             position: relative;
             z-index: 1;
         }
+        .page.is-hidden {
+            display: none !important;
+        }
 .system-block{
     position: static;
     margin: 0;  
@@ -264,7 +267,7 @@ body {
         }
         .concept {
             margin: 0;
-            font-size: clamp(12px, 1.2vw, 15px);
+            font-size: clamp(14px, 1.3vw, 18px);
             transform: scaleY(0.8);
             line-height: 1.5;
             color: #e4f1ff;
@@ -769,6 +772,9 @@ body.loading-lock {
   pointer-events: none;      /* 不干擾點擊 */
   z-index: 2500;
   will-change: transform;
+}
+body.interaction-mode #scroll-orb{
+    display: none;
 }
         #loading {
             margin-top: 20px;

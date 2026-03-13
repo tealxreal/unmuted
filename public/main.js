@@ -1,3 +1,58 @@
+const mainPages = [
+  document.getElementById("home-view"),
+  document.getElementById("concept-view"),
+  document.getElementById("system-view")
+];
+const interactionPages = [
+  document.getElementById("interaction-intro-view"),
+  document.getElementById("experience-view-1"),
+  document.getElementById("experience-view-2"),
+  document.getElementById("catalog-view")
+];
+let currentMode = "main"; // "main" 或 "interaction"
+let currentMainIndex = 0;
+let currentInteractionIndex = 0;
+const container = document.querySelector(".container");
+const enterInteractionBtn = document.getElementById("enter-interaction-btn");
+const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
+if (enterInteractionBtn) {
+  enterInteractionBtn.addEventListener("click", () => {
+    setMode("interaction");
+  });
+}
+closeInteractionBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    setMode("main");
+  });
+});
+function setMode(mode) {
+  currentMode = mode;
+  const showGroup = mode === "main" ? "main" : "interaction";
+  document.querySelectorAll(".page").forEach(page => {
+    const group = page.dataset.group;
+    page.classList.toggle("is-hidden", group !== showGroup);
+  });
+
+  if (mode === "main") {
+    currentMainIndex = 0;
+    if (mainPages[0]) {
+      mainPages[0].scrollIntoView({ behavior: "instant", block: "start" });
+    }
+    document.body.classList.remove("interaction-mode");
+    document.body.classList.add("main-mode");
+  } else {
+    currentInteractionIndex = 0;
+    if (interactionPages[0]) {
+      interactionPages[0].scrollIntoView({ behavior: "instant", block: "start" });
+    }
+    document.body.classList.remove("main-mode");
+    document.body.classList.add("interaction-mode");
+  }
+
+  stopAllAudio();
+  hideAnalysisResult();
+  setupPageObserver();
+}
 const analysisResult = document.getElementById("analysisResult");
 const nonPassiveOption = { passive: false };
 function preventScrollKeys(e) {
@@ -168,7 +223,6 @@ playBtn.addEventListener("click", () => {
     generatedAudio.muted = false;
     generatedAudio.volume = 1;
     generatedAudio.play();
-    generatedAudio.play();
 });
 
 
@@ -188,26 +242,28 @@ function stopAllAudio() {
     generatedAudio.currentTime = 0;
   }
 }
-
-(() => {
-  const pages = document.querySelectorAll(".page");
+let pageObserver = null;
+let currentPageId = null;
+function setupPageObserver() {
   const container = document.querySelector(".container");
+  const pages = document.querySelectorAll(".page:not(.is-hidden)");
   if (!pages.length || !container) return;
-  let currentPageId = null;
-  // 觀察每一頁，哪一頁進入「主要可見」就算切頁
-  const io = new IntersectionObserver((entries) => {
-    // 找到目前可見比例最高的那一頁
+
+  if (pageObserver) {
+    pageObserver.disconnect();
+  }
+
+  pageObserver = new IntersectionObserver((entries) => {
     let best = null;
     for (const e of entries) {
       if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
     }
     if (!best) return;
-    // 你想「超過一半才算切頁」→ 0.6 很穩（你可改 0.55 / 0.7）
     if (best.intersectionRatio < 0.65) return;
+
     const newId = best.target.id || null;
     if (!newId) return;
 
-    // 真正換頁才停
     if (currentPageId && newId !== currentPageId) {
       stopAllAudio();
       hideAnalysisResult();
@@ -215,17 +271,16 @@ function stopAllAudio() {
       textarea.value = "";
       counter.textContent = 0;
     }
+
     currentPageId = newId;
   }, {
     root: container,
     threshold: [0.2, 0.5, 0.8]
   });
 
-  pages.forEach(p => io.observe(p));
-
-  pages.forEach(p => io.observe(p));
+  pages.forEach(p => pageObserver.observe(p));
   currentPageId = pages[0].id || null;
-})();
+}
 
 (function bgScroller(){
   const track = document.getElementById("bgTrack");
@@ -408,7 +463,7 @@ clearBtn.addEventListener("click", () => {
     playBtn.classList.add("hidden-btn");
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
-    hideAnalysisResult;
+    hideAnalysisResult();
 });
 //計算字數
 const counter = document.getElementById("char-count");
