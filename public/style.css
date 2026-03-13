@@ -177,43 +177,7 @@ body {
                     opacity: 1;
                 }
             }
-        .enter-interaction-btn{
-
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
-            border: 0.5px solid rgba(255, 255, 255, 0.761);
-            border-radius: 999px;
-            backdrop-filter: none;
-            padding: 6px 16px;
-            color: #e8ffff;
-            cursor: pointer;
-            box-shadow: 0 0 2px #e8ffffa4;
-            animation: shine 2.6s ease-in-out infinite;
-        }
-        .enter-interaction-btn:hover {
-            transform: scale(1.02);
-            background: rgba(0, 0, 0, 0.597);
-            opacity: 0.85;
-            filter: brightness(1.2);
-        }
-        @keyframes shine{
-            0%{
-                box-shadow: 0 0 2px #e8ffff8d;
-                transform: scale(1);
-            }
-            50%{
-                box-shadow: 0 0 2px #e8ffffe5,
-                            0 0 6px #e8ffffab,
-                            0 0 18px #e8ffff71,
-                            0 0 36px #e8ffff38;
-                transform: scale(1.05);
-            }
-            100%{
-                box-shadow: 0 0 2px #e8ffff8d;
-                transform: scale(1);
-                       
-            }
-        }
+        
 .system-block{
     position: static;
     margin: 0;  
@@ -337,6 +301,44 @@ body {
             text-align: left;
             justify-content: center;
             white-space: pre-line; 
+        }
+        .enter-interaction-btn{
+            position: absolute;
+            bottom: 50px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            border: none;
+            border-radius: 999px;
+            backdrop-filter: none;
+            padding: 6px 16px;
+            color: #e8ffff;
+            cursor: pointer;
+            box-shadow: 0 0 2px #e8ffffa4;
+            animation: shine 2.6s ease-in-out infinite;
+        }
+        .enter-interaction-btn:hover {
+            transform: scale(1.02);
+            background: rgba(0, 0, 0, 0.597);
+            opacity: 0.85;
+            filter: brightness(1.2);
+        }
+        @keyframes shine{
+            0%{
+                box-shadow: 0 0 2px #e8ffff8d;
+                transform: scale(1);
+            }
+            50%{
+                box-shadow: 0 0 2px #e8ffffe5,
+                            0 0 6px #e8ffffab,
+                            0 0 18px #e8ffff71,
+                            0 0 36px #e8ffff38;
+                transform: scale(1.05);
+            }
+            100%{
+                box-shadow: 0 0 2px #e8ffff8d;
+                transform: scale(1);
+                       
+            }
         }
 /* ===== About 滾動跟隨轉場：初始位置（在畫面外） ===== */
 .fx1206{
