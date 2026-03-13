@@ -59,7 +59,7 @@ emotionButtons.forEach(btn => {
 const textarea = document.getElementById("user-input");
 const generateBtn = document.getElementById("generate-btn");
 const playBtn = document.getElementById("play-btn");
-const data = await response.json();
+
 let generatedAudioURL = null;
 let generatedAudio = new Audio();
 playBtn.disabled = true;
