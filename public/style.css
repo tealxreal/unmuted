@@ -57,71 +57,7 @@ body {
         .page.is-hidden {
             display: none !important;
         }
-.system-block{
-    position: static;
-    margin: 0;  
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-        /* ✅ 背景層 */
-#bg{
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  overflow: hidden;
-  background: #000; /* 當圖片還沒載入的底色 */
-  pointer-events: none;
-}
-
-#bgTrack{
-  position: absolute;
-  inset: 0;
-  will-change: transform;
-  pointer-events: none;
-}
-
-.bgSlide{
-  height: 100vh;                 /* 每張剛好一屏 */
-  width: 100vw;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-        .experience-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0px;
-            box-sizing: border-box;
-        }
-        #interaction-intro-view,
-        #experience-view-1,
-        #experience-view-2,
-        #catalog-view {
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            position: relative;
-        }
-        .experience-block{ 
-            width: 100%;
-            max-width: 100dvw;
-            min-height: 90dvh;
-            display: flex;
-            flex-direction: column;  
-            justify-content: center;  
-            align-items: center;
-            gap: 24px;
-            margin: 0 auto;
-            text-align: center;
-            box-sizing: border-box; 
-        }
-    /* 標題群組：你要它在哪裡就改 top/left */
-.title-group{
+        .title-group{
     position: static;
     margin-top: -60px;    /* 你要更靠上就改小 */
     text-align: center;
@@ -218,6 +154,132 @@ body {
                 opacity: 0;
             }
         }
+        .start-hint{
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+                pointer-events: none;
+                z-index: 2000;
+                font-size: 14px;
+                color: rgba(232,255,255,0.9);
+                text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
+                animation: floatHint 1.8s ease-in-out infinite;
+            }
+            @keyframes floatHint {
+                0%, 100% {
+                    transform: translateX(-50%) translateY(0);
+                    opacity: 0.7;
+                }
+                50% {
+                    transform: translateX(-50%) translateY(6px);
+                    opacity: 1;
+                }
+            }
+        .enter-interaction-btn{
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            border: 1.5px solid rgba(255, 255, 255, 0.761);
+            border-radius: 20px;
+            backdrop-filter: none;
+            padding: 6px 16px;
+            color: #e8ffff;
+            cursor: pointer;
+            box-shadow: 0 0 2px #e8ffffa4,
+                        0 0 6px #e8ffff41;
+            animation: shine 2.6s ease-in-out infinite;
+        }
+        .enter-interaction-btn:hover {
+            background: rgba(0, 0, 0, 0.597);
+            transform: scale(1.06);
+            opacity: 0.85;
+            filter: brightness(1.2);
+        }
+        @keyframes shine{
+            0%{
+                box-shadow: 0 0 2px #e8ffff8d,
+                        
+            }
+            50%{
+                box-shadow: 0 0 2px #e8ffffe5,
+                            0 0 6px #e8ffffab,
+                            0 0 18px #e8ffff71,
+                            0 0 36px #e8ffff38,
+            }
+            100%{
+                box-shadow: 0 0 2px #e8ffff8d,
+                       
+            }
+        }
+.system-block{
+    position: static;
+    margin: 0;  
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+        /* ✅ 背景層 */
+#bg{
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: #000; /* 當圖片還沒載入的底色 */
+  pointer-events: none;
+}
+
+#bgTrack{
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.bgSlide{
+  height: 100vh;                 /* 每張剛好一屏 */
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+        .experience-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0px;
+            box-sizing: border-box;
+        }
+        #interaction-intro-view,
+        #experience-view-1,
+        #experience-view-2,
+        #catalog-view {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            position: relative;
+        }
+        .experience-block{ 
+            width: 100%;
+            max-width: 100dvw;
+            min-height: 90dvh;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;  
+            align-items: center;
+            gap: 24px;
+            margin: 0 auto;
+            text-align: center;
+            box-sizing: border-box; 
+        }
+
         #system-view {
     display: flex;
     justify-content: center;
@@ -410,29 +472,7 @@ body {
                 opacity: 0; 
                 pointer-events: none; }
             
-            .start-hint{
-                position: absolute;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                text-align: center;
-                pointer-events: none;
-                z-index: 2000;
-                font-size: 14px;
-                color: rgba(232,255,255,0.9);
-                text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
-                animation: floatHint 1.8s ease-in-out infinite;
-            }
-            @keyframes floatHint {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 0.7;
-    }
-    50% {
-        transform: translateX(-50%) translateY(6px);
-        opacity: 1;
-    }
-}
+            
 .analysis-result {
   text-align: center;
   font-size: 14px;
@@ -557,41 +597,7 @@ body {
             cursor: pointer;
             z-index: 2000;
         }
-        .enter-interaction-btn{
-            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
-            border: 1.5px solid rgba(255, 255, 255, 0.761);
-            border-radius: 20px;
-            backdrop-filter: none;
-            padding: 6px 16px;
-            color: #e8ffff;
-            cursor: pointer;
-            box-shadow: 0 0 2px #e8ffffa4,
-                        0 0 6px #e8ffff41;
-            animation: shine 2.6s ease-in-out infinite;
-        }
-        .enter-interaction-btn:hover {
-            background: rgba(0, 0, 0, 0.597);
-            transform: scale(1.06);
-            opacity: 0.85;
-            filter: brightness(1.2);
-        }
-        @keyframes shine{
-            0%{
-                box-shadow: 0 0 2px #e8ffffaf,
-                        0 0 6px #e8ffff84;
-            }
-            50%{
-                box-shadow: 0 0 2px #e8ffffe5,
-                            0 0 6px #e8ffffab,
-                            0 0 18px #e8ffff71,
-                            0 0 30px #e8ffff63,
-                            0 0 50px #e8ffff49;
-            }
-            100%{
-                box-shadow: 0 0 2px #e8ffffaf,
-                        0 0 6px #e8ffff84;;
-            }
-        }
+        
         .emotion-btn,
         #clear-btn,
         #generate-btn {
