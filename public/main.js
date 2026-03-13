@@ -15,17 +15,51 @@ let currentInteractionIndex = 0;
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
-if (enterInteractionBtn) {
-  enterInteractionBtn.addEventListener("click", () => {
-    setMode("interaction");
-  });
+/* =========================
+   切頁時停止播放
+========================= */
+
+function stopAllAudio() {
+    // 試聽音
+  if (!previewAudio.paused) {
+    previewAudio.pause();
+    previewAudio.currentTime = 0;
+  }
+  // 生成音
+  if (!generatedAudio.paused) {
+    generatedAudio.pause();
+    generatedAudio.currentTime = 0;
+  }
 }
-closeInteractionBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    setMode("main");
+function setMode(mode) {
+  currentMode = mode;
+  const showGroup = mode === "main" ? "main" : "interaction";
+  document.querySelectorAll(".page").forEach(page => {
+    const group = page.dataset.group;
+    page.classList.toggle("is-hidden", group !== showGroup);
   });
-});
-setMode("main");
+
+  if (mode === "main") {
+    
+    currentMainIndex = 0;
+    if (mainPages[0]) {
+      mainPages[0].scrollIntoView({ behavior: "auto", block: "start" });
+    }
+    document.body.classList.remove("interaction-mode");
+    document.body.classList.add("main-mode");
+  } else {
+    currentInteractionIndex = 0;
+    if (interactionPages[0]) {
+      interactionPages[0].scrollIntoView({ behavior: "auto", block: "start" });
+    }
+    document.body.classList.remove("main-mode");
+    document.body.classList.add("interaction-mode");
+  }
+
+  stopAllAudio();
+  hideAnalysisResult();
+  setupPageObserver();
+}
 let pageObserver = null;
 let currentPageId = null;
 function setupPageObserver() {
@@ -60,35 +94,18 @@ function setupPageObserver() {
   pages.forEach(p => pageObserver.observe(p));
   currentPageId = pages[0].id || null;
 }
-function setMode(mode) {
-  currentMode = mode;
-  const showGroup = mode === "main" ? "main" : "interaction";
-  document.querySelectorAll(".page").forEach(page => {
-    const group = page.dataset.group;
-    page.classList.toggle("is-hidden", group !== showGroup);
+if (enterInteractionBtn) {
+  enterInteractionBtn.addEventListener("click", () => {
+    setMode("interaction");
   });
-
-  if (mode === "main") {
-    
-    currentMainIndex = 0;
-    if (mainPages[0]) {
-      mainPages[0].scrollIntoView({ behavior: "auto", block: "start" });
-    }
-    document.body.classList.remove("interaction-mode");
-    document.body.classList.add("main-mode");
-  } else {
-    currentInteractionIndex = 0;
-    if (interactionPages[0]) {
-      interactionPages[0].scrollIntoView({ behavior: "auto", block: "start" });
-    }
-    document.body.classList.remove("main-mode");
-    document.body.classList.add("interaction-mode");
-  }
-
-  stopAllAudio();
-  hideAnalysisResult();
-  setupPageObserver();
 }
+closeInteractionBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    setMode("main");
+  });
+});
+setMode("main");
+
 const analysisResult = document.getElementById("analysisResult");
 const nonPassiveOption = { passive: false };
 function preventScrollKeys(e) {
@@ -262,22 +279,7 @@ playBtn.addEventListener("click", () => {
 });
 
 
-/* =========================
-   切頁時停止播放
-========================= */
 
-function stopAllAudio() {
-    // 試聽音
-  if (!previewAudio.paused) {
-    previewAudio.pause();
-    previewAudio.currentTime = 0;
-  }
-  // 生成音
-  if (!generatedAudio.paused) {
-    generatedAudio.pause();
-    generatedAudio.currentTime = 0;
-  }
-}
 (function bgScroller(){
   const track = document.getElementById("bgTrack");
   if (!track) return;
