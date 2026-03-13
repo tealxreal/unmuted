@@ -428,7 +428,7 @@ body {
 }
 .analysis-result {
   text-align: center;
-  font-size: 10px;
+  font-size: 14px;
   letter-spacing: 0.05em;
   color: #e8ffffbb;
   font-weight: 700;
@@ -699,10 +699,16 @@ body {
 
     }
 }
+body.loading-lock,
 html.loading-lock {
     overflow: hidden;
-    overflow-y: hidden; 
-    overflow-x: hidden;
+    height: 100%;
+}
+body.loading-lock {
+  position: fixed;
+  width: 100%;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 .flow6{
   display: grid;

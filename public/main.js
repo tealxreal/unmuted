@@ -310,19 +310,7 @@ stopAllAudio = function(){
   container.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", () => requestAnimationFrame(update));
   window.addEventListener("load", update);
-  // --- Debug：你可以先留著，看是不是有在跑 ---
-  let n = 0;
-  function debugOncePerSecond() {
-    n++;
-    if (n % 60 === 0) {
-      console.log("[orb]", {
-        scrollTop: scroller.scrollTop,
-        scrollMax: scroller.scrollHeight - window.innerHeight,
-        transform: orb.style.transform
-      });
-    }
-    requestAnimationFrame(debugOncePerSecond);
-  }
+
   requestAnimationFrame(debugOncePerSecond);
 
   update();
