@@ -72,7 +72,7 @@ async def generate(req: GenerateRequest):
             raise RuntimeError("Audio file not generated")
         
         filename=os.path.basename(audio_path)
-        audio_url = f"/output/{filename}"
+        audio_url = f"{filename}"
 
         return {
             "emotion": emotion,
