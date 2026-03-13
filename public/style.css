@@ -184,8 +184,8 @@ body {
             transform: translateX(-50%);
             text-align: center;
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
-            border: none;
-            border-radius: 20px;
+            border: 0.5px solid rgba(255, 255, 255, 0.761);
+            border-radius: 999px;
             backdrop-filter: none;
             padding: 6px 16px;
             color: #e8ffff;
@@ -194,27 +194,26 @@ body {
             animation: shine 2.6s ease-in-out infinite;
         }
         .enter-interaction-btn:hover {
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+            transform: translateX(-50%),scale(1.06);
             background: rgba(0, 0, 0, 0.597);
-            transform: scale(1.06);
             opacity: 0.85;
             filter: brightness(1.2);
         }
         @keyframes shine{
             0%{
-                box-shadow: 0 0 2px #e8ffff8d,
-                        
+                box-shadow: 0 0 2px #e8ffff8d;
+                transform: scale(1);
             }
             50%{
                 box-shadow: 0 0 2px #e8ffffe5,
                             0 0 6px #e8ffffab,
                             0 0 18px #e8ffff71,
-                            0 0 36px #e8ffff38,
+                            0 0 36px #e8ffff38;
+                transform: scale(1.1);
             }
             100%{
-                box-shadow: 0 0 2px #e8ffff8d,
+                box-shadow: 0 0 2px #e8ffff8d;
+                transform: scale(1.1);
                        
             }
         }
