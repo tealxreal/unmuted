@@ -211,6 +211,13 @@ body {
                 opacity: 0;
             }
         }
+        #system-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 20px;
+    box-sizing: border-box;
+}
         #concept-view {
     display: flex;
     justify-content: center;
@@ -699,20 +706,13 @@ html.loading-lock {
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
   display: grid;
-  grid-template-rows: 1fr 1fr;
-
-  /* 由左至右：圓 / 線 / 圓 / 分支器 / 圓 / 線 / 圓 */
-  grid-template-columns: 160px 64px 160px 74px 160px 64px 160px;
-
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  gap: 28px;
   align-items: center;
   justify-content: center;
 
-  row-gap: 46px;
-  column-gap: 0px;
-
-  width: min(1100px, 92vw);
+  width: min(900px, 92vw);
   margin: 24px auto 0;
-  position: relative;
 }
 
 .fnode{
@@ -731,82 +731,17 @@ html.loading-lock {
   line-height: 1.25;
   padding: 10px;
 }
-
-/* 主線的圓跨兩列，確保「分支前的圓」水平置中對齊兩分支 */
-.span2{ grid-row: 1 / span 2; justify-self: center; }
-
-.top{ grid-row: 1; justify-self: center; }
-.bottom{ grid-row: 2; justify-self: center; }
-
-/* 水平線（帶箭頭；不想要箭頭就把 ::after 刪掉） */
-.hline{
-  height: 2px;
-  background: rgba(255,255,255,0.75);
-  align-self: center;
-  position: relative;
-}
-.hline::after{
-  content: "";
-  position: absolute;
-  right: -2px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid rgba(255,255,255,0.75);
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-}
-
-/* Grid 位置 */
-.s1{ grid-column: 1; }
-.l12{ grid-column: 2; }
-.s2{ grid-column: 3; }
-.split{ grid-column: 4; grid-row: 1 / span 2; }
-
-.a1{ grid-column: 5; }
-.la12{ grid-column: 6; }
-.a2{ grid-column: 7; }
-
-.b1{ grid-column: 5; }
-.lb12{ grid-column: 6; }
-.b2{ grid-column: 7; }
-.branch-lines{
-  position: relative;
-  width: 74px;
-  height: 100%;
-}
-
-/* 往上分支 */
-.line-up{
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 105px;
-  height: 2px;
-  background: rgba(255,255,255,0.75);
-
-  transform-origin: left center;
-  transform: rotate(-45deg);
-}
-
-/* 往下分支 */
-.line-down{
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 105px;
-  height: 2px;
-  background: rgba(255,255,255,0.75);
-
-  transform-origin: left center;
-  transform: rotate(45deg);
-}
-/* 小螢幕微縮避免擠爆（可留可刪） */
 @media (max-width: 1100px){
   .flow6{
-    transform: scale(0.9);
-    transform-origin: top center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 94vw;
+  }
+  .fnode {
+    width: 92px;
+    height: 92px;
+    font-size: 12px;
+    padding: 8px;
   }
 }
 #scroll-orb{

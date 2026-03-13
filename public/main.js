@@ -104,7 +104,7 @@ async function generateMusic() {
         generatedAudio.load();
 
         if (data.emotion) {
-            showAnalysisResult(`Analysis result: ${data.emotion}`);
+            showAnalysisResult(`分析結果：${data.emotion}`);
         } else {
             hideAnalysisResult();
         }
@@ -177,6 +177,8 @@ function stopAllAudio() {
     if (currentPageId && newId !== currentPageId) {
       stopAllAudio();
       hideAnalysisResult();
+      textarea.value = "";
+      counter.textContent = 0;
     }
     currentPageId = newId;
   }, {
