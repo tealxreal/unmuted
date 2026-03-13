@@ -691,7 +691,7 @@ body {
 
     }
 }
-body.loading-lock {
+html.loading-lock {
     overflow: hidden;
     overflow-y: hidden; 
     overflow-x: hidden;
