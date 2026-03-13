@@ -1,4 +1,27 @@
 const analysisResult = document.getElementById("analysisResult");
+const nonPassiveOption = { passive: false };
+function preventScrollKeys(e) {
+  const keys = [
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "PageUp",
+    "PageDown",
+    "Home",
+    "End",
+    " ",
+    "Spacebar"
+  ];
+
+  if (keys.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+
+function preventScrollAction(e) {
+  e.preventDefault();
+}
 function showAnalysisResult(text) {
   if (!analysisResult) return;
   analysisResult.textContent = text;
