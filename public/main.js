@@ -399,11 +399,16 @@ function showLoading() {
   loadingOverlay.classList.remove("hidden");
   document.documentElement.classList.add("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "false");
-  
+  window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.addEventListener("touchmove", preventScrollAction, nonPassiveOption);
 }
 function hideLoading() {
   if (!loadingOverlay) return;
   loadingOverlay.classList.add("hidden");
   document.documentElement.classList.remove("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "true");
+  window.removeEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.removeEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.removeEventListener("touchmove", preventScrollAction, nonPassiveOption);
 }
