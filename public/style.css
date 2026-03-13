@@ -240,7 +240,7 @@ body {
             font-size: clamp(24px, 4vw, 32px);
             font-weight: 700;
             color: #e8ffff;
-            text-align: center;
+            text-align: left;
             transform: scaleY(0.6);
             white-space: nowrap;
             display: flex; 
@@ -611,7 +611,7 @@ body {
   align-items: center;
   justify-content: center;
   background: rgba(5, 8, 18, 0.258);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(6px);
   z-index: 4000;
   opacity: 1;
   pointer-events: auto;
@@ -646,30 +646,34 @@ body {
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: loadingglow 2s ease-in-out infinite alternate;
+    animation: loadscale 3s ease-in-out infinite alternate,loadingglow 2s ease-in-out infinite alternate;
 }
-@keyframes spin{
-    0%{
-        transform: rotate(0deg);
+@keyframes loadscale{
+    0% {
+        transform: scale(1);
     }
-    100%{
-        transform: rotate(360deg);
+    100% {
+        transform: scale(1.2);
     }
 }
 @keyframes loadingglow {
     0% {
         box-shadow: 0 0 2px #dfffffcd,
-                    0 0 6px #dcffff53;
+                    0 0 6px #dcffff6c;
     }
     100%{
-        box-shadow: 0 0 6px #e8ffffcd,
-                    0 0 8px #e8ffffb6,
-                    0 0 16px #e8ffff81,
-                    0 0 22px #e8ffff61,
-                    0 0 32px #e8ffff41,
+        box-shadow: 0 0 6px #e8ffffe8,
+                    0 0 8px #e8ffffd4,
+                    0 0 16px #e8ffffba,
+                    0 0 20px #e8ffff93,
+                    0 0 26px #e8ffff76,
+                    0 0 36px #e8ffff41,
                     0 0 56px #e8ffff20;
 
     }
+}
+body.loading-lock {
+  overflow: hidden;
 }
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{

@@ -382,10 +382,13 @@ const loadingOverlay = document.getElementById("loadingOverlay");
 function showLoading() {
   if (!loadingOverlay) return;
   loadingOverlay.classList.remove("hidden");
+  document.body.classList.add("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "false");
+  
 }
 function hideLoading() {
   if (!loadingOverlay) return;
   loadingOverlay.classList.add("hidden");
+  document.body.classList.remove("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "true");
 }
