@@ -12,13 +12,98 @@ const interactionPages = [
 let currentMode = "main"; // "main" 或 "interaction"
 let currentMainIndex = 0;
 let currentInteractionIndex = 0;
+const counter = document.getElementById("char-count");
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
 /* =========================
+   試玩區 - 輸入與生成
+========================= */
+const textarea = document.getElementById("user-input");
+const generateBtn = document.getElementById("generate-btn");
+const playBtn = document.getElementById("play-btn");
+const clearBtn = document.getElementById("clear-btn");
+const emotionButtons = document.querySelectorAll(".emotion-btn");
+const loadingOverlay = document.getElementById("loadingOverlay");
+const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
+const lerp = (a,b,t)=>a+(b-a)*t;
+const tapHint = document.getElementById("tap-to-pause");
+const scroller = document.scrollingElement || document.documentElement;
+const previewAudio = new Audio();
+const analysisResult = document.getElementById("analysisResult");
+const nonPassiveOption = { passive: false };
+let generatedAudioURL = null;
+let generatedAudio = new Audio();
+playBtn.disabled = true;
+/* --- 3️⃣ 點擊確認送出 --- */
+generateBtn.addEventListener("click", () => {
+    generateMusic();
+});
+/* ✅ 如果文字改了：舊音檔作廢，播放鍵回到灰 */
+textarea.addEventListener("input", () => {
+  generatedAudioURL = null;
+  hideAnalysisResult();
+  playBtn.disabled = true;
+  playBtn.textContent = "播放 ▶︎";
+});
+/* --- 4️⃣ 呼叫後端生成音樂 --- */
+async function generateMusic() {
+    const text = textarea.value.trim();
+    if (!text) return;
+    generateBtn.disabled = true;
+    generateBtn.textContent = "生成中...";
+    playBtn.disabled = true;
+    try {
+        showLoading();
+        const API_BASE = "https://unmuted.onrender.com";
+        const response = await fetch(`${API_BASE}/generate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sentence: text })
+        });
+
+        if (!response.ok) throw new Error("生成失敗");
+        hideLoading();
+        //const blob = await response.blob();
+        const data = await response.json();
+        if (!data.audio_url) {
+            throw new Error("沒有收到音檔網址");
+        }
+        generatedAudio.src = `${API_BASE}${data.audio_url}`;
+        generatedAudio.load();
+
+        if (data.emotion) {
+            showAnalysisResult(`分析結果：${data.emotion}`);
+        } else {
+            hideAnalysisResult();
+        }
+        // 顯示播放鍵
+        playBtn.classList.add("visible-btn");
+        playBtn.classList.remove("hidden-btn");
+        playBtn.disabled = false;
+        hideLoading();
+    } catch (err) {
+        alert("生成失敗，請再試一次");
+        playBtn.disabled = true;
+        hideLoading();
+        hideAnalysisResult();
+    }
+    generateBtn.disabled = false;
+    generateBtn.textContent = "確認送出";
+}
+/* --- 5️⃣ 播放生成音樂 --- */
+playBtn.addEventListener("click", () => {
+    if (playBtn.disabled) return;
+    if (!generatedAudio.src) return;
+    generatedAudio.currentTime = 0;
+    generatedAudio.muted = false;
+    generatedAudio.volume = 1;
+    generatedAudio.play();
+});
+/* =========================
    切頁時停止播放
 ========================= */
-const previewAudio = new Audio(); // 試聽專用播放器
+ // 試聽專用播放器
 function stopAllAudio() {
     // 試聽音
   if (!previewAudio.paused) {
@@ -31,6 +116,42 @@ function stopAllAudio() {
     generatedAudio.currentTime = 0;
   }
 }
+
+function preventScrollKeys(e) {
+  const keys = [
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "PageUp",
+    "PageDown",
+    "Home",
+    "End",
+    " ",
+    "Spacebar"
+  ];
+
+  if (keys.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+
+function preventScrollAction(e) {
+  e.preventDefault();
+}
+function showAnalysisResult(text) {
+  if (!analysisResult) return;
+  analysisResult.textContent = text;
+  analysisResult.classList.remove("hidden");
+}
+function hideAnalysisResult() {
+  if (!analysisResult) return;
+  analysisResult.textContent = "";
+  analysisResult.classList.add("hidden");
+}
+(() => {
+  const home = document.getElementById("home-view");
+  if (!home) return;
 function setMode(mode) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -106,43 +227,7 @@ closeInteractionBtns.forEach(btn => {
 });
 setMode("main");
 
-const analysisResult = document.getElementById("analysisResult");
-const nonPassiveOption = { passive: false };
-function preventScrollKeys(e) {
-  const keys = [
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight",
-    "PageUp",
-    "PageDown",
-    "Home",
-    "End",
-    " ",
-    "Spacebar"
-  ];
 
-  if (keys.includes(e.key)) {
-    e.preventDefault();
-  }
-}
-
-function preventScrollAction(e) {
-  e.preventDefault();
-}
-function showAnalysisResult(text) {
-  if (!analysisResult) return;
-  analysisResult.textContent = text;
-  analysisResult.classList.remove("hidden");
-}
-function hideAnalysisResult() {
-  if (!analysisResult) return;
-  analysisResult.textContent = "";
-  analysisResult.classList.add("hidden");
-}
-(() => {
-  const home = document.getElementById("home-view");
-  if (!home) return;
 
   const lines = home.querySelectorAll(".line");
 
@@ -177,7 +262,6 @@ function hideAnalysisResult() {
 
   io.observe(home);
 })();
-const emotionButtons = document.querySelectorAll(".emotion-btn");
 
 
 emotionButtons.forEach(btn => {
@@ -192,94 +276,6 @@ emotionButtons.forEach(btn => {
         syncTapHint();
     });
 });
-
-
-/* =========================
-   試玩區 - 輸入與生成
-========================= */
-
-const textarea = document.getElementById("user-input");
-const generateBtn = document.getElementById("generate-btn");
-const playBtn = document.getElementById("play-btn");
-
-let generatedAudioURL = null;
-let generatedAudio = new Audio();
-playBtn.disabled = true;
-
-/* --- 3️⃣ 點擊確認送出 --- */
-generateBtn.addEventListener("click", () => {
-    generateMusic();
-});
-/* ✅ 如果文字改了：舊音檔作廢，播放鍵回到灰 */
-textarea.addEventListener("input", () => {
-  generatedAudioURL = null;
-  hideAnalysisResult();
-  playBtn.disabled = true;
-  playBtn.textContent = "播放 ▶︎";
-});
-
-/* --- 4️⃣ 呼叫後端生成音樂 --- */
-
-async function generateMusic() {
-    const text = textarea.value.trim();
-    if (!text) return;
-    generateBtn.disabled = true;
-    generateBtn.textContent = "生成中...";
-    playBtn.disabled = true;
-    try {
-        showLoading();
-        const API_BASE = "https://unmuted.onrender.com";
-        const response = await fetch(`${API_BASE}/generate`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ sentence: text })
-        });
-
-        if (!response.ok) throw new Error("生成失敗");
-        hideLoading();
-        //const blob = await response.blob();
-        const data = await response.json();
-        if (!data.audio_url) {
-            throw new Error("沒有收到音檔網址");
-        }
-        generatedAudio.src = `${API_BASE}${data.audio_url}`;
-        generatedAudio.load();
-
-        if (data.emotion) {
-            showAnalysisResult(`分析結果：${data.emotion}`);
-        } else {
-            hideAnalysisResult();
-        }
-        // 顯示播放鍵
-        playBtn.classList.add("visible-btn");
-        playBtn.classList.remove("hidden-btn");
-        playBtn.disabled = false;
-        hideLoading();
-    } catch (err) {
-        alert("生成失敗，請再試一次");
-        playBtn.disabled = true;
-        hideLoading();
-        hideAnalysisResult();
-    }
-
-    generateBtn.disabled = false;
-    generateBtn.textContent = "確認送出";
-}
-
-
-/* --- 5️⃣ 播放生成音樂 --- */
-
-playBtn.addEventListener("click", () => {
-    if (playBtn.disabled) return;
-    if (!generatedAudio.src) return;
-    generatedAudio.currentTime = 0;
-    generatedAudio.muted = false;
-    generatedAudio.volume = 1;
-    generatedAudio.play();
-});
-
-
-
 (function bgScroller(){
   const track = document.getElementById("bgTrack");
   if (!track) return;
@@ -317,7 +313,7 @@ playBtn.addEventListener("click", () => {
   requestAnimationFrame(tick);
 
   // ✅ 捲動時暫停背景動畫，提升順暢度
-  const scroller = document.scrollingElement || document.documentElement;
+  
   scroller.addEventListener("scroll", () => {
     paused = true;
     clearTimeout(scrollTimer);
@@ -333,7 +329,7 @@ playBtn.addEventListener("click", () => {
 /* =========================
    播放狀態 UI（中央提示 + 可點空白暫停）
 ========================= */
-const tapHint = document.getElementById("tap-to-pause");
+
 function showTapHint(show){
   if (!tapHint) return;
   tapHint.classList.toggle("is-hidden", !show);
@@ -402,8 +398,6 @@ stopAllAudio = function(){
   update();
 })();
 
-const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
-const lerp = (a,b,t)=>a+(b-a)*t;
 /* 取得 section 進場程度 */
 function pageProgress(section){
   const r = section.getBoundingClientRect();
@@ -454,7 +448,7 @@ document.querySelector(".container").addEventListener("scroll", onScroll,{passiv
 window.addEventListener("resize",updateFX);
 updateFX();
 //清除
-const clearBtn = document.getElementById("clear-btn");
+
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
     counter.textContent = 0;
@@ -464,13 +458,13 @@ clearBtn.addEventListener("click", () => {
     hideAnalysisResult();
 });
 //計算字數
-const counter = document.getElementById("char-count");
+
 if (textarea && counter) {
   textarea.addEventListener("input", () => {
     counter.textContent = textarea.value.length;
   });
 }
-const loadingOverlay = document.getElementById("loadingOverlay");
+
 function showLoading() {
   if (!loadingOverlay) return;
   loadingOverlay.classList.remove("hidden");
