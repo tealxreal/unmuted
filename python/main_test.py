@@ -160,5 +160,5 @@ async def generate_music(sentence: str, emotion: str):
 
     final = final.fade_in(500).fade_out(1200)
     final.export(final_audio_path, format="mp3") 
-    # 回應音樂檔案路徑
-    return final_audio_path
+
+    return final_audio_path  

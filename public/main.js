@@ -95,11 +95,18 @@ async function generateMusic() {
 
         if (!response.ok) throw new Error("生成失敗");
         hideLoading();
-        const blob = await response.blob();
-        generatedAudioURL = URL.createObjectURL(blob);
-        generatedAudio.src = generatedAudioURL;
+        //const blob = await response.blob();
+        const data = await response.json();
+        if (!data.audio_url) {
+            throw new Error("沒有收到音檔網址");
+        }
+        generatedAudio.src = `${API_BASE}${data.audio_url}`;
+        generatedAudio.load();
+
         if (data.emotion) {
-          showAnalysisResult(`Analysis result: ${data.emotion}`);
+            showAnalysisResult(`Analysis result: ${data.emotion}`);
+        } else {
+            hideAnalysisResult();
         }
         // 顯示播放鍵
         playBtn.classList.add("visible-btn");

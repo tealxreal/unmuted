@@ -34,7 +34,11 @@ app.mount(
     StaticFiles(directory=FRONTEND_DIR),
     name="static"
 )
-
+app.mount(
+    "/output",
+    StaticFiles(directory=OUTPUT_DIR),
+    name="output"
+)
 @app.get("/")
 async def read_index():
     index_path = os.path.join(FRONTEND_DIR, "index.html")
@@ -66,12 +70,15 @@ async def generate(req: GenerateRequest):
 
         if not os.path.exists(audio_path):
             raise RuntimeError("Audio file not generated")
+        
+        filename=os.path.basename(audio_path)
+        audio_url = f"/output/{filename}"
 
-        return FileResponse(
-            audio_path,
-            media_type="audio/mpeg",
-            filename=os.path.basename(audio_path)
-        )
+        return {
+            "emotion": emotion,
+            "audio_url": audio_url
+        }    
+    
 
     except Exception as e:
         print("ERROR:", e)
