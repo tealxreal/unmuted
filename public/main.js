@@ -26,6 +26,40 @@ closeInteractionBtns.forEach(btn => {
   });
 });
 setMode("main");
+let pageObserver = null;
+let currentPageId = null;
+function setupPageObserver() {
+  const container = document.querySelector(".container");
+  const pages = document.querySelectorAll(".page:not(.is-hidden)");
+  if (!pages.length || !container) return;
+
+  if (pageObserver) {
+    pageObserver.disconnect();
+  }
+  pageObserver = new IntersectionObserver((entries) => {
+    let best = null;
+    for (const e of entries) {
+      if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+    }
+    if (!best) return;
+    if (best.intersectionRatio < 0.65) return;
+    const newId = best.target.id || null;
+    if (!newId) return;
+    if (currentPageId && newId !== currentPageId) {
+      stopAllAudio();
+      hideAnalysisResult();
+      playBtn.disabled = true;
+      textarea.value = "";
+      counter.textContent = 0;
+    }
+    currentPageId = newId;
+  }, {
+    root: container,
+    threshold: [0.2, 0.5, 0.8]
+  });
+  pages.forEach(p => pageObserver.observe(p));
+  currentPageId = pages[0].id || null;
+}
 function setMode(mode) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -244,46 +278,6 @@ function stopAllAudio() {
     generatedAudio.currentTime = 0;
   }
 }
-let pageObserver = null;
-let currentPageId = null;
-function setupPageObserver() {
-  const container = document.querySelector(".container");
-  const pages = document.querySelectorAll(".page:not(.is-hidden)");
-  if (!pages.length || !container) return;
-
-  if (pageObserver) {
-    pageObserver.disconnect();
-  }
-
-  pageObserver = new IntersectionObserver((entries) => {
-    let best = null;
-    for (const e of entries) {
-      if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
-    }
-    if (!best) return;
-    if (best.intersectionRatio < 0.65) return;
-
-    const newId = best.target.id || null;
-    if (!newId) return;
-
-    if (currentPageId && newId !== currentPageId) {
-      stopAllAudio();
-      hideAnalysisResult();
-      playBtn.disabled = true;
-      textarea.value = "";
-      counter.textContent = 0;
-    }
-
-    currentPageId = newId;
-  }, {
-    root: container,
-    threshold: [0.2, 0.5, 0.8]
-  });
-
-  pages.forEach(p => pageObserver.observe(p));
-  currentPageId = pages[0].id || null;
-}
-
 (function bgScroller(){
   const track = document.getElementById("bgTrack");
   if (!track) return;
