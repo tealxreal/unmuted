@@ -14,7 +14,7 @@ let currentMainIndex = 0;
 let currentInteractionIndex = 0;
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
-const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
+const closeInteractionBtn = document.getElementById("close-interaction-btn");
 if (enterInteractionBtn) {
   enterInteractionBtn.addEventListener("click", () => {
     setMode("interaction");
