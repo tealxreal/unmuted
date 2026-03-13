@@ -375,6 +375,7 @@ clearBtn.addEventListener("click", () => {
     playBtn.classList.add("hidden-btn");
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
+    hideAnalysisResult;
 });
 //計算字數
 const counter = document.getElementById("char-count");
