@@ -304,20 +304,22 @@ body {
         }
         .enter-interaction-btn{
             position: absolute;
-            bottom: 50px;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            background: rgba(255, 255, 255, 0);  /* 半透明白色 */
             border: none;
             border-radius: 999px;
             backdrop-filter: none;
-            padding: 6px 16px;
+            padding: 8px 18px;
             color: #e8ffff;
             cursor: pointer;
             box-shadow: 0 0 2px #e8ffffa4;
             animation: shine 2.6s ease-in-out infinite;
         }
         .enter-interaction-btn:hover {
-            transform: scale(1.02);
+            transform: scale(1.02), translateX(-50%);
             background: rgba(0, 0, 0, 0.597);
             opacity: 0.85;
             filter: brightness(1.2);
