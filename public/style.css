@@ -539,6 +539,28 @@ body {
             box-sizing: border-box;
             z-index: 100;
         }
+        .close-interaction-btn{
+            background: none;
+            font-size: clamp(28px 9vw 32px);
+            font-weight: 800;
+        }
+        #enter-interaction-btn{
+            box-shadow: 0 0 2px #e8ffff,
+                        0 0 6px #e8ffffce;
+                        animation: shine 5s ease-in-out infinite alternate;
+        }
+        @keyframes shine{
+            0%{
+                box-shadow: 0 0 2px #e8ffff,
+                        0 0 6px #e8ffffce;
+            }
+            100%{
+                box-shadow: 0 0 2px #e8ffff,
+                            0 0 6px #e8ffffce,
+                            0 0 18px #e8ffff71,
+                            0 0 30px #e8ffff49;
+            }
+        }
         .emotion-btn,
         #clear-btn,
         #generate-btn {
@@ -668,17 +690,17 @@ body {
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: loadscale 3s linear infinite,loadingglow 2s ease-in-out infinite alternate;
+    animation: loadscale 3s linear infinite,loadingglow 3s ease-in-out infinite alternate;
 }
 @keyframes loadscale{
     0% {
         transform: scale(1);
     }
     25% {
-        transform: scale(1.1);
+        transform: scale(0.9);
     }
     50% {
-        transform: scale(1);
+        transform: scale(0.8);
     }
     75% {
         transform: scale(0.9);
