@@ -20,11 +20,11 @@ if (enterInteractionBtn) {
     setMode("interaction");
   });
 }
-closeInteractionBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
+if (closeInteractionBtn) {
+  closeInteractionBtn.addEventListener("click", () => {
     setMode("main");
   });
-});
+}
 function setMode(mode) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -34,6 +34,9 @@ function setMode(mode) {
   });
 
   if (mode === "main") {
+    if (closeInteractionBtn) {
+      closeInteractionBtn.classList.add("is-hidden");
+    }
     currentMainIndex = 0;
     if (mainPages[0]) {
       mainPages[0].scrollIntoView({ behavior: "instant", block: "start" });
@@ -41,6 +44,9 @@ function setMode(mode) {
     document.body.classList.remove("interaction-mode");
     document.body.classList.add("main-mode");
   } else {
+    if (closeInteractionBtn) {
+      closeInteractionBtn.classList.remove("is-hidden");
+    }
     currentInteractionIndex = 0;
     if (interactionPages[0]) {
       interactionPages[0].scrollIntoView({ behavior: "instant", block: "start" });

@@ -540,14 +540,38 @@ body {
             z-index: 100;
         }
         .close-interaction-btn{
+            position: fixed;
+            top: clamp(16px, 4vw, 28px);
+            right: clamp(16px, 4vw, 28px);
+            border: none;
             background: none;
-            font-size: clamp(28px 9vw 32px);
-            font-weight: 800;
+            font-size: clamp(30px, 7vw, 42px);
+            font-weight: 900;
+            color: #e8ffff;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            z-index: 2000;
+            opacity: 1;
+            transition: opacity 0.35s ease;
         }
-        #enter-interaction-btn{
+        .close-interaction-btn.is-hidden{
+            opacity: 0;
+            pointer-events: none;
+        }
+        .enter-interaction-btn{
+            background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
+            border: 1.5px solid rgba(255, 255, 255, 0.761);
+            border-radius: 20px;
+            backdrop-filter: none;
+            
+            padding: 6px 16px;
+            color: #e8ffff;
+            cursor: pointer;
             box-shadow: 0 0 2px #e8ffff,
                         0 0 6px #e8ffffce;
-                        animation: shine 5s ease-in-out infinite alternate;
+            animation: shine 5s ease-in-out infinite alternate;
         }
         @keyframes shine{
             0%{
