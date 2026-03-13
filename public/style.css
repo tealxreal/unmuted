@@ -98,11 +98,14 @@ body {
             padding: 20px 0px;
             box-sizing: border-box;
         }
+        #interaction-intro-view,
         #experience-view-1,
-        #experience-view-2 {
+        #experience-view-2,
+        #catalog-view {
             justify-content: center;
             align-items: center;
             display: flex;
+            position: relative;
         }
         .experience-block{ 
             width: 100%;
@@ -540,12 +543,12 @@ body {
             z-index: 100;
         }
         .close-interaction-btn{
-            position: fixed;
-            top: clamp(16px, 4vw, 28px);
-            right: clamp(16px, 4vw, 28px);
+            position: absolute;
+            right:15%;
+            top:15%;
             border: none;
             background: none;
-            font-size: clamp(30px, 7vw, 42px);
+            font-size: clamp(20px, 6vw, 36px);
             font-weight: 900;
             color: #e8ffff;
             line-height: 1;
@@ -553,12 +556,6 @@ body {
             margin: 0;
             cursor: pointer;
             z-index: 2000;
-            opacity: 1;
-            transition: opacity 0.35s ease;
-        }
-        .close-interaction-btn.is-hidden{
-            opacity: 0;
-            pointer-events: none;
         }
         .enter-interaction-btn{
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
@@ -570,8 +567,14 @@ body {
             color: #e8ffff;
             cursor: pointer;
             box-shadow: 0 0 2px #e8ffff,
-                        0 0 6px #e8ffffce;
+                        0 0 6px #e8ffffa4;
             animation: shine 5s ease-in-out infinite alternate;
+        }
+        .enter-interaction-btn:hover {
+            background: rgba(0, 0, 0, 0.597);
+            transform: scale(1.06);
+            opacity: 0.85;
+            filter: brightness(1.2);
         }
         @keyframes shine{
             0%{
