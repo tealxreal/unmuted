@@ -54,14 +54,15 @@ body {
             position: relative;
             z-index: 1;
         }
-        .page-content{
-            height: 100%;
-            width: 100dvw;
-            padding: 28px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px; /* 取代很多 margin */
-        }
+.system-block{
+    position: static;
+    margin: 0;  
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
         /* ✅ 背景層 */
 #bg{
   position: fixed;
@@ -703,10 +704,9 @@ html.loading-lock {
     overflow-y: hidden; 
     overflow-x: hidden;
 }
-        /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
   display: grid;
-  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  grid-template-columns: repeat(3, 140px);
   gap: 28px;
   align-items: center;
   justify-content: center;
@@ -719,6 +719,7 @@ html.loading-lock {
   width: 140px;
   height: 140px;
   border: 2px solid rgba(255,255,255,0.85);
+  aspect-ratio:1/1;
   border-radius: 999px;
   background: transparent;
 
@@ -733,7 +734,7 @@ html.loading-lock {
 }
 @media (max-width: 1100px){
   .flow6{
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 92px);
     gap: 16px;
     width: 94vw;
   }
