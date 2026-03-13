@@ -562,7 +562,7 @@ body {
             border: 1.5px solid rgba(255, 255, 255, 0.761);
             border-radius: 20px;
             backdrop-filter: none;
-            
+            margin-top: 10px;
             padding: 6px 16px;
             color: #e8ffff;
             cursor: pointer;
