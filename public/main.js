@@ -59,7 +59,7 @@ emotionButtons.forEach(btn => {
 const textarea = document.getElementById("user-input");
 const generateBtn = document.getElementById("generate-btn");
 const playBtn = document.getElementById("play-btn");
-
+const data = await response.json();
 let generatedAudioURL = null;
 let generatedAudio = new Audio();
 playBtn.disabled = true;
@@ -71,6 +71,7 @@ generateBtn.addEventListener("click", () => {
 /* ✅ 如果文字改了：舊音檔作廢，播放鍵回到灰 */
 textarea.addEventListener("input", () => {
   generatedAudioURL = null;
+  hideAnalysisResult();
   playBtn.disabled = true;
   playBtn.textContent = "播放 ▶︎";
 });
@@ -97,7 +98,9 @@ async function generateMusic() {
         const blob = await response.blob();
         generatedAudioURL = URL.createObjectURL(blob);
         generatedAudio.src = generatedAudioURL;
-
+        if (data.emotion) {
+          showAnalysisResult(`Analysis result: ${data.emotion}`);
+        }
         // 顯示播放鍵
         playBtn.classList.add("visible-btn");
         playBtn.classList.remove("hidden-btn");
@@ -107,6 +110,7 @@ async function generateMusic() {
         alert("生成失敗，請再試一次");
         playBtn.disabled = true;
         hideLoading();
+        hideAnalysisResult();
     }
 
     generateBtn.disabled = false;
@@ -162,6 +166,7 @@ function stopAllAudio() {
     // 真正換頁才停
     if (currentPageId && newId !== currentPageId) {
       stopAllAudio();
+      hideAnalysisResult();
     }
     currentPageId = newId;
   }, {
@@ -391,4 +396,15 @@ function hideLoading() {
   loadingOverlay.classList.add("hidden");
   document.body.classList.remove("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "true");
+}
+const analysisResult = document.getElementById("analysisResult");
+function showAnalysisResult(text) {
+  if (!analysisResult) return;
+  analysisResult.textContent = text;
+  analysisResult.classList.remove("hidden");
+}
+function hideAnalysisResult() {
+  if (!analysisResult) return;
+  analysisResult.textContent = "";
+  analysisResult.classList.add("hidden");
 }

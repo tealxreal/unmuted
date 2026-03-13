@@ -259,7 +259,7 @@ body {
             font-size: clamp(15px, 1.6vw, 18px);
             line-height: 1.5;
             color: #e4f1ff;
-            text-align: center;
+            text-align: left;
             justify-content: center;
             white-space: pre-line; 
         }
@@ -417,6 +417,16 @@ body {
         transform: translateX(-50%) translateY(6px);
         opacity: 1;
     }
+}
+.analysis-result {
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #e8ffffbb;
+  font-weight: 700;
+}
+.analysis-result.hidden {
+  display: none;
 }
             .tap-to-pause{
                 position: fixed;
@@ -652,8 +662,17 @@ body {
     0% {
         transform: scale(1);
     }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(0.9);
+    }
     100% {
-        transform: scale(1.2);
+        transform: scale(1);
     }
 }
 @keyframes loadingglow {
