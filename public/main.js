@@ -128,9 +128,12 @@ async function generateMusic() {
 /* --- 5️⃣ 播放生成音樂 --- */
 
 playBtn.addEventListener("click", () => {
-    if (!generatedAudioURL) return;
     if (playBtn.disabled) return;
+    if (!generatedAudio.src) return;
     generatedAudio.currentTime = 0;
+    generatedAudio.muted = false;
+    generatedAudio.volume = 1;
+    generatedAudio.play();
     generatedAudio.play();
 });
 

@@ -656,7 +656,7 @@ body {
   box-shadow:
     0 0 20px rgba(160, 255, 253, 0.08),
     inset 0 0 24px rgba(255, 255, 255, 0.04);
-    animation: loadscale 3s ease-in-out infinite alternate,loadingglow 2s ease-in-out infinite alternate;
+    animation: loadscale 3s linear infinite,loadingglow 2s ease-in-out infinite alternate;
 }
 @keyframes loadscale{
     0% {
@@ -682,17 +682,19 @@ body {
     }
     100%{
         box-shadow: 0 0 6px #e8ffffe8,
-                    0 0 8px #e8ffffd4,
-                    0 0 16px #e8ffffba,
-                    0 0 20px #e8ffff93,
-                    0 0 26px #e8ffff76,
+                    0 0 8px #e8ffffb7,
+                    0 0 18px #e8ffffaa,
+                    0 0 24px #e8ffff93,
+                    0 0 28px #e8ffff76,
                     0 0 36px #e8ffff41,
                     0 0 56px #e8ffff20;
 
     }
 }
 body.loading-lock {
-  overflow: hidden;
+    overflow: hidden;
+    overflow-y: hidden; 
+    overflow-x: hidden;
 }
         /* ====== 六圓分支流程圖（不合流） ====== */
 .flow6{
