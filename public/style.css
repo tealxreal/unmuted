@@ -213,15 +213,7 @@ body {
                        
             }
         }
-.system-block{
-    position: static;
-    margin: 0;  
-    text-align: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
         /* ✅ 背景層 */
 #bg{
   position: fixed;
@@ -277,14 +269,23 @@ body {
             box-sizing: border-box; 
         }
 
-        #system-view {
+#system-view {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 32px 20px;
     box-sizing: border-box;
 }
-        #concept-view {
+.system-block{
+    position: static;
+    margin: 0;  
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+#concept-view {
     display: flex;
     justify-content: center;
     align-items: center;
