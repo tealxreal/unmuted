@@ -443,9 +443,7 @@ function updateFX() {
     if (!section || section.classList.contains("is-hidden")) return;
 
     const targetP = pageProgress(section, containerEl);
-    if (targetP > 0.985) targetP = 1;
-    if (targetP < 0.015) targetP = 0;
-    item.currentP = lerp(item.currentP, targetP, 0.22);
+    item.currentP = lerp(item.currentP, targetP, 0.18);
 
     /* 再做一次吸附，避免永遠停在 0.998 這種半途值 */
     if (Math.abs(item.currentP - 1) < 0.01) item.currentP = 1;
