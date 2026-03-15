@@ -419,12 +419,10 @@ function closeSidebar(){
   }, 380);
 }
 
-function toggleSidebar(e){
-  if (e) e.stopPropagation();
-
+function toggleSidebar(){
   if (sidebarOverlay.classList.contains("hidden")) {
     openSidebar();
-  } else if (sidebarOverlay.classList.contains("is-open")) {
+  } else {
     closeSidebar();
   }
 }
