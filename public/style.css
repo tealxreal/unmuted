@@ -83,12 +83,12 @@ body {
   height: 52px;
   padding: 0;
   border: none;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 600;
   color: #e8ffff;
   background: transparent;
   cursor: pointer;
-  z-index: 1200;
+  z-index: 3510;
   display: flex;
   align-items: center;
   justify-content: center;
