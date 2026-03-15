@@ -7,7 +7,7 @@ body {
             justify-content: center;
             align-items: center;
             background-color: rgb(47, 47, 47);
-            font-family:"Noto Sans", "微軟正黑體",sans-serif;
+            font-family:"微軟正黑體","Noto Sans", sans-serif;
             background-size: cover;
             position: relative;
             scroll-padding-top: 0px;
@@ -74,6 +74,77 @@ body {
             scroll-behavior: auto;
             -webkit-overflow-scrolling: touch;
         }
+        /* 右上角開關按鈕 */
+.sidebar-toggle{
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s ease;
+}
+.sidebar-toggle.is-open{
+  transform: rotate(90deg);
+}
+.sidebar-toggle.is-open{
+  transform: rotate(90deg);
+}
+
+/* 全頁覆蓋選單 */
+.sidebar-overlay{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: rgba(6, 10, 20, 0.544);
+  backdrop-filter: blur(10px);
+  z-index: 3500;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+.sidebar-overlay.hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar-panel{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 7vh;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-link{
+  width: 100%;
+  min-height: 72px;
+  padding: 20px 0 18px;
+  border: none;
+  border-top: 1px solid rgba(228, 241, 255, 0.25);
+  background: transparent;
+  color: #e4f1ff;
+  text-align: left;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.sidebar-link:last-child{
+  border-bottom: 1px solid rgba(228, 241, 255, 0.25);
+}
+.sidebar-link:hover{
+  opacity: 0.78;
+}
         .title-group{
     position: static;
     margin-top: -60px;    /* 你要更靠上就改小 */
@@ -593,7 +664,7 @@ body {
         }
         .close-interaction-btn{
             position: absolute;
-            right:1%;
+            right:5%;
             top:15%;
             border: none;
             background: none;
@@ -705,7 +776,8 @@ body {
   backdrop-filter: blur(6px);
   z-index: 4000;
   opacity: 1;
-  pointer-events: none;
+  pointer-events: auto;
+  touch-action: none;
 }
 .loading-overlay.hidden {
   opacity: 0;
@@ -812,7 +884,7 @@ body.loading-lock {
 }
 #scroll-orb{
   position: absolute;
-  right: 4px;
+  left: 4px;
   top: 0;                 /* 初始值，JS 會動態改 top */
   width: 24px;
   height: 24px;

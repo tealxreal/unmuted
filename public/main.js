@@ -25,6 +25,9 @@ function fixHomeFX(){
 let currentMode = "main"; // "main" 或 "interaction"
 let currentMainIndex = 0;
 let currentInteractionIndex = 0;
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const sidebarToggles = document.querySelectorAll(".sidebar-toggle");
+const sidebarLinks = document.querySelectorAll(".sidebar-link");
 const counter = document.getElementById("char-count");
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
@@ -387,6 +390,68 @@ stopAllAudio = function(){
   _stopAllAudio();
   showTapHint(false);
 };
+
+function openSidebar(){
+  sidebarOverlay.classList.remove("hidden");
+  sidebarOverlay.setAttribute("aria-hidden", "false");
+  sidebarToggles.forEach(btn => btn.classList.add("is-open"));
+}
+
+function closeSidebar(){
+  sidebarOverlay.classList.add("hidden");
+  sidebarOverlay.setAttribute("aria-hidden", "true");
+  sidebarToggles.forEach(btn => btn.classList.remove("is-open"));
+}
+
+function toggleSidebar(){
+  if (sidebarOverlay.classList.contains("hidden")) {
+    openSidebar();
+  } else {
+    closeSidebar();
+  }
+}
+
+sidebarToggles.forEach(btn => {
+  btn.addEventListener("click", toggleSidebar);
+});
+
+/* 點背景也可收合 */
+sidebarOverlay.addEventListener("click", (e) => {
+  if (e.target === sidebarOverlay) {
+    closeSidebar();
+  }
+});
+
+/* 跳轉到指定頁面 */
+function goToPageById(targetId){
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  const targetGroup = target.dataset.group;
+
+  if (targetGroup === "interaction") {
+    setMode("interaction");
+  } else if (targetGroup === "main") {
+    setMode("main");
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  });
+}
+
+sidebarLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    const targetId = link.dataset.target;
+    closeSidebar();
+    goToPageById(targetId);
+  });
+});
 //滾動音符
 (() => {
   const orb = document.getElementById("scroll-orb");

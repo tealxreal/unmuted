@@ -29,10 +29,25 @@
   </div>
 <div class="overlay"></div>
 <div class="container">
-
+<div id="sidebarOverlay" class="sidebar-overlay hidden" aria-hidden="true">
+    <div class="sidebar-panel">
+        <button class="sidebar-link" type="button" data-target="interaction-intro-view">
+            互動方法
+        </button>
+        <button class="sidebar-link" type="button" data-target="experience-view-1">
+            開始互動
+        </button>
+        <button class="sidebar-link" type="button" data-target="experience-view-2">
+            情緒音色
+        </button>
+        <button class="sidebar-link" type="button" data-target="catalog-view">
+            風鈴短冊圖鑑
+        </button>
+    </div>
+</div>
     <!-- 🌿 主畫面 -->
     <section id="home-view" class="page" data-group="main">
-        
+    <button class="sidebar-toggle fx fx-right" type="button">☰</button>    
         <div class="title-group">
             <div class="title3 fx06 fx-right">2026@tealxreal</div>
             <h1 class="title fx06 fx-left">「Unmuted:」</h1>
@@ -69,8 +84,9 @@
     </section>
     <!-- 🌿 互動體驗頁1 -->
     <section id="experience-view-1" class="page experience-page" data-group="interaction">
+        <button class="close-interaction-btn" type="button">✕</button>
         <div class="experience-block fx fx-right">
-            <button class="close-interaction-btn" type="button">✕</button>
+            
             <p class = glow-texth2>Start Generating<br>/開始互動</p>
             <p id="analysisResult" class = "analysis-result hidden"></p>
             <textarea 
@@ -101,8 +117,9 @@
     </section>
     <!-- 🌿 互動體驗頁2 -->
     <section id="experience-view-2" class="page experience-page" data-group="interaction">
+        <button class="close-interaction-btn" type="button">✕</button>
         <div class="experience-block fx fx-left">
-            <button class="close-interaction-btn" type="button">✕</button>
+            
             <p class = "glow-texth2">Music Preview<br>/音色試聽</p>
             <p class = "glow-textt">「請點擊想試聽的音色：」</p>
             <div class="emotion-buttons">
@@ -124,12 +141,12 @@
         <div class="system-block">
             <h2 class = "glow-texth2 fx06 fx-right2">System Process<br>/系統介紹</h2>
             <div class="flow6 fx fx-left" aria-label="Workflow grid">
-                <div class="fnode">①<br>使用者<br>輸入文字</div>
-                <div class="fnode">②<br>AI 辨識情緒</div>
-                <div class="fnode">④<br>取得分析結果</div> 
-                <div class="fnode">③<br>自定義演算法<br>合成音樂輸出</div>
-                <div class="fnode">⑤<br>依情緒<br>輸出風鈴短冊</div>
-                <div class="fnode">⑥<br>掛於風鈴下</div>
+                <div class="fnode">𝟭<br>使用者<br>輸入文字</div>
+                <div class="fnode">𝟮<br>AI 辨識情緒</div>
+                <div class="fnode">𝟯<br>取得分析結果</div> 
+                <div class="fnode">𝟰<br>自定義演算法<br>合成音樂</div>
+                <div class="fnode">𝟱<br>依情緒<br>列印風鈴短冊</div>
+                <div class="fnode">𝟲<br>掛於風鈴下</div>
             </div>
             <button id="enter-interaction-btn" type="button" class="enter-interaction-btn">點此進入互動頁面
             </button>
