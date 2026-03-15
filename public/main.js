@@ -3,12 +3,22 @@ const mainPages = [
   document.getElementById("concept-view"),
   document.getElementById("system-view")
 ];
+home = document.getElementById("home-view")
 const interactionPages = [
   document.getElementById("interaction-intro-view"),
   document.getElementById("experience-view-1"),
   document.getElementById("experience-view-2"),
   document.getElementById("catalog-view")
 ];
+function fixHomeFX(){
+  if(!mainPages) return;
+
+  home.querySelectorAll(".fx, .fx06").forEach(el=>{
+    el.style.setProperty("--fx-x","0px");
+    el.style.setProperty("--fx-y","0px");
+    el.style.setProperty("--fx-o","1");
+  });
+}
 let currentMode = "main"; // "main" 或 "interaction"
 let currentMainIndex = 0;
 let currentInteractionIndex = 0;
@@ -472,16 +482,7 @@ window.addEventListener("resize", () => {
   fixHomeFX();
 });
 updateFX();
-function fixHomeFX(){
-  const home = document.querySelector("#home-view");
-  if(!home) return;
 
-  home.querySelectorAll(".fx, .fx06").forEach(el=>{
-    el.style.setProperty("--fx-x","0px");
-    el.style.setProperty("--fx-y","0px");
-    el.style.setProperty("--fx-o","1");
-  });
-}
 //清除
 
 clearBtn.addEventListener("click", () => {
