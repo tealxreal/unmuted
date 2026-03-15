@@ -804,9 +804,9 @@ body.loading-lock {
   padding: 8px;
 }
 #scroll-orb{
-  position: fixed;
+  position: absolute;
   right: 4px;
-  top: 10px;                 /* 初始值，JS 會動態改 top */
+  top: 0;                 /* 初始值，JS 會動態改 top */
   width: 24px;
   height: 24px;
 

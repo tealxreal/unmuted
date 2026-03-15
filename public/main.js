@@ -16,6 +16,9 @@ const counter = document.getElementById("char-count");
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
+const containerEl = document.querySelector(".container");
+const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+const lerp = (a, b, t) => a + (b - a) * t;
 /* =========================
    試玩區 - 輸入與生成
 ========================= */
@@ -25,8 +28,6 @@ const playBtn = document.getElementById("play-btn");
 const clearBtn = document.getElementById("clear-btn");
 const emotionButtons = document.querySelectorAll(".emotion-btn");
 const loadingOverlay = document.getElementById("loadingOverlay");
-const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
-const lerp = (a,b,t)=>a+(b-a)*t;
 const tapHint = document.getElementById("tap-to-pause");
 const scroller = document.scrollingElement || document.documentElement;
 const previewAudio = new Audio();
@@ -381,7 +382,7 @@ stopAllAudio = function(){
 
     const orbH = orb.getBoundingClientRect().height || 44;
     const yRange = container.clientHeight - margin * 2 - orbH;
-    const y = Math.max(0, yRange * t);
+    const y = margin + Math.max(0, yRange * t);
     const rot = 360 * 4 * t;
 
     orb.style.transform = `translate3d(0, ${y}px, 0) rotate(${rot}deg)`;
@@ -399,13 +400,16 @@ stopAllAudio = function(){
 })();
 
 /* 取得 section 進場程度 */
-function pageProgress(section){
-  const r = section.getBoundingClientRect();
-  const vh = window.innerHeight;
-  const center = r.top + r.height/2;
-  const viewportCenter = vh/2;
-  const dist = Math.abs(center - viewportCenter);
-  const range = vh * 0.9;
+function pageProgress(section, container){
+  const sectionRect = section.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const sectionCenter = sectionRect.top + sectionRect.height / 2;
+  const containerCenter = containerRect.top + containerRect.height / 2;
+
+  const dist = Math.abs(sectionCenter - containerCenter);
+  const range = containerRect.height * 0.9;
+
   return clamp(1 - dist / range, 0, 1);
 }
 /* 記錄元素初始 offset */
@@ -416,23 +420,31 @@ document.querySelectorAll(".fx, .fx06, .fx08, .fx1206").forEach(el=>{
   const y = parseFloat(style.getPropertyValue("--fx-y")) || 0;
   fxElements.push({
     el,
+    section: el.closest(".page"),
     startX: x,
-    startY: y
+    startY: y,
+    currentP: 0
   });
 });
 /* 更新動畫 */
-function updateFX(){
-  document.querySelectorAll(".page").forEach(section=>{
-    const p = pageProgress(section);
-    section.querySelectorAll(".fx, .fx06, .fx08, .fx1206").forEach(el=>{
-      const data = fxElements.find(d => d.el === el);
-      if(!data) return;
-      const x = lerp(data.startX,0,p);
-      const y = lerp(data.startY,0,p);
-      el.style.setProperty("--fx-x", x+"px");
-      el.style.setProperty("--fx-y", y+"px");
-      el.style.setProperty("--fx-o", p);
-    });
+function updateFX() {
+  if (!containerEl) return;
+
+  fxElements.forEach(item => {
+    const { el, section, startX, startY } = item;
+    if (!section || section.classList.contains("is-hidden")) return;
+
+    const targetP = pageProgress(section, containerEl);
+
+    /* 做一點平滑，減少抖動 */
+    item.currentP = lerp(item.currentP, targetP, 0.18);
+
+    const x = lerp(startX, 0, item.currentP);
+    const y = lerp(startY, 0, item.currentP);
+
+    el.style.setProperty("--fx-x", `${x.toFixed(2)}px`);
+    el.style.setProperty("--fx-y", `${y.toFixed(2)}px`);
+    el.style.setProperty("--fx-o", item.currentP.toFixed(3));
   });
 }
 /* Scroll 驅動 */
@@ -444,8 +456,13 @@ function onScroll(){
     raf = null;
   });
 }
-document.querySelector(".container").addEventListener("scroll", onScroll,{passive:true})
-window.addEventListener("resize",updateFX);
+if (containerEl) {
+  containerEl.addEventListener("scroll", onScroll, { passive: true });
+}
+
+window.addEventListener("resize", () => {
+  updateFX();
+});
 updateFX();
 //清除
 
