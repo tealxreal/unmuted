@@ -76,13 +76,16 @@ body {
         }
         /* 右上角開關按鈕 */
 .sidebar-toggle{
-  position: absolute;
+  position: fixed;
   top: 15%;
   right: 5%;
   width: 52px;
   height: 52px;
   padding: 0;
   border: none;
+  font-size: 40px;
+  font-weight: 600;
+  color: #e8ffff;
   background: transparent;
   cursor: pointer;
   z-index: 1200;
@@ -94,10 +97,6 @@ body {
 .sidebar-toggle.is-open{
   transform: rotate(90deg);
 }
-.sidebar-toggle.is-open{
-  transform: rotate(90deg);
-}
-
 /* 全頁覆蓋選單 */
 .sidebar-overlay{
   position: fixed;
@@ -106,7 +105,7 @@ body {
   height: 100vh;
   height: 100dvh;
   background: rgba(6, 10, 20, 0.544);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   z-index: 3500;
   opacity: 1;
   pointer-events: auto;

@@ -10,6 +10,10 @@ const interactionPages = [
   document.getElementById("experience-view-2"),
   document.getElementById("catalog-view")
 ];
+const interactionintroview = document.getElementById("interaction-intro-view");
+const experienceview1 = document.getElementById("experience-view-1");
+const experienceview2 = document.getElementById("experience-view-2");
+const catalogview = document.getElementById("catalog-view");
 function fixHomeFX(){
   if(!mainPages) return;
 
@@ -422,34 +426,29 @@ sidebarOverlay.addEventListener("click", (e) => {
   }
 });
 
-/* 跳轉到指定頁面 */
-function goToPageById(targetId){
-  const target = document.getElementById(targetId);
-  if (!target) return;
-
-  const targetGroup = target.dataset.group;
-
-  if (targetGroup === "interaction") {
-    setMode("interaction");
-  } else if (targetGroup === "main") {
-    setMode("main");
-  }
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
-  });
-}
-
 sidebarLinks.forEach(link => {
   link.addEventListener("click", () => {
-    const targetId = link.dataset.target;
+    let target = null;
+    if (link.dataset.target === "interaction-intro-view") {
+      target = interactionintroview;
+    } else if (link.dataset.target === "experience-view-1") {
+      target = experienceview1;
+    } else if (link.dataset.target === "experience-view-2") {
+      target = experienceview2;
+    } else if (link.dataset.target === "catalog-view") {
+      target = catalogview;
+    }
+    if (!target) return;
     closeSidebar();
-    goToPageById(targetId);
+    setMode("interaction");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
   });
 });
 //滾動音符
