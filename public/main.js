@@ -13,10 +13,13 @@ const interactionPages = [
 function fixHomeFX(){
   if(!mainPages) return;
 
-  home.querySelectorAll(".fx, .fx06").forEach(el=>{
-    el.style.setProperty("--fx-x","0px");
-    el.style.setProperty("--fx-y","0px");
-    el.style.setProperty("--fx-o","1");
+  fxElements.forEach(item => {
+    if (item.section === home) {
+      item.currentP = 1;
+      item.el.style.setProperty("--fx-x", "0px");
+      item.el.style.setProperty("--fx-y", "0px");
+      item.el.style.setProperty("--fx-o", "1");
+    }
   });
 }
 let currentMode = "main"; // "main" 或 "interaction"
@@ -239,7 +242,9 @@ if (enterInteractionBtn) {
 closeInteractionBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     setMode("main");
-    fixHomeFX();
+    requestAnimationFrame(() => {
+      fixHomeFX();
+    }); 
   });
 });
 setMode("main");
@@ -482,6 +487,9 @@ window.addEventListener("resize", () => {
   fixHomeFX();
 });
 updateFX();
+requestAnimationFrame(() => {
+  fixHomeFX();
+});
 
 //清除
 
