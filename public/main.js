@@ -380,9 +380,12 @@ stopAllAudio = function(){
     const scrollMax = Math.max(0, container.scrollHeight - container.clientHeight);
     const t = scrollMax ? clamp(scrollTop / scrollMax, 0, 1) : 0;
 
-    const orbH = orb.getBoundingClientRect().height || 44;
-    const yRange = container.clientHeight - margin * 2 - orbH;
-    const y = margin + Math.max(0, yRange * t);
+    const containerRect = container.getBoundingClientRect();
+    const visibleH = containerRect.height;
+
+    const orbH = orb.offsetHeight || 24;
+    const yRange = Math.max(0, visibleH - margin * 2 - orbH);
+    const y = margin + yRange * t;
     const rot = 360 * 4 * t;
 
     orb.style.transform = `translate3d(0, ${y}px, 0) rotate(${rot}deg)`;
@@ -408,7 +411,7 @@ function pageProgress(section, container){
   const containerCenter = containerRect.top + containerRect.height / 2;
 
   const dist = Math.abs(sectionCenter - containerCenter);
-  const range = containerRect.height * 0.9;
+  const range = containerRect.height * 0.85;
 
   return clamp(1 - dist / range, 0, 1);
 }

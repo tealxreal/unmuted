@@ -1,6 +1,7 @@
 body {
             margin: 0;
             min-height: 100vh;
+            min-height: 100svh;
             min-height: 100dvh;
             display: flex;
             justify-content: center;
@@ -65,6 +66,8 @@ body {
             position: relative;
             z-index: 1;
             height: 100vh;
+            height: 100svh;
+            height: 100dvh;
             overflow-y: auto;
             overflow-x: hidden;
             scroll-snap-type: y mandatory;
@@ -246,7 +249,8 @@ body {
 }
 
 .bgSlide{
-  height: 100vh;                 /* 每張剛好一屏 */
+  height: 100vh; 
+  height: 100dvh;                /* 每張剛好一屏 */
   width: 100vw;
   background-size: cover;
   background-position: center;
@@ -691,6 +695,7 @@ body {
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -837,7 +842,7 @@ body.interaction-mode #scroll-orb{
 @media (min-width: 768px){
     .container {
     width: min(100vw, 75vh);
-    height: 100vh;
+    height: 100dvh;
   }
   .title {
     font-size: 72px;
