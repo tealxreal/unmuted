@@ -459,7 +459,6 @@ sidebarLinks.forEach(link => {
     }
     if (!target) return;
     closeSidebar();
-    setMode("interaction");
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         target.scrollIntoView({
