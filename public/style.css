@@ -684,8 +684,8 @@ body {
         }
         .close-interaction-btn{
             position: absolute;
-            right:5%;
-            top:15%;
+            left:5%;
+            top:12%;
             border: none;
             background: none;
             font-size: clamp(20px, 6vw, 36px);
