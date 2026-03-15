@@ -408,6 +408,9 @@ function openSidebar(){
   if (containerEl) containerEl.classList.add("loading-lock");
 }
 function closeSidebar(){
+  if (document.activeElement && sidebarOverlay.contains(document.activeElement)) {
+    sidebarToggle.focus();
+  }
   sidebarOverlay.classList.remove("is-open");
   sidebarOverlay.setAttribute("aria-hidden", "true");
   sidebarToggles.forEach(btn => btn.classList.remove("is-open"));
@@ -446,8 +449,9 @@ sidebarLinks.forEach(link => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
-    let target = null;
+    
     const targetId = link.dataset.target;
+    let target = null;
     if (targetId === "interaction-intro-view") {
       target = interactionintroview;
     } else if (targetId === "experience-view-1") {
@@ -458,13 +462,18 @@ sidebarLinks.forEach(link => {
       target = catalogview;
     }
     if (!target) return;
+    /* 先把焦點移回 toggle，再關閉 */
+    sidebarToggle.focus();
     closeSidebar();
+    setMode("interaction");
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+        if (containerEl) {
+          containerEl.scrollTo({
+            top: target.offsetTop,
+            behavior: "smooth"
+          });
+        }
       });
     });
   });
