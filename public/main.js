@@ -409,7 +409,7 @@ function openSidebar(){
 }
 function closeSidebar(){
   if (document.activeElement && sidebarOverlay.contains(document.activeElement)) {
-    sidebarToggle.focus();
+    document.activeElement.blur();
   }
   sidebarOverlay.classList.remove("is-open");
   sidebarOverlay.setAttribute("aria-hidden", "true");
@@ -463,7 +463,7 @@ sidebarLinks.forEach(link => {
     }
     if (!target) return;
     /* 先把焦點移回 toggle，再關閉 */
-    sidebarToggles.focus();
+    document.activeElement.blur();
     closeSidebar();
     setMode("interaction");
     requestAnimationFrame(() => {
