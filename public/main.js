@@ -32,6 +32,7 @@ let currentInteractionIndex = 0;
 const sidebarOverlay = document.getElementById("sidebarOverlay");
 const sidebarToggles = document.querySelectorAll(".sidebar-toggle");
 const sidebarLinks = document.querySelectorAll(".sidebar-link");
+const sidebarPanel = document.querySelector(".sidebar-panel");
 const counter = document.getElementById("char-count");
 const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
@@ -432,9 +433,10 @@ sidebarToggles.forEach(btn => {
 
 /* 點背景也可收合 */
 sidebarOverlay.addEventListener("click", (e) => {
-  closeSidebar();
+  if (e.target === sidebarOverlay) {
+    closeSidebar();
+  }
 });
-const sidebarPanel = document.querySelector(".sidebar-panel");
 if (sidebarPanel) {
   sidebarPanel.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -442,6 +444,7 @@ if (sidebarPanel) {
 }
 sidebarLinks.forEach(link => {
   link.addEventListener("click", (e) => {
+    e.preventDefault();
     e.stopPropagation();
     let target = null;
     const targetId = link.dataset.target;
