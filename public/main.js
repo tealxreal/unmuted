@@ -179,7 +179,7 @@ function hideAnalysisResult() {
 (() => {
   const home = document.getElementById("home-view");
   if (!home) return;
-function setMode(mode) {
+function setMode(mode, targetPage = null) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
   document.querySelectorAll(".page").forEach(page => {
@@ -188,7 +188,6 @@ function setMode(mode) {
   });
 
   if (mode === "main") {
-    
     currentMainIndex = 0;
     if (mainPages[0]) {
       mainPages[0].scrollIntoView({ behavior: "auto", block: "start" });
@@ -196,9 +195,10 @@ function setMode(mode) {
     document.body.classList.remove("interaction-mode");
     document.body.classList.add("main-mode");
   } else {
-    currentInteractionIndex = 0;
-    if (interactionPages[0]) {
-      interactionPages[0].scrollIntoView({ behavior: "auto", block: "start" });
+    const target = targetPage || interactionPages[0];
+    currentInteractionIndex = interactionPages.indexOf(target);
+    if (target) {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
     }
     document.body.classList.remove("main-mode");
     document.body.classList.add("interaction-mode");
@@ -282,6 +282,32 @@ setMode("main");
     }
   }, { threshold: [0, 0.25, 0.55, 0.75, 1] });
   io.observe(home);
+sidebarLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const targetId = link.dataset.target;
+    let target = null;
+    if (targetId === "interaction-intro-view") {
+      target = interactionPages[0];
+    } else if (targetId === "experience-view-1") {
+      target = interactionPages[1];
+    } else if (targetId === "experience-view-2") {
+      target = interactionPages[2];
+    } else if (targetId === "catalog-view") {
+      target = interactionPages[3];
+    }
+    if (!target) return;
+    /* 先把焦點移回 toggle，再關閉 */
+    if (document.activeElement && typeof document.activeElement.blur === "function") {
+      document.activeElement.blur();
+    }
+
+    closeSidebar();
+    setMode("interaction", target);
+  });
+});
 })();
 
 
@@ -436,38 +462,7 @@ if (sidebarPanel) {
     e.stopPropagation();
   });
 }
-sidebarLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const targetId = link.dataset.target;
-    let target = null;
-    if (targetId === "interaction-intro-view") {
-      target = interactionPages[0];
-    } else if (targetId === "experience-view-1") {
-      target = interactionPages[1];
-    } else if (targetId === "experience-view-2") {
-      target = interactionPages[2];
-    } else if (targetId === "catalog-view") {
-      target = interactionPages[3];
-    }
-    if (!target) return;
-    /* 先把焦點移回 toggle，再關閉 */
-    document.activeElement.blur();
-    closeSidebar();
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (containerEl) {
-          containerEl.scrollTo({
-            top: target.offsetTop,
-            behavior: "smooth"
-          });
-        }
-      });
-    });
-  });
-});
+
 //滾動音符
 (() => {
   const orb = document.getElementById("scroll-orb");
