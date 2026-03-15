@@ -229,6 +229,7 @@ if (enterInteractionBtn) {
 closeInteractionBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     setMode("main");
+    fixHomeFX();
   });
 });
 setMode("main");
@@ -468,8 +469,19 @@ if (containerEl) {
 
 window.addEventListener("resize", () => {
   updateFX();
+  fixHomeFX();
 });
 updateFX();
+function fixHomeFX(){
+  const home = document.querySelector("#home-view");
+  if(!home) return;
+
+  home.querySelectorAll(".fx, .fx06").forEach(el=>{
+    el.style.setProperty("--fx-x","0px");
+    el.style.setProperty("--fx-y","0px");
+    el.style.setProperty("--fx-o","1");
+  });
+}
 //清除
 
 clearBtn.addEventListener("click", () => {
