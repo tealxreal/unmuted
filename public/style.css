@@ -391,16 +391,16 @@ body {
   will-change: transform, opacity;
 }
 .fx-up{
-  --fx-y:220px;
+  --fx-y:110px;
 }
 .fx-left{
-  --fx-x:-140px;
+  --fx-x:-80px;
 }
 .fx-right{
-  --fx-x:140px;
+  --fx-x:80px;
 }
 .fx-right2{
-  --fx-x:180px;
+  --fx-x:100px;
 }
         .glow-texth2 {
             font-size: clamp(38px, 5vw, 46px); 
