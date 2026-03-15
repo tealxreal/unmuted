@@ -115,6 +115,10 @@ body {
   opacity: 0;
   pointer-events: none;
 }
+.sidebar-overlay.is-open{
+  opacity: 1;
+  pointer-events: auto;
+}
 .sidebar-panel{
   position: absolute;
   left: 0;
@@ -123,6 +127,19 @@ body {
   padding: 0 28px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  z-index: 3501;
+  pointer-events: auto;
+
+  transform: translateY(80px);
+  opacity: 0;
+  transition:
+    transform 0.38s ease,
+    opacity 0.28s ease;
+}
+.sidebar-overlay.is-open .sidebar-panel{
+  transform: translateY(0);
+  opacity: 1;
 }
 .sidebar-link{
   width: 100%;
@@ -137,6 +154,9 @@ body {
   font-weight: 600;
   letter-spacing: 0.08em;
   cursor: pointer;
+  position: relative;
+  z-index: 3502;
+  pointer-events: auto;
 }
 .sidebar-link:last-child{
   border-bottom: 1px solid rgba(228, 241, 255, 0.25);

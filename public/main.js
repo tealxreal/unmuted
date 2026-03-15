@@ -396,21 +396,35 @@ stopAllAudio = function(){
 };
 
 function openSidebar(){
+  clearTimeout(sidebarClosingTimer);
   sidebarOverlay.classList.remove("hidden");
-  sidebarOverlay.setAttribute("aria-hidden", "false");
-  sidebarToggles.forEach(btn => btn.classList.add("is-open"));
+  requestAnimationFrame(() => {
+    sidebarOverlay.classList.add("is-open");
+    sidebarOverlay.setAttribute("aria-hidden", "false");
+    sidebarToggles.forEach(btn => btn.classList.add("is-open"));
+  });
+  document.body.classList.add("loading-lock");
+  document.documentElement.classList.add("loading-lock");
+  if (containerEl) containerEl.classList.add("loading-lock");
 }
-
 function closeSidebar(){
-  sidebarOverlay.classList.add("hidden");
+  sidebarOverlay.classList.remove("is-open");
   sidebarOverlay.setAttribute("aria-hidden", "true");
   sidebarToggles.forEach(btn => btn.classList.remove("is-open"));
+  document.body.classList.remove("loading-lock");
+  document.documentElement.classList.remove("loading-lock");
+  if (containerEl) containerEl.classList.remove("loading-lock");
+  sidebarClosingTimer = setTimeout(() => {
+    sidebarOverlay.classList.add("hidden");
+  }, 380);
 }
 
-function toggleSidebar(){
+function toggleSidebar(e){
+  if (e) e.stopPropagation();
+
   if (sidebarOverlay.classList.contains("hidden")) {
     openSidebar();
-  } else {
+  } else if (sidebarOverlay.classList.contains("is-open")) {
     closeSidebar();
   }
 }
@@ -421,11 +435,12 @@ sidebarToggles.forEach(btn => {
 
 /* 點背景也可收合 */
 sidebarOverlay.addEventListener("click", (e) => {
-  if (e.target === sidebarOverlay) {
-    closeSidebar();
-  }
+  closeSidebar();
 });
-
+/* 點到 panel 本身不要收合 */
+document.querySelector(".sidebar-panel").addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 sidebarLinks.forEach(link => {
   link.addEventListener("click", () => {
     let target = null;
