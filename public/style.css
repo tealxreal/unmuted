@@ -2,6 +2,9 @@ body {
             margin: 0;
             min-height: 100vh;
             min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: rgb(47, 47, 47);
             font-family:"Noto Sans", "微軟正黑體",sans-serif;
             background-size: cover;
@@ -20,7 +23,7 @@ body {
             margin: 0;
             padding: 0;
             width: 100%;
-            min-height: 100%;
+            height: 100%;
             overflow-x: hidden;
         }
          .gradient {
@@ -57,6 +60,17 @@ body {
         .page.is-hidden {
             display: none !important;
         }
+        .container {
+            width: min(100vw, 56.25vh);
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: auto;
+            -webkit-overflow-scrolling: touch;
+        }
         .title-group{
     position: static;
     margin-top: -60px;    /* 你要更靠上就改小 */
@@ -69,7 +83,7 @@ body {
         .title {
             text-align: center;
             margin-top: 0px ;
-            font-size: clamp(64px, 10vw, 160px);
+            font-size: 14vw;
             color: #e4f1ff;
             letter-spacing: -0.05em;
             transform: scaleY(0.6);
@@ -417,17 +431,7 @@ body {
   margin-top: -20px;   /* 讓它靠近按鈕底下一點，覺得太近就調成 -10 或 0 */
   opacity: 0.9;
 }
-        .container {
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            height: 100dvh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: auto;
-            -webkit-overflow-scrolling: touch;
-        }
+        
 .overlay {
     position: fixed;
     inset: 0;
@@ -775,18 +779,16 @@ body.loading-lock {
 }
 .flow6{
   display: grid;
-  grid-template-columns: repeat(3, 140px);
-  gap: 28px;
+  grid-template-columns: repeat(3, 92px);
+  gap: 16px;
   align-items: center;
   justify-content: center;
-
-  width: min(900px, 92vw);
   margin: 24px auto 0;
 }
 
 .fnode{
-  width: 140px;
-  height: 140px;
+  width: 92px;
+  height: 92px;
   border: 2px solid rgba(255,255,255,0.85);
   aspect-ratio:1/1;
   border-radius: 999px;
@@ -797,22 +799,9 @@ body.loading-lock {
   text-align: center;
 
   color: rgb(232, 255, 255);
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.25;
-  padding: 10px;
-}
-@media (max-width: 1100px){
-  .flow6{
-    grid-template-columns: repeat(3, 92px);
-    gap: 16px;
-    width: 94vw;
-  }
-  .fnode {
-    width: 92px;
-    height: 92px;
-    font-size: 12px;
-    padding: 8px;
-  }
+  padding: 8px;
 }
 #scroll-orb{
   position: fixed;
@@ -844,57 +833,26 @@ body.interaction-mode #scroll-orb{
         }
         #input-view {
             position: relative;
-        }    
-@media screen and (max-width: 1366px) and (orientation: landscape) {
-    body {
-        font-size: 16px;
-    }
+        } 
+@media (min-width: 768px){
+    .container {
+    width: min(100vw, 75vh);
+    height: 100vh;
+  }
+  .title {
+    font-size: 72px;
+  }
+  .flow6 {
+    grid-template-columns: repeat(3, 120px);
+    gap: 22px;
+  }
 
-    .page {
-        padding: 40px 20px;
-    }
-    .hashtag {
-        font-size: 18;
-    }
-    /* 主標題 */
-    .title {
-        font-size: 16vw;
-        text-align:center;
-    }
-    /* 右上按鈕 */
-    .home-right {
-        bottom: 40px;
-        gap: 250px;
-    }
-    /* 互動頁 */
-    #experience-view {
-        align-items: flex-start;
-        padding-top: 80px;
-    }
-    #concept-view {
-        padding: 24px 16px;
-    }
-    .experience-block {
-        width: 100%;
-    }
-    /* 情緒標題 */
-    .experience-block h3 {
-        font-size: 30px;
-        color: #e8ffff;
-    }
-    /* 按鈕尺寸放大（觸控友好） */
-    button {
-        font-size: 16px;
-        padding: 10px 18px;
-    }
-    .emotion-buttons {
-        gap: 12px;
-    }
-    textarea {
-        height: 120px;
-        width:50%;
-        font-size: 16px;
-    }
+  .fnode {
+    width: 120px;
+    height: 120px;
+    font-size: 15px;
+    padding: 10px;
+  }
 }
 *, *::before, *::after { box-sizing: border-box; }
 /* ===== 完全隱藏 scrollbar ===== */
