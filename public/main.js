@@ -256,11 +256,7 @@ closeInteractionBtns.forEach(btn => {
   });
 });
 setMode("main");
-
-
-
   const lines = home.querySelectorAll(".line");
-
   function resetHomeLines(){
     // 把動畫確實重置到初始狀態（避免回來時卡在中途）
     lines.forEach(el => {
@@ -270,16 +266,12 @@ setMode("main");
       el.style.animation = "";       // 交回給 CSS 控制
     });
   }
-
   let isActive = false;
-
   const io = new IntersectionObserver((entries) => {
     const e = entries[0];
     const nowActive = e.isIntersecting && e.intersectionRatio >= 0.55; // 超過一半才算
-
     if (nowActive === isActive) return;
     isActive = nowActive;
-
     if (nowActive) {
       home.classList.add("is-active");
       // 進入時也重置一次，確保從頭開始
@@ -289,8 +281,40 @@ setMode("main");
       resetHomeLines();
     }
   }, { threshold: [0, 0.25, 0.55, 0.75, 1] });
-
   io.observe(home);
+sidebarLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const targetId = link.dataset.target;
+    let target = null;
+    if (targetId === "interaction-intro-view") {
+      target = interactionPages[0];
+    } else if (targetId === "experience-view-1") {
+      target = interactionPages[1];
+    } else if (targetId === "experience-view-2") {
+      target = interactionPages[2];
+    } else if (targetId === "catalog-view") {
+      target = interactionPages[3];
+    }
+    if (!target) return;
+    /* 先把焦點移回 toggle，再關閉 */
+    document.activeElement.blur();
+    closeSidebar();
+    setMode("interaction");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (containerEl) {
+          containerEl.scrollTo({
+            top: target.offsetTop,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  });
+});
 })();
 
 
@@ -445,39 +469,7 @@ if (sidebarPanel) {
     e.stopPropagation();
   });
 }
-sidebarLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const targetId = link.dataset.target;
-    let target = null;
-    if (targetId === "interaction-intro-view") {
-      target = interactionPages[0];
-    } else if (targetId === "experience-view-1") {
-      target = interactionPages[1];
-    } else if (targetId === "experience-view-2") {
-      target = interactionPages[2];
-    } else if (targetId === "catalog-view") {
-      target = interactionPages[3];
-    }
-    if (!target) return;
-    /* 先把焦點移回 toggle，再關閉 */
-    document.activeElement.blur();
-    closeSidebar();
-    setMode("interaction");
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (containerEl) {
-          containerEl.scrollTo({
-            top: target.offsetTop,
-            behavior: "smooth"
-          });
-        }
-      });
-    });
-  });
-});
+
 //滾動音符
 (() => {
   const orb = document.getElementById("scroll-orb");
