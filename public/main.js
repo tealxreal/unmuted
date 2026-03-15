@@ -17,8 +17,13 @@ const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
 const containerEl = document.querySelector(".container");
-const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
-const lerp = (a, b, t) => a + (b - a) * t;
+function clamp(v, min, max){
+  return Math.max(min, Math.min(max, v));
+}
+
+function lerp(a, b, t){
+  return a + (b - a) * t;
+}
 /* =========================
    試玩區 - 輸入與生成
 ========================= */
@@ -438,9 +443,13 @@ function updateFX() {
     if (!section || section.classList.contains("is-hidden")) return;
 
     const targetP = pageProgress(section, containerEl);
+    if (targetP > 0.985) targetP = 1;
+    if (targetP < 0.015) targetP = 0;
+    item.currentP = lerp(item.currentP, targetP, 0.22);
 
-    /* 做一點平滑，減少抖動 */
-    item.currentP = lerp(item.currentP, targetP, 0.18);
+    /* 再做一次吸附，避免永遠停在 0.998 這種半途值 */
+    if (Math.abs(item.currentP - 1) < 0.01) item.currentP = 1;
+    if (Math.abs(item.currentP - 0) < 0.01) item.currentP = 0;
 
     const x = lerp(startX, 0, item.currentP);
     const y = lerp(startY, 0, item.currentP);

@@ -365,6 +365,7 @@ body {
   opacity: var(--fx-o);
   transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1.2, 0.6);
   will-change: transform, opacity;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 .fx06{
   --fx-x: 0px;
@@ -373,6 +374,7 @@ body {
   opacity: var(--fx-o);
   transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1, 0.6);
   will-change: transform, opacity;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 .fx08{
   --fx-x: 0px;
@@ -381,6 +383,7 @@ body {
   opacity: var(--fx-o);
   transform: translate3d(var(--fx-x), var(--fx-y),0) scale(1, 0.8);
   will-change: transform, opacity;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 .fx{
   --fx-x: 0px;
@@ -389,6 +392,7 @@ body {
   opacity: var(--fx-o);
   transform: translate3d(var(--fx-x), var(--fx-y),0);
   will-change: transform, opacity;
+  transition: transform 0.45s ease, opacity 0.45s ease;
 }
 .fx-up{
   --fx-y:110px;
