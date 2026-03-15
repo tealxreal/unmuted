@@ -394,15 +394,14 @@ stopAllAudio = function(){
   _stopAllAudio();
   showTapHint(false);
 };
-
+let sidebarClosingTimer = null;
 function openSidebar(){
   clearTimeout(sidebarClosingTimer);
-  sidebarOverlay.classList.remove("hidden");
-  requestAnimationFrame(() => {
-    sidebarOverlay.classList.add("is-open");
-    sidebarOverlay.setAttribute("aria-hidden", "false");
-    sidebarToggles.forEach(btn => btn.classList.add("is-open"));
-  });
+
+  sidebarOverlay.classList.add("is-open");
+  sidebarOverlay.setAttribute("aria-hidden", "false");
+  sidebarToggles.forEach(btn => btn.classList.add("is-open"));
+
   document.body.classList.add("loading-lock");
   document.documentElement.classList.add("loading-lock");
   if (containerEl) containerEl.classList.add("loading-lock");
@@ -411,12 +410,10 @@ function closeSidebar(){
   sidebarOverlay.classList.remove("is-open");
   sidebarOverlay.setAttribute("aria-hidden", "true");
   sidebarToggles.forEach(btn => btn.classList.remove("is-open"));
+
   document.body.classList.remove("loading-lock");
   document.documentElement.classList.remove("loading-lock");
   if (containerEl) containerEl.classList.remove("loading-lock");
-  sidebarClosingTimer = setTimeout(() => {
-    sidebarOverlay.classList.add("hidden");
-  }, 380);
 }
 
 function toggleSidebar(e){
@@ -437,20 +434,24 @@ sidebarToggles.forEach(btn => {
 sidebarOverlay.addEventListener("click", (e) => {
   closeSidebar();
 });
-/* 點到 panel 本身不要收合 */
-document.querySelector(".sidebar-panel").addEventListener("click", (e) => {
-  e.stopPropagation();
-});
+const sidebarPanel = document.querySelector(".sidebar-panel");
+if (sidebarPanel) {
+  sidebarPanel.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+}
 sidebarLinks.forEach(link => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (e) => {
+    e.stopPropagation();
     let target = null;
-    if (link.dataset.target === "interaction-intro-view") {
+    const targetId = link.dataset.target;
+    if (targetId === "interaction-intro-view") {
       target = interactionintroview;
-    } else if (link.dataset.target === "experience-view-1") {
+    } else if (targetId === "experience-view-1") {
       target = experienceview1;
-    } else if (link.dataset.target === "experience-view-2") {
+    } else if (targetId === "experience-view-2") {
       target = experienceview2;
-    } else if (link.dataset.target === "catalog-view") {
+    } else if (targetId === "catalog-view") {
       target = catalogview;
     }
     if (!target) return;
