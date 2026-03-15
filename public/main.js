@@ -3,7 +3,7 @@ const mainPages = [
   document.getElementById("concept-view"),
   document.getElementById("system-view")
 ];
-home = document.getElementById("home-view")
+const home = document.getElementById("home-view")
 const interactionPages = [
   document.getElementById("interaction-intro-view"),
   document.getElementById("experience-view-1"),
@@ -453,17 +453,17 @@ sidebarLinks.forEach(link => {
     const targetId = link.dataset.target;
     let target = null;
     if (targetId === "interaction-intro-view") {
-      target = interactionintroview;
+      target = interactionPages[0];
     } else if (targetId === "experience-view-1") {
-      target = experienceview1;
+      target = interactionPages[1];
     } else if (targetId === "experience-view-2") {
-      target = experienceview2;
+      target = interactionPages[2];
     } else if (targetId === "catalog-view") {
-      target = catalogview;
+      target = interactionPages[3];
     }
     if (!target) return;
     /* 先把焦點移回 toggle，再關閉 */
-    sidebarToggle.focus();
+    sidebarToggles.focus();
     closeSidebar();
     setMode("interaction");
     requestAnimationFrame(() => {
