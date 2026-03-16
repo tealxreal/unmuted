@@ -6,7 +6,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgb(47, 47, 47);
+            background-color: rgb(0, 0, 0);
             font-family:"微軟正黑體","Noto Sans", sans-serif;
             background-size: cover;
             position: relative;
@@ -83,10 +83,9 @@ body {
   padding: 0;
   border: 0.5px solid #e8ffff57;
   border-radius: 50%;
-  font-size: 40px;
-  font-weight: 600;
+  
   line-height: 1;
-  color: #e8ffff;
+  
   background: transparent;
   cursor: pointer;
   z-index: 5000;
@@ -97,6 +96,14 @@ body {
   transform-origin: center center;
   pointer-events: auto;
   transition: transform 0.35s ease;
+}
+.sidebar-toggle-icon{
+  display: block;
+  line-height: 1;
+  transform: translateY(-2px);
+  font-size: 40px;
+  font-weight: 600;
+  color: #e8ffff;
 }
 .sidebar-toggle.is-open{
   transform: rotate(90deg);
