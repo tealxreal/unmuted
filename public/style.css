@@ -282,7 +282,7 @@ body {
 }
         .title-group{
     position: static;
-    margin-top: -60px;    /* 你要更靠上就改小 */
+    margin-top: -90px;    /* 你要更靠上就改小 */
     text-align: center;
     align-items: center;
     display: flex;
