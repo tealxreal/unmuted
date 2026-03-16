@@ -183,15 +183,15 @@ function hideAnalysisResult() {
   if (!home) return;
   const mainArtStops = {
   "home-view": 0,
-  "concept-view": 0.334,
-  "system-view": 0.667
+  "concept-view": 1/3,
+  "system-view": 2/3
 };
 
 const interactionArtStops = {
   "interaction-intro-view": 0,
-  "experience-view-1": 0.25,
-  "experience-view-2": 0.5,
-  "catalog-view": 0.75
+  "experience-view-1": 1/4,
+  "experience-view-2": 2/4,
+  "catalog-view": 3/4
 };
 function updateArtPosition(pageId){
   let activeArt = null;
