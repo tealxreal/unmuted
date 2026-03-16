@@ -83,10 +83,9 @@ body {
   padding: 0;
   border: 0.5px solid #e8ffffe8;
   border-radius: 50%;
-  
   line-height: 1;
-  
   background: #e8ffffd5;
+  box-shadow: 0 0 3px #e8ffffbe;
   cursor: pointer;
   z-index: 5000;
   display: flex;
@@ -100,7 +99,7 @@ body {
 .sidebar-toggle-icon{
   display: block;
   line-height: 1;
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   font-size: 11vw;
   font-weight: 600;
   color: #000000;
@@ -243,7 +242,7 @@ body {
 .site-subtitle{
   margin: 0;
   color: #e8ffff;
-  font-size: 4vw;
+  font-size: 5vw;
   font-weight: 700;
   letter-spacing: 0.05em;
   transform: scaleY(0.6);
@@ -274,7 +273,7 @@ body {
 .site-meta{
   margin: 0;
   color: #e4f1ff90;
-  font-size: 2vw;
+  font-size: 4vw;
   letter-spacing: 0em;
   transform: scaleY(0.6);
   transform-origin: center center;
@@ -323,7 +322,7 @@ body {
                 text-align: center;
                 pointer-events: none;
                 z-index: 1000;
-                font-size: 2vw;
+                font-size: 3.4vw;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
                 animation: floatHint 1.8s ease-in-out infinite;
@@ -510,7 +509,7 @@ body {
             line-height: 1;
         }
         .hashtag {
-            font-size: 5vw;
+            font-size: 7vw;
             font-weight: 700;
             color: #e8ffff;
             text-align: left;
@@ -529,7 +528,7 @@ body {
         }
         .concept {
             margin: 0;
-            font-size: 2vw;
+            font-size: 4vw;
             transform: scaleY(0.8);
             line-height: 2;
             color: #e8ffff;
@@ -598,7 +597,7 @@ body {
         }
         .glow-textt {
             color: #e4f1ff9e;
-            font-size: 1.8vw;
+            font-size: 2.2vw;
             letter-spacing: 0.05em;
             text-shadow:
                 0 0 22px rgba(255, 255, 255, 0.597),
@@ -633,7 +632,7 @@ body {
             box-sizing: border-box;
             border: none;
             border-radius: 4px;
-            font-size: 2vw;
+            font-size: 3vw;
             color: #e8ffff;
             box-shadow:
                 0 0 1px rgba(255,255,255,0.8),
@@ -643,11 +642,11 @@ body {
         }
         textarea::placeholder {
             color: rgba(232, 255, 255, 0.483);
-            font-size: 2vw;
+            font-size: 3vw;
             }
             .char-counter{
     margin-bottom: 6px;
-    font-size: 1.8vw;
+    font-size: 3vw;
     color: rgba(232,255,255,0.483);
     text-align: left;
     letter-spacing: 0.05em;
@@ -659,7 +658,7 @@ body {
             
 .analysis-result {
   text-align: center;
-  font-size: 2vw;
+  font-size: 4vw;
   letter-spacing: 0.05em;
   color: #e8ffff;
   font-weight: 700;
@@ -676,7 +675,7 @@ body {
                 text-orientation: mixed;
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
-                font-size: 2vw;
+                font-size: 3vw;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
             }
@@ -685,8 +684,8 @@ body {
   content: "";
   position: absolute;
   /* 盒子大小：你可以調整 */
-  height: 16vw;
-  width: 4vw;
+  height: 20vw;
+  width: 8vw;
   border: 0px solid rgba(232,255,255,0.65);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.059);
@@ -756,7 +755,7 @@ body {
             } 
         button {
             font-family:  "微軟正黑體","Noto Sans", sans-serif;
-            font-size: 4vw;
+            font-size: 3vw;
             white-space: nowrap;
             padding: 10px 14px;
             letter-spacing: 0.05em;
@@ -927,16 +926,16 @@ body.loading-lock {
 }
 .flow6{
   display: grid;
-  grid-template-columns: repeat(3, 92px);
-  gap: 16px;
+  grid-template-columns: repeat(3, 20vw);
+  gap: 5vw;
   align-items: center;
   justify-content: center;
   margin: 24px auto 0;
 }
 
 .fnode{
-  width: 15vw;
-  height: 15vw;
+  width: 20vw;
+  height: 20vw;
   border: 1.5px solid rgb(255, 255, 255);
   aspect-ratio:1/1;
   border-radius: 999px;
@@ -947,7 +946,7 @@ body.loading-lock {
   text-align: center;
 
   color: rgb(232, 255, 255);
-  font-size: 2vw;
+  font-size: 4vw;
   line-height: 1.25;
   padding: 8px;
 }
