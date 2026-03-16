@@ -190,7 +190,7 @@ body {
   left: 0;
   width: 100%;
   padding-top: 6vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
 }
 
@@ -228,7 +228,7 @@ body {
     color: #e8ffff;
     font-size: 11vw;
     line-height: 0.85;
-    font-weight: 700;
+    font-weight: 1000;
     letter-spacing: 0em;
 
     transform: scaleY(0.6);
@@ -258,7 +258,7 @@ body {
   bottom: 0;
   width: 100%;
   padding-bottom: 1.8vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
 }
 
@@ -282,7 +282,7 @@ body {
 }
         .title-group{
     position: static;
-    margin-top: -90px;    /* 你要更靠上就改小 */
+    margin-top: -150px;    /* 你要更靠上就改小 */
     text-align: center;
     align-items: center;
     display: flex;
