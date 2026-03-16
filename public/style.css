@@ -76,10 +76,12 @@ body {
         }
         /* 右上角開關按鈕 */
 .sidebar-toggle{
-  position: relative;
+  position: fixed;
+  top: 6vh;
+  right: 5%;
   flex: 0 0 auto;
-  width: 13vw;
-  height: 13vw;
+  width: clamp(45px, 13vw, 52px);
+  height: clamp(45px, 13vw, 52px);
   padding: 0;
   border: 0.5px solid #e8ffffe8;
   border-radius: 50%;
@@ -100,7 +102,7 @@ body {
   display: block;
   line-height: 1;
   transform: translateY(-4px);
-  font-size: 11vw;
+  font-size: clamp(38px, 11vw, 46px);
   font-weight: 600;
   color: #000000;
   z-index: 5000;
@@ -121,7 +123,7 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: auto;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  transition: opacity 0.3s ease, visibility 0s linear 0.38s;
 }
 .sidebar-overlay.is-open{
   opacity: 1;
@@ -187,7 +189,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding-top: 8vh;
+  padding-top: 6vh;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
 }
@@ -255,7 +257,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  padding-bottom: 3vh;
+  padding-bottom: 1.8vh;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
 }
@@ -299,7 +301,8 @@ body {
             text-align: center;
             margin-top: 0px ;
             align-items: center;
-            font-size: clamp(28px, 3vw, 36px);
+            font-size: clamp(28px, 4vw, 36px);
+            line-height: 2;
             color: #e8ffff;
             font-weight: 700;
             letter-spacing: 0.1em;
@@ -728,7 +731,7 @@ body {
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
             border: 1.5px solid rgba(255, 255, 255, 0.761);
             border-radius: 20px;
-            backdrop-filter: blur(6);
+            backdrop-filter: blur(6px);
             
             padding: 6px 16px;
             color: #e8ffff;
@@ -742,7 +745,7 @@ body {
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
             border: 2.5px solid rgba(255, 255, 255, 0.761);
             border-radius: 20px;
-            backdrop-filter: blur(6);
+            backdrop-filter: blur(6px);
             box-shadow:
             0 0 12px rgba(232,255,255,0.35),
             0 0 28px rgba(232,255,255,0.18);
