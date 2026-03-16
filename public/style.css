@@ -431,11 +431,13 @@ body {
 }
 /* 主畫面組：3 頁 */
 .art-main{
-  height: 300vh;
+  width: 100vw;
+  height: auto;
 }
 /* 互動畫面組：4 頁 */
 .art-interaction{
-  height: 400vh;
+  width: 100vw;
+  height: auto;
 }
         .experience-page {
             display: flex;
@@ -880,16 +882,16 @@ body.loading-lock {
 }
 .flow6{
   display: grid;
-  grid-template-columns: repeat(3, 22vw);
-  gap: 4vw;
+  grid-template-columns: repeat(3, 24vw);
+  gap: 3vw;
   align-items: center;
   justify-content: center;
   margin: 24px auto 0;
 }
 
 .fnode{
-  width: 22vw;
-  height: 22vw;
+  width: 24vw;
+  height: 24vw;
   border: 1.5px solid rgb(255, 255, 255);
   aspect-ratio:1/1;
   border-radius: 999px;
