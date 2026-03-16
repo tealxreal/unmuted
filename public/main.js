@@ -14,6 +14,8 @@ const interactionintroview = document.getElementById("interaction-intro-view");
 const experienceview1 = document.getElementById("experience-view-1");
 const experienceview2 = document.getElementById("experience-view-2");
 const catalogview = document.getElementById("catalog-view");
+const mainArt = document.getElementById("mainArt");
+const interactionArt = document.getElementById("interactionArt");
 function fixHomeFX(){
   if(!mainPages) return;
 
@@ -179,6 +181,37 @@ function hideAnalysisResult() {
 (() => {
   const home = document.getElementById("home-view");
   if (!home) return;
+  const mainArtStops = {
+  "home-view": 0,
+  "concept-view": 0.334,
+  "system-view": 0.667
+};
+
+const interactionArtStops = {
+  "interaction-intro-view": 0,
+  "experience-view-1": 0.25,
+  "experience-view-2": 0.5,
+  "catalog-view": 0.75
+};
+function updateArtPosition(pageId){
+  let activeArt = null;
+  let stop = 0;
+
+  if (currentMode === "main") {
+    activeArt = mainArt;
+    stop = mainArtStops[pageId] ?? 0;
+  } else {
+    activeArt = interactionArt;
+    stop = interactionArtStops[pageId] ?? 0;
+  }
+
+  if (!activeArt) return;
+
+  const maxShift = activeArt.offsetHeight - window.innerHeight;
+  const y = -maxShift * stop;
+
+  activeArt.style.transform = `translate(-50%, ${y}px)`;
+}
 function setMode(mode, targetPage = null) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -255,6 +288,13 @@ closeInteractionBtns.forEach(btn => {
     }); 
   });
 });
+if (currentMode === "main") {
+    mainArt.classList.add("is-active");
+    interactionArt.classList.remove("is-active");
+  } else {
+    mainArt.classList.remove("is-active");
+    interactionArt.classList.add("is-active");
+  }
 setMode("main");
   const lines = home.querySelectorAll(".line");
   function resetHomeLines(){
@@ -306,6 +346,16 @@ sidebarLinks.forEach(link => {
 
     closeSidebar();
     setMode("interaction", target);
+    updateArtGroup();
+
+    targetId = targetPage ? targetPage.id :
+  (mode === "main" ? mainPages[0]?.id : interactionPages[0]?.id);
+
+if (targetId) {
+  requestAnimationFrame(() => {
+    updateArtPosition(targetId);
+  });
+}
   });
 });
 })();
