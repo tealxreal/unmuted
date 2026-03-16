@@ -212,7 +212,17 @@ function updateArtPosition(pageId){
 
   activeArt.style.transform = `translate(-50%, ${y}px)`;
 }
+function updateArtGroup(){
+  if (!mainArt || !interactionArt) return;
 
+  if (currentMode === "main") {
+    mainArt.classList.add("is-active");
+    interactionArt.classList.remove("is-active");
+  } else {
+    mainArt.classList.remove("is-active");
+    interactionArt.classList.add("is-active");
+  }
+}
 function setMode(mode, targetPage = null) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
