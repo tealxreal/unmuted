@@ -74,34 +74,6 @@ body {
             scroll-behavior: auto;
             -webkit-overflow-scrolling: touch;
         }
-.center-mask{
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 18%;
-  bottom: 8%;
-  z-index: 0;
-  pointer-events: none;
-
-  background: rgba(8,12,20,0.20);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.8) 18%,
-    rgba(0,0,0,0.8) 92%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.8) 18%,
-    rgba(0,0,0,0.8) 92%,
-    transparent 100%
-  );
-}
         /* 右上角開關按鈕 */
 .sidebar-toggle{
   position: relative;
@@ -217,6 +189,8 @@ body {
   left: 0;
   width: 100%;
   padding-top: 8vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
 }
 
 .site-topbar-inner{
@@ -283,6 +257,8 @@ body {
   bottom: 0;
   width: 100%;
   padding-bottom: 3vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
 }
 
 .site-bottombar-inner{
@@ -327,7 +303,7 @@ body {
             font-size: clamp(28px, 3vw, 36px);
             color: #e8ffff;
             font-weight: 700;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             transform: scaleY(0.6);
         }
         .title3 { 
@@ -460,7 +436,7 @@ body {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     z-index: -1;
     pointer-events: none;
 }
