@@ -170,7 +170,7 @@ body {
 .site-frame{
   position: fixed;
   inset: 0;
-  pointer-events: auto;
+  pointer-events: none;
   z-index: 2000;
 }
 
@@ -206,21 +206,24 @@ body {
 .site-title{
   margin: 0;
 }
+.site-title button{
+  pointer-events: auto;
+}
 .home-btn{
-  border: none;
-  background: none;
-  cursor: pointer;
+    border: none;
+    background: none;
+    cursor: pointer;
+    pointer-events: auto;
+    color: #e8ffff;
+    font-size: 13vw;
+    line-height: 0.85;
+    font-weight: 700;
+    letter-spacing: -0.05em;
 
-  color: #e8ffff;
-  font-size: 13vw;
-  line-height: 0.85;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-
-  transform: scaleY(0.6);
-  transform-origin: left center;
-  text-align: left;
-  padding: 0;
+    transform: scaleY(0.6);
+    transform-origin: left center;
+    text-align: left;
+    padding: 0;
 }
 
 .close-interaction-btn{
