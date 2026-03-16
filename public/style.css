@@ -528,9 +528,9 @@ body {
         }
         .concept {
             margin: 0;
-            font-size: 4vw;
+            font-size: 3.2vw;
             transform: scaleY(0.8);
-            line-height: 2;
+            line-height: 1.8;
             color: #e8ffff;
             text-align: left;
             justify-content: center;
@@ -597,7 +597,7 @@ body {
         }
         .glow-textt {
             color: #e4f1ff9e;
-            font-size: 2.2vw;
+            font-size: 3vw;
             letter-spacing: 0.05em;
             text-shadow:
                 0 0 22px rgba(255, 255, 255, 0.597),
@@ -658,10 +658,10 @@ body {
             
 .analysis-result {
   text-align: center;
-  font-size: 4vw;
-  letter-spacing: 0.05em;
+  font-size: 3vw;
+  letter-spacing: 0.08em;
   color: #e8ffff;
-  font-weight: 700;
+  font-weight: 400;
 }
 .analysis-result.hidden {
   display: none;
@@ -676,65 +676,19 @@ body {
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
                 font-size: 3vw;
+                letter-spacing: 0.01em;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
             }
-            /* ✅ 外框 + 呼吸燈：用 pseudo element 做框跟底 */
-.tap-to-pause::before{
-  content: "";
-  position: absolute;
-  /* 盒子大小：你可以調整 */
-  height: 20vw;
-  width: 8vw;
-  border: 0px solid rgba(232,255,255,0.65);
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.059);
-  backdrop-filter: blur(4px);
-
-  /* 讓框在正中央 */
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  /* 呼吸燈：亮度＋外發光 */
-  animation: breatheGlow 1.8s ease-in-out infinite;
-}
 
 /* ✅ 文字本身也一起輕微呼吸 */
 .tap-to-pause{
   animation: breatheText 1.8s ease-in-out infinite;
 }
 
-@keyframes breatheGlow{
-  0%{
-    opacity: 0.55;
-    filter: brightness(0.95);
-    box-shadow:
-      0 0 0 rgba(232,255,255,0),
-      0 0 8px rgba(232,255,255,0.08),
-      inset 0 0 10px rgba(232,255,255,0.05);
-  }
-  50%{
-    opacity: 1;
-    filter: brightness(1.12);
-    box-shadow:
-      0 0 12px rgba(232,255,255,0.22),
-      0 0 30px rgba(232,255,255,0.10),
-      inset 0 0 14px rgba(232,255,255,0.08);
-  }
-  100%{
-    opacity: 0.55;
-    filter: brightness(0.95);
-    box-shadow:
-      0 0 0 rgba(232,255,255,0),
-      0 0 8px rgba(232,255,255,0.08),
-      inset 0 0 10px rgba(232,255,255,0.05);
-  }
-}
-
 @keyframes breatheText{
   0%{
-    opacity: 0.85;
+    opacity: 0.75;
     transform: translateY(0);
   }
   50%{
@@ -742,7 +696,7 @@ body {
     transform: translateY(-1px);
   }
   100%{
-    opacity: 0.85;
+    opacity: 0.75;
     transform: translateY(0);
   }
 }
@@ -926,16 +880,16 @@ body.loading-lock {
 }
 .flow6{
   display: grid;
-  grid-template-columns: repeat(3, 20vw);
-  gap: 5vw;
+  grid-template-columns: repeat(3, 22vw);
+  gap: 4vw;
   align-items: center;
   justify-content: center;
   margin: 24px auto 0;
 }
 
 .fnode{
-  width: 20vw;
-  height: 20vw;
+  width: 22vw;
+  height: 22vw;
   border: 1.5px solid rgb(255, 255, 255);
   aspect-ratio:1/1;
   border-radius: 999px;
@@ -946,7 +900,7 @@ body.loading-lock {
   text-align: center;
 
   color: rgb(232, 255, 255);
-  font-size: 4vw;
+  font-size: 3.2vw;
   line-height: 1.25;
   padding: 8px;
 }
