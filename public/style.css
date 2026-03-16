@@ -282,7 +282,7 @@ body {
 }
         .title-group{
     position: static;
-    margin-top: -120px;    /* 你要更靠上就改小 */
+    margin-top: -60px;    /* 你要更靠上就改小 */
     text-align: center;
     align-items: center;
     display: flex;
@@ -301,8 +301,8 @@ body {
             text-align: center;
             margin-top: 0px ;
             align-items: center;
-            font-size: clamp(28px, 4vw, 36px);
-            line-height: 2;
+            font-size: 4vw;
+            line-height: 3;
             color: #e8ffff;
             font-weight: 700;
             letter-spacing: 0.12em;
