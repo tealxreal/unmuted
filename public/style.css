@@ -78,15 +78,15 @@ body {
 .sidebar-toggle{
   position: relative;
   flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
+  width: 13vw;
+  height: 13vw;
   padding: 0;
-  border: 0.5px solid #e8ffff57;
+  border: 0.5px solid #e8ffffe8;
   border-radius: 50%;
   
   line-height: 1;
   
-  background: transparent;
+  background: #e8ffffd5;
   cursor: pointer;
   z-index: 5000;
   display: flex;
@@ -101,9 +101,9 @@ body {
   display: block;
   line-height: 1;
   transform: translateY(-3px);
-  font-size: 40px;
+  font-size: 11vw;
   font-weight: 600;
-  color: #e8ffff;
+  color: #000000;
   z-index: 5000;
 }
 .sidebar-toggle.is-open{
@@ -161,7 +161,7 @@ body {
   background: transparent;
   color: #e4f1ff;
   text-align: left;
-  font-size: 3vw;
+  font-size: 5vw;
   font-weight: 200;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -243,7 +243,7 @@ body {
 .site-subtitle{
   margin: 0;
   color: #e8ffff;
-  font-size: clamp(16px, 2.2vw, 28px);
+  font-size: 4vw;
   font-weight: 700;
   letter-spacing: 0.05em;
   transform: scaleY(0.6);
@@ -274,7 +274,7 @@ body {
 .site-meta{
   margin: 0;
   color: #e4f1ff90;
-  font-size: clamp(16px, 1.8vw, 24px);
+  font-size: 2vw;
   letter-spacing: 0em;
   transform: scaleY(0.6);
   transform-origin: center center;
@@ -315,38 +315,6 @@ body {
             letter-spacing: 0em;
             transform: scaleY(0.6);
         }
-        .topline{
-            align-items: center;
-            width: min(1366px, 110vw);
-            height: 1px;
-            background: rgba(232,255,255,0.72);
-            margin-top: -55px;
-        }
-        .description-wrapper {
-            position: absolute;
-            top: 55%;
-            text-align: center;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        /* 預設：不跑動畫，停在初始狀態 */
-            #home-view .line {
-            align-items: center;
-            border-radius: 20px;
-            background-color: none;
-            border: 1px solid #e8ffff98;
-            box-shadow:
-              0 0 6px rgba(255, 255, 255, 0.152);
-            padding: 8px 15px;
-            white-space: nowrap;
-            font-size: 16px;
-            color: #e8ffff;
-            opacity: 0;
-            animation: none;
-            transform: translateX(90%);
-        }
         .start-hint{
                 position: absolute;
                 bottom: 80px;
@@ -355,7 +323,7 @@ body {
                 text-align: center;
                 pointer-events: none;
                 z-index: 1000;
-                font-size: 14px;
+                font-size: 2vw;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
                 animation: floatHint 1.8s ease-in-out infinite;
@@ -542,7 +510,7 @@ body {
             line-height: 1;
         }
         .hashtag {
-            font-size: clamp(24px, 4vw, 32px);
+            font-size: 5vw;
             font-weight: 700;
             color: #e8ffff;
             text-align: left;
@@ -561,7 +529,7 @@ body {
         }
         .concept {
             margin: 0;
-            font-size: clamp(14px, 1.3vw, 18px);
+            font-size: 2vw;
             transform: scaleY(0.8);
             line-height: 2;
             color: #e8ffff;
@@ -630,7 +598,7 @@ body {
         }
         .glow-textt {
             color: #e4f1ff9e;
-            font-size: 12px;
+            font-size: 1.8vw;
             letter-spacing: 0.05em;
             text-shadow:
                 0 0 22px rgba(255, 255, 255, 0.597),
@@ -661,11 +629,11 @@ body {
             padding: 12px;
             margin: 0 auto;
             align-items: center;
-            background: #0000008d;
+            background: #00000031;
             box-sizing: border-box;
             border: none;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 2vw;
             color: #e8ffff;
             box-shadow:
                 0 0 1px rgba(255,255,255,0.8),
@@ -675,11 +643,11 @@ body {
         }
         textarea::placeholder {
             color: rgba(232, 255, 255, 0.483);
-            font-size: 12px;
+            font-size: 2vw;
             }
             .char-counter{
     margin-bottom: 6px;
-    font-size: 12px;
+    font-size: 1.8vw;
     color: rgba(232,255,255,0.483);
     text-align: left;
     letter-spacing: 0.05em;
@@ -691,7 +659,7 @@ body {
             
 .analysis-result {
   text-align: center;
-  font-size: 14px;
+  font-size: 2vw;
   letter-spacing: 0.05em;
   color: #e8ffff;
   font-weight: 700;
@@ -708,7 +676,7 @@ body {
                 text-orientation: mixed;
                 pointer-events: none; /* 讓它不擋點擊，點擊仍落到 body */
                 z-index: 2000;
-                font-size: 14px;
+                font-size: 2vw;
                 color: rgba(232,255,255,0.9);
                 text-shadow: 0 0 12px rgba(255, 255, 255, 0.294);
             }
@@ -717,8 +685,8 @@ body {
   content: "";
   position: absolute;
   /* 盒子大小：你可以調整 */
-  height: min(160px, 40vw);
-  width: 40px;
+  height: 16vw;
+  width: 4vw;
   border: 0px solid rgba(232,255,255,0.65);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0.059);
@@ -788,7 +756,7 @@ body {
             } 
         button {
             font-family:  "微軟正黑體","Noto Sans", sans-serif;
-            font-size: 12px;
+            font-size: 4vw;
             white-space: nowrap;
             padding: 10px 14px;
             letter-spacing: 0.05em;
@@ -805,7 +773,7 @@ body {
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
             border: 1.5px solid rgba(255, 255, 255, 0.761);
             border-radius: 20px;
-            backdrop-filter: none;
+            backdrop-filter: blur(6);
             
             padding: 6px 16px;
             color: #e8ffff;
@@ -819,7 +787,7 @@ body {
             background: rgba(255, 255, 255, 0.1);  /* 半透明白色 */
             border: 2.5px solid rgba(255, 255, 255, 0.761);
             border-radius: 20px;
-            backdrop-filter: none;
+            backdrop-filter: blur(6);
             box-shadow:
             0 0 12px rgba(232,255,255,0.35),
             0 0 28px rgba(232,255,255,0.18);
@@ -967,8 +935,8 @@ body.loading-lock {
 }
 
 .fnode{
-  width: 100px;
-  height: 100px;
+  width: 15vw;
+  height: 15vw;
   border: 1.5px solid rgb(255, 255, 255);
   aspect-ratio:1/1;
   border-radius: 999px;
@@ -979,7 +947,7 @@ body.loading-lock {
   text-align: center;
 
   color: rgb(232, 255, 255);
-  font-size: 13px;
+  font-size: 2vw;
   line-height: 1.25;
   padding: 8px;
 }
@@ -1018,20 +986,6 @@ body.interaction-mode #scroll-orb{
     .container {
     width: min(100vw, 75vh);
     height: 100dvh;
-  }
-  .title {
-    font-size: 72px;
-  }
-  .flow6 {
-    grid-template-columns: repeat(3, 120px);
-    gap: 22px;
-  }
-
-  .fnode {
-    width: 120px;
-    height: 120px;
-    font-size: 15px;
-    padding: 10px;
   }
 }
 *, *::before, *::after { box-sizing: border-box; }
