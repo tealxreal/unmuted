@@ -86,7 +86,7 @@ body {
   border: 0.5px solid #e8ffffe8;
   border-radius: 50%;
   line-height: 1;
-  background: #e8ffff98;
+  background: #e8fffff2;
   box-shadow: 0 0 4px #e8ffffbe;
   cursor: pointer;
   z-index: 5000;
@@ -244,9 +244,9 @@ body {
 .site-subtitle{
   margin: 0;
   color: #e8ffff;
-  font-size: 5vw;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  font-size: 4.6vw;
+  font-weight: 500;
+  letter-spacing: 0.15em;
   transform: scaleY(0.6);
   transform-origin: left center;
 }
