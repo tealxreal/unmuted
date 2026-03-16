@@ -74,6 +74,34 @@ body {
             scroll-behavior: auto;
             -webkit-overflow-scrolling: touch;
         }
+.center-mask{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 18%;
+  bottom: 12%;
+  z-index: 3;
+  pointer-events: none;
+
+  background: rgba(8,12,20,0.20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.4) 12%,
+    rgba(0,0,0,0.4) 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.4) 12%,
+    rgba(0,0,0,0.4) 88%,
+    transparent 100%
+  );
+}
         /* 右上角開關按鈕 */
 .sidebar-toggle{
   position: relative;
@@ -189,8 +217,6 @@ body {
   left: 0;
   width: 100%;
   padding-top: 8vh;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px); 
 }
 
 .site-topbar-inner{
@@ -257,8 +283,6 @@ body {
   bottom: 0;
   width: 100%;
   padding-bottom: 3vh;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px); 
 }
 
 .site-bottombar-inner{
@@ -618,7 +642,7 @@ body {
   --fx-x:100px;
 }
         .glow-texth2 {
-            font-size: 4vw; 
+            font-size: 6vw; 
             letter-spacing: -0.08em;
             transform: scaleY(0.6);
             white-space: nowrap;
