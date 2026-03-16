@@ -451,10 +451,10 @@ body {
   height: auto;
   min-height: 400vh;   /* interaction 四頁可先用 400vh 試 */
   transform: translate(-50%, 0);
-  object-fit: cover;
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.6s ease;
   will-change: transform, opacity;
+  pointer-events: none;
 }
 
 .art-long.is-active{

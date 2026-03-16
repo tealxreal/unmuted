@@ -212,6 +212,7 @@ function updateArtPosition(pageId){
 
   activeArt.style.transform = `translate(-50%, ${y}px)`;
 }
+
 function setMode(mode, targetPage = null) {
   currentMode = mode;
   const showGroup = mode === "main" ? "main" : "interaction";
@@ -219,16 +220,17 @@ function setMode(mode, targetPage = null) {
     const group = page.dataset.group;
     page.classList.toggle("is-hidden", group !== showGroup);
   });
-
+  let target = null;
   if (mode === "main") {
-    currentMainIndex = 0;
-    if (mainPages[0]) {
-      mainPages[0].scrollIntoView({ behavior: "auto", block: "start" });
+    target = targetPage || mainPages[0];
+    currentMainIndex = mainPages.indexOf(target);
+    if (target) {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
     }
     document.body.classList.remove("interaction-mode");
     document.body.classList.add("main-mode");
   } else {
-    const target = targetPage || interactionPages[0];
+    target = targetPage || interactionPages[0];
     currentInteractionIndex = interactionPages.indexOf(target);
     if (target) {
       target.scrollIntoView({ behavior: "auto", block: "start" });
@@ -240,6 +242,13 @@ function setMode(mode, targetPage = null) {
   stopAllAudio();
   hideAnalysisResult();
   setupPageObserver();
+  updateArtGroup();
+
+  if (target && target.id) {
+    requestAnimationFrame(() => {
+      updateArtPosition(target.id);
+    });
+  }
 }
 let pageObserver = null;
 let currentPageId = null;
@@ -268,6 +277,7 @@ function setupPageObserver() {
       counter.textContent = 0;
     }
     currentPageId = newId;
+    updateArtPosition(newId);
   }, {
     root: container,
     threshold: [0.2, 0.5, 0.8]
@@ -280,6 +290,9 @@ if (enterInteractionBtn) {
     setMode("interaction");
   });
 }
+if (currentPageId) {
+    updateArtPosition(currentPageId);
+  }
 closeInteractionBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     setMode("main");
@@ -346,16 +359,6 @@ sidebarLinks.forEach(link => {
 
     closeSidebar();
     setMode("interaction", target);
-    updateArtGroup();
-
-    targetId = targetPage ? targetPage.id :
-  (mode === "main" ? mainPages[0]?.id : interactionPages[0]?.id);
-
-if (targetId) {
-  requestAnimationFrame(() => {
-    updateArtPosition(targetId);
-  });
-}
   });
 });
 })();
