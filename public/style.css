@@ -305,7 +305,7 @@ body {
             line-height: 2;
             color: #e8ffff;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             transform: scaleY(0.6);
         }
         .title3 { 
@@ -406,7 +406,7 @@ body {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.25);
     z-index: -1;
     pointer-events: none;
 }
