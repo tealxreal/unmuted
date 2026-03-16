@@ -475,6 +475,16 @@ stopAllAudio = function(){
   _stopAllAudio();
   showTapHint(false);
 };
+function lockScroll(){
+  window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.addEventListener("touchmove", preventScrollAction, nonPassiveOption);
+}
+function unlockScroll(){
+  window.removeEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.removeEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.removeEventListener("touchmove", preventScrollAction, nonPassiveOption);
+}
 let sidebarClosingTimer = null;
 function openSidebar(){
   clearTimeout(sidebarClosingTimer);
@@ -486,6 +496,7 @@ function openSidebar(){
   document.body.classList.add("loading-lock");
   document.documentElement.classList.add("loading-lock");
   if (containerEl) containerEl.classList.add("loading-lock");
+  lockScroll();
 }
 function closeSidebar(){
   if (document.activeElement && sidebarOverlay.contains(document.activeElement)) {
@@ -498,6 +509,7 @@ function closeSidebar(){
   document.body.classList.remove("loading-lock");
   document.documentElement.classList.remove("loading-lock");
   if (containerEl) containerEl.classList.remove("loading-lock");
+  unlockScroll();
 }
 
 function toggleSidebar(e){
@@ -653,16 +665,12 @@ function showLoading() {
   loadingOverlay.classList.remove("hidden");
   document.documentElement.classList.add("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "false");
-  window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
-  window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
-  window.addEventListener("touchmove", preventScrollAction, nonPassiveOption);
+  lockScroll();
 }
 function hideLoading() {
   if (!loadingOverlay) return;
   loadingOverlay.classList.add("hidden");
   document.documentElement.classList.remove("loading-lock");
   loadingOverlay.setAttribute("aria-hidden", "true");
-  window.removeEventListener("keydown", preventScrollKeys, nonPassiveOption);
-  window.removeEventListener("wheel", preventScrollAction, nonPassiveOption);
-  window.removeEventListener("touchmove", preventScrollAction, nonPassiveOption);
+  unlockScroll();
 }

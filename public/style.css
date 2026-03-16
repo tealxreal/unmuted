@@ -349,7 +349,7 @@ body {
         }
         .start-hint{
                 position: absolute;
-                bottom: 70px;
+                bottom: 80px;
                 left: 50%;
                 transform: translateX(-50%);
                 text-align: center;
@@ -436,7 +436,7 @@ body {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.35);
     z-index: -1;
     pointer-events: none;
 }
@@ -661,7 +661,7 @@ body {
             padding: 12px;
             margin: 0 auto;
             align-items: center;
-            background: #0000006b;
+            background: #0000008d;
             box-sizing: border-box;
             border: none;
             border-radius: 4px;
