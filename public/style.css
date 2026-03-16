@@ -81,8 +81,9 @@ body {
   width: 52px;
   height: 52px;
   padding: 0;
-  border: none;
-  font-size: 45px;
+  border: 0.5px solid #e8ffff57;
+  border-radius: 50%;
+  font-size: 40px;
   font-weight: 600;
   line-height: 1;
   color: #e8ffff;
@@ -209,8 +210,9 @@ body {
   font-size: 14vw;
   line-height: 0.85;
   letter-spacing: -0.05em;
-  transform: scaleY(0.6);
+  transform: scaleY(0.8);
   transform-origin: left center;
+  text-align: left;
 }
 
 .site-subtitle{
@@ -229,7 +231,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  padding-bottom: 5vh;
+  padding-bottom: 3vh;
 }
 
 .site-bottombar-inner{
@@ -349,7 +351,7 @@ body {
         }
         .start-hint{
                 position: absolute;
-                bottom: 90px;
+                bottom: 70px;
                 left: 50%;
                 transform: translateX(-50%);
                 text-align: center;
