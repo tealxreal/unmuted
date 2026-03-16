@@ -161,9 +161,9 @@ body {
   background: transparent;
   color: #e4f1ff;
   text-align: left;
-  font-size: clamp(24px, 3vw, 34px);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 3vw;
+  font-weight: 200;
+  letter-spacing: 0.1em;
   cursor: pointer;
   position: relative;
   z-index: 3502;
@@ -534,7 +534,7 @@ body {
 }
         .about-text {
             margin: 0;
-            font-size: clamp(36px, 7vw, 64px);
+            font-size: 9vw;
             color: #e8ffff;
             font-weight: 800;
             transform: scale( 1.2, 0.6);
@@ -563,7 +563,7 @@ body {
             margin: 0;
             font-size: clamp(14px, 1.3vw, 18px);
             transform: scaleY(0.8);
-            line-height: 1.5;
+            line-height: 2;
             color: #e8ffff;
             text-align: left;
             justify-content: center;
@@ -967,19 +967,19 @@ body.loading-lock {
 }
 
 .fnode{
-  width: 92px;
-  height: 92px;
-  border: 2px solid rgb(255, 255, 255);
+  width: 100px;
+  height: 100px;
+  border: 1.5px solid rgb(255, 255, 255);
   aspect-ratio:1/1;
   border-radius: 999px;
-  background: transparent;
+  background: #0000009f;
 
   display: grid;
   place-items: center;
   text-align: center;
 
   color: rgb(232, 255, 255);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.25;
   padding: 8px;
 }
