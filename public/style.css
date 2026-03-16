@@ -170,7 +170,7 @@ body {
 .site-frame{
   position: fixed;
   inset: 0;
-  pointer-events: none;
+  pointer-events: auto;
   z-index: 2000;
 }
 
@@ -203,16 +203,28 @@ body {
   min-width: 0;
   pointer-events: none;
 }
-
 .site-title{
   margin: 0;
+}
+.home-btn{
+  border: none;
+  background: none;
+  cursor: pointer;
+
   color: #e8ffff;
   font-size: 13vw;
   line-height: 0.85;
+  font-weight: 700;
   letter-spacing: -0.05em;
+
   transform: scaleY(0.6);
   transform-origin: left center;
   text-align: left;
+  padding: 0;
+}
+
+.close-interaction-btn{
+  z-index: 2000;
 }
 
 .site-subtitle{
@@ -758,7 +770,7 @@ body {
                 display: none; /* 直接消失，最不會出包 */
             } 
         button {
-            font-family: "Noto Sans", "微軟正黑體", sans-serif;
+            font-family:  "微軟正黑體","Noto Sans", sans-serif;
             font-size: 12px;
             white-space: nowrap;
             padding: 10px 14px;
@@ -769,13 +781,7 @@ body {
             box-sizing: border-box;
             z-index: 100;
         }
-        .close-interaction-btn{
-            border: none;
-            background: none;
-            cursor: pointer;
-            z-index: 2000;
-        }
-        
+ 
         .emotion-btn,
         #clear-btn,
         #generate-btn {
