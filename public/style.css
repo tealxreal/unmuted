@@ -887,9 +887,9 @@ body.loading-lock {
 .flow-slider-wrap{
   position: relative;
   width: 100%;
-  margin: 24px auto 0;
-  padding: 0 7vw;              /* 和畫面兩端保留距離 */
+  margin: 24px auto 0; 
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .flow-slider{
@@ -898,10 +898,9 @@ body.loading-lock {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  scroll-padding-left: 7vw;
   -webkit-overflow-scrolling: touch;
 
-  padding: 2px 10vw 12px 0;    /* 右邊多留一點，讓下一張露出邊邊 */
+  padding: 2px 11vw 12px 0;    /* 右邊多留一點，讓下一張露出邊邊 */
   box-sizing: border-box;
 
   scrollbar-width: none;
@@ -912,12 +911,12 @@ body.loading-lock {
 .flow-card{
   flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
   min-height: 60vw;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   align-items: center;
   border: 1px solid rgba(232,255,255,0.75);
   border-radius: 24px;
-  background: rgba(0, 0, 0, 0.515);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
   padding: 22px 20px 24px;
   box-sizing: border-box;
   display: flex;

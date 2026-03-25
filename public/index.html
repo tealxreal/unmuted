@@ -132,9 +132,9 @@
             <div class="flow-slider" aria-label="Workflow details">
                 <article class="flow-card">
                     <div class="flow-card-num">-1-</div>
-                    <h3 class="flow-card-title">使用者輸入文字</h3>
+                    <h3 class="flow-card-title">輸入文字</h3>
                     <p class="flow-card-text">
-                        觀眾輸入想說的話、想記下的心情，讓文字成為這次互動的起點。
+                        使用者在互動區輸入想說的話，<br>輸入完畢後按下確認送出。
                     </p>
                 </article>
 
@@ -142,15 +142,18 @@
                     <div class="flow-card-num">-2-</div>
                     <h3 class="flow-card-title">AI 辨識情緒</h3>
                     <p class="flow-card-text">
-                        系統分析文字中的情緒傾向，辨識目前輸入內容較接近哪一種情緒狀態。
+                        對使用者所輸入文字做情緒分析<br>
+                        （使用GPT 4o-mini模型），<br>
+                        等待約15-60秒後得到分析結果。
                     </p>
                 </article>
 
                 <article class="flow-card">
                     <div class="flow-card-num">-3-</div>
-                    <h3 class="flow-card-title">取得分析結果</h3>
+                    <h3 class="flow-card-title">分析結果</h3>
                     <p class="flow-card-text">
-                        生成對應的情緒判定結果，作為後續音色、風格與紙條樣式選擇的依據。
+                        依據情緒辨識結果，<br>
+                        選擇後續情緒音樂音色、風鈴短冊樣式。
                     </p>
                 </article>
 
@@ -158,15 +161,19 @@
                     <div class="flow-card-num">-4-</div>
                     <h3 class="flow-card-title">演算法合成音樂</h3>
                     <p class="flow-card-text">
-                        系統依照文字特徵與情緒分類，透過自定義規則將內容轉化為獨特的音樂片段。
+                        自定義演算法拆解文字<br>
+                        產生一組固定的假亂數seed，<br>
+                        定義音樂中的和弦、旋律組成，<br>
+                        依情緒類別擷取對應音色片段合成音樂。
                     </p>
                 </article>
 
                 <article class="flow-card">
                     <div class="flow-card-num">-5-</div>
-                    <h3 class="flow-card-title">列印風鈴短冊</h3>
+                    <h3 class="flow-card-title">產生風鈴短冊</h3>
                     <p class="flow-card-text">
-                        根據情緒結果生成對應的短冊內容與視覺樣式，作為可被保存的情緒載體。
+                        根據情緒結果列印風鈴短冊，<br>
+                        手機版網頁中可下載電子版短冊作為紀念。
                     </p>
                 </article>
 
@@ -174,7 +181,10 @@
                     <div class="flow-card-num">-6-</div>
                     <h3 class="flow-card-title">掛於風鈴下</h3>
                     <p class="flow-card-text">
-                        完成的短冊被掛上風鈴，讓文字、聲音與情緒一起留在空間之中。
+                        短冊被垂掛於風鈴下方完成互動。<br>
+                        最初的文字轉換為音樂與符號，<br>
+                        抹去文字裡最直觀的可讀性，<br>
+                        餘下話中抽象的想像、記憶，且仍能發聲。
                     </p>
                 </article>
             </div>
