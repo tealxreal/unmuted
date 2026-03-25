@@ -910,18 +910,18 @@ body.loading-lock {
   display: none;
 }
 .flow-spacer{
-  flex: 0 0 11vw;
+  flex: 0 0 17vw;
 }
 .flow-card{
-  flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
-  min-height: 66vw;
+  flex: 0 0 76vw;              /* 每張卡不要滿版，才能露出下一張邊 */
+  min-height: 68vw;
   scroll-snap-align: center;
   align-items: center;
   border: 1px solid rgba(232,255,255,0.75);
   border-radius: 24px;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  padding: 22px 20px 56px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
+  padding: 22px 20px 50px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -933,7 +933,7 @@ body.loading-lock {
   font-weight: 900;
   letter-spacing: 0.08em;
   transform: scaleY(0.8);
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 .flow-card-title{
   margin: 0 0 14px;
@@ -942,6 +942,7 @@ body.loading-lock {
   letter-spacing: 0.1em;
   font-weight: 700;
   line-height: 1.15;
+  margin-bottom: 28px;
 }
 .flow-card-text{
   margin: 0;
@@ -954,7 +955,7 @@ body.loading-lock {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 .flow-dots .dot{
   width: 6px;
