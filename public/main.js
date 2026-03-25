@@ -16,9 +16,7 @@ const experienceview2 = document.getElementById("experience-view-2");
 const catalogview = document.getElementById("catalog-view");
 const mainArt = document.getElementById("mainArt");
 const interactionArt = document.getElementById("interactionArt");
-const flowSlider = document.querySelector(".flow-slider");
-const dots = document.querySelectorAll("#flowDots .dot");
-const cards = document.querySelectorAll(".flow-card");
+
 function fixHomeFX(){
   if(!mainPages) return;
 
@@ -677,28 +675,31 @@ function hideLoading() {
   loadingOverlay.setAttribute("aria-hidden", "true");
   unlockScroll();
 }
-function updateFlowDots() {
-  if (!flowSlider) return;
-  const sliderRect = flowSlider.getBoundingClientRect();
-  const sliderCenter = sliderRect.left + sliderRect.width / 2;
-  let closestIndex = 0;
-  let closestDist = Infinity;
-  cards.forEach((card, i) => {
-    const rect = card.getBoundingClientRect();
+document.querySelectorAll(".slider-wrap").forEach(wrap => {
+  const slider = wrap.querySelector(".slider");
+  const cards = wrap.querySelectorAll(".slider-card");
+  const dots = wrap.querySelectorAll(".slider-dots .dot");
+  if (!slider || !cards.length || !dots.length) return;
+  function updateDots() {
+    const rect = slider.getBoundingClientRect();
     const center = rect.left + rect.width / 2;
-    const dist = Math.abs(center - sliderCenter);
-    if (dist < closestDist) {
-      closestDist = dist;
-      closestIndex = i;
-    }
+    let closest = 0;
+    let min = Infinity;
+    cards.forEach((card, i) => {
+      const r = card.getBoundingClientRect();
+      const c = r.left + r.width / 2;
+      const d = Math.abs(c - center);
+      if (d < min) {
+        min = d;
+        closest = i;
+      }
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("is-active", i === closest);
+    });
+  }
+  slider.addEventListener("scroll", () => {
+    requestAnimationFrame(updateDots);
   });
-  dots.forEach((dot, i) => {
-    dot.classList.toggle("is-active", i === closestIndex);
-  });
-}
-/* 滑動時更新 */
-flowSlider.addEventListener("scroll", () => {
-  requestAnimationFrame(updateFlowDots);
+  updateDots();
 });
-/* 初始 */
-updateFlowDots();

@@ -884,7 +884,7 @@ body.loading-lock {
   touch-action: none;
   overscroll-behavior: none;
 }
-.flow-slider-wrap{
+.slider-wrap{
   position: relative;
   width: 100%;
   margin: 24px auto 0; 
@@ -892,8 +892,7 @@ body.loading-lock {
   overflow: hidden;
   padding-bottom: 34px;
 }
-
-.flow-slider{
+.slider{
   display: flex;
   gap: 4vw;
   overflow-x: auto;
@@ -906,14 +905,14 @@ body.loading-lock {
 
   scrollbar-width: none;
 }
-.flow-slider::-webkit-scrollbar{
+.slider::-webkit-scrollbar{
   display: none;
 }
-.flow-spacer{
-  flex: 0 0 17vw;
+.slider-spacer{
+  flex: 0 0 21vw;
 }
-.flow-card{
-  flex: 0 0 76vw;              /* 每張卡不要滿版，才能露出下一張邊 */
+.slider-card{
+  flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
   min-height: 68vw;
   scroll-snap-align: center;
   align-items: center;
@@ -927,7 +926,7 @@ body.loading-lock {
   flex-direction: column;
   justify-content: flex-start;
 }
-.flow-card-num{
+.slider-card-num{
   color: rgba(232,255,255,0.62);
   font-size: 4.8vw;
   font-weight: 900;
@@ -935,7 +934,7 @@ body.loading-lock {
   transform: scaleY(0.8);
   margin-bottom: 18px;
 }
-.flow-card-title{
+.slider-card-title{
   margin: 0 0 14px;
   color: rgb(232,255,255);
   font-size: 5vw;
@@ -944,31 +943,65 @@ body.loading-lock {
   line-height: 1.15;
   margin-bottom: 28px;
 }
-.flow-card-text{
+.slider-card-text{
   margin: 0;
   color: rgba(232,255,255,0.92);
   font-size: 3vw;
   line-height: 1.75;
   letter-spacing: 0.03em;
 }
-.flow-dots{
+.slider-dots{
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 1px;
 }
-.flow-dots .dot{
+.slider-dots .dot{
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: rgba(232,255,255,0.35);
   transition: all 0.25s ease;
 }
-.flow-dots .dot.is-active{
+.slider-dots .dot.is-active{
   width: 18px;
   border-radius: 999px;
   background: rgba(232,255,255,0.95);
   box-shadow: 0 0 10px rgba(174,255,236,0.4);
+}
+.catalog-block{
+  width: 100%;
+}
+.catalog-slider-wrap{
+  padding-bottom: 12px;
+}
+.catalog-slider::-webkit-scrollbar{
+  display: none;
+}
+.catalog-spacer{
+  flex: 0 0 11vw;
+}
+.catalog-image-wrap{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.catalog-image{
+  width: auto;
+  height: 78vw;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+.catalog-label{
+  margin: 0;
+  color: rgba(232,255,255,0.95);
+  font-size: clamp(18px, 4.8vw, 24px);
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-align: center;
 }
 #scroll-orb{
   position: absolute;

@@ -123,45 +123,107 @@
         <div class="start-hint">︽<br>風鈴短冊圖鑑</div> 
     </section>
     <section id="catalog-view" class="page" data-group="interaction">
-    </section>
+    <div class="catalog-block">
+        <h2 class="glow-texth2 fx06 fx-right2">風鈴短冊圖鑑</h2>
+
+        <div class="catalog-slider-wrap fx fx-left">
+            <div class="slider" aria-label="Tanzaku gallery">
+                <div class="catalog-spacer" aria-hidden="true"></div>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_joy.png" alt="喜 短冊">
+                    </div>
+                    <p class="catalog-label">Joy</p>
+                </article>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_anger.png" alt="怒 短冊">
+                    </div>
+                    <p class="catalog-label">Anger</p>
+                </article>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_sadness.png" alt="哀 短冊">
+                    </div>
+                    <p class="catalog-label">Sadness</p>
+                </article>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_calm.png" alt="中立 短冊">
+                    </div>
+                    <p class="catalog-label">Calm</p>
+                </article>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_fear.png" alt="恐懼 短冊">
+                    </div>
+                    <p class="catalog-label">Fear</p>
+                </article>
+
+                <article class="slider-card">
+                    <div class="catalog-image-wrap">
+                        <img class="catalog-image" src="/pic/catalog_surprise.png" alt="驚訝 短冊">
+                    </div>
+                    <p class="catalog-label">Surprise</p>
+                </article>
+
+                <div class="catalog-spacer" aria-hidden="true"></div>
+            </div>
+
+            <div class="slider-dots">
+                <span class="dot is-active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- 🌿 系統流程頁 -->
     <section id="system-view" class="page" data-group="main">
         <div class="system-block">
             <h2 class = "glow-texth2 fx06 fx-right2">系統流程簡介</h2>
-            <div class="flow-slider-wrap fx fx-left">
-            <div class="flow-slider" aria-label="Workflow details">
-                <div class="flow-spacer" aria-hidden="true"></div>
-                <article class="flow-card">
-                    <div class="flow-card-num">-1-</div>
-                    <h3 class="flow-card-title">輸入文字</h3>
-                    <p class="flow-card-text">
+            <div class="slider-wrap catalog-slider-wrap fx fx-left">
+            <div class="slider" aria-label="Workflow details">
+                <div class="slider-spacer" aria-hidden="true"></div>
+                <article class="slider-card">
+                    <div class="slider-card-num">-1-</div>
+                    <h3 class="slider-card-title">輸入文字</h3>
+                    <p class="slider-card-text">
                         使用者在互動區輸入想說的話，<br>輸入完畢後按下確認送出。
                     </p>
                 </article>
 
-                <article class="flow-card">
-                    <div class="flow-card-num">-2-</div>
-                    <h3 class="flow-card-title">AI 辨識情緒</h3>
-                    <p class="flow-card-text">
+                <article class="slider-card">
+                    <div class="slider-card-num">-2-</div>
+                    <h3 class="slider-card-title">AI 辨識情緒</h3>
+                    <p class="slider-card-text">
                         對使用者所輸入文字做情緒分析<br>
                         （使用GPT 4o-mini模型），<br>
                         等待約15-60秒後得到分析結果。
                     </p>
                 </article>
 
-                <article class="flow-card">
-                    <div class="flow-card-num">-3-</div>
-                    <h3 class="flow-card-title">分析結果</h3>
-                    <p class="flow-card-text">
+                <article class="slider-card">
+                    <div class="slider-card-num">-3-</div>
+                    <h3 class="slider-card-title">分析結果</h3>
+                    <p class="slider-card-text">
                         依據情緒辨識結果，<br>
                         選擇後續情緒音樂音色、風鈴短冊樣式。
                     </p>
                 </article>
 
-                <article class="flow-card">
-                    <div class="flow-card-num">-4-</div>
-                    <h3 class="flow-card-title">演算法合成音樂</h3>
-                    <p class="flow-card-text">
+                <article class="slider-card">
+                    <div class="slider-card-num">-4-</div>
+                    <h3 class="slider-card-title">演算法合成音樂</h3>
+                    <p class="slider-card-text">
                         自定義演算法拆解文字<br>
                         產生一組固定的假亂數seed，<br>
                         定義音樂中的和弦、旋律組成，<br>
@@ -169,28 +231,28 @@
                     </p>
                 </article>
 
-                <article class="flow-card">
-                    <div class="flow-card-num">-5-</div>
-                    <h3 class="flow-card-title">產生風鈴短冊</h3>
-                    <p class="flow-card-text">
+                <article class="slider-card">
+                    <div class="slider-card-num">-5-</div>
+                    <h3 class="slider-card-title">產生風鈴短冊</h3>
+                    <p class="slider-card-text">
                         根據情緒結果列印風鈴短冊，<br>
                         手機版網頁中可下載電子版短冊作為紀念。
                     </p>
                 </article> 
 
-                <article class="flow-card">
-                    <div class="flow-card-num">-6-</div>
-                    <h3 class="flow-card-title">掛於風鈴下</h3>
-                    <p class="flow-card-text">
+                <article class="slider-card">
+                    <div class="slider-card-num">-6-</div>
+                    <h3 class="slider-card-title">掛於風鈴下</h3>
+                    <p class="slider-card-text">
                         短冊被垂掛於風鈴下方完成互動。<br>
                         最初的文字轉換為音樂與符號，<br>
                         抹去文字裡最直觀的可讀性，<br>
                         餘下話中抽象的想像、記憶，且仍能發聲。
                     </p>
                 </article>
-                <div class="flow-spacer" aria-hidden="true"></div>
+                <div class="slider-spacer" aria-hidden="true"></div>
             </div>
-            <div class="flow-dots" id="flowDots">
+            <div class="slider-dots">
                 <span class="dot is-active"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
