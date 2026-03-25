@@ -911,11 +911,12 @@ body.loading-lock {
 }
 .flow-card{
   flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
-  min-height: 54vw;
+  min-height: 60vw;
   scroll-snap-align: start;
+  align-items: center;
   border: 1px solid rgba(232,255,255,0.75);
   border-radius: 24px;
-  background: rgba(0,0,0,0.32);
+  background: rgba(0, 0, 0, 0.515);
   backdrop-filter: blur(10px);
   padding: 22px 20px 24px;
   box-sizing: border-box;
@@ -926,23 +927,44 @@ body.loading-lock {
 .flow-card-num{
   color: rgba(232,255,255,0.62);
   font-size: clamp(20px, 6vw, 32px);
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transform: scaleY(0.8);
   margin-bottom: 12px;
 }
 .flow-card-title{
   margin: 0 0 14px;
   color: rgb(232,255,255);
-  font-size: clamp(22px, 6.4vw, 34px);
+  font-size: 5vw;
+  letter-spacing: 0.05em;
   font-weight: 700;
   line-height: 1.15;
 }
 .flow-card-text{
   margin: 0;
   color: rgba(232,255,255,0.92);
-  font-size: clamp(15px, 4vw, 22px);
+  font-size: 3vw;
   line-height: 1.75;
   letter-spacing: 0.03em;
+}
+.flow-dots{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.flow-dots .dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(232,255,255,0.35);
+  transition: all 0.25s ease;
+}
+.flow-dots .dot.is-active{
+  width: 18px;
+  border-radius: 999px;
+  background: rgba(232,255,255,0.95);
+  box-shadow: 0 0 10px rgba(174,255,236,0.4);
 }
 #scroll-orb{
   position: absolute;
