@@ -909,7 +909,7 @@ body.loading-lock {
   display: none;
 }
 .slider-spacer{
-  flex: 0 0 21vw;
+  flex: 0 0 11vw;
 }
 .slider-card{
   flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
@@ -974,6 +974,13 @@ body.loading-lock {
 }
 .catalog-slider-wrap{
   padding-bottom: 12px;
+}
+.catalog-slider-card{
+  min-height: 70vw;
+  scroll-snap-align: center;
+  border:none;
+  background: none;
+  padding: 22px 20px 10px;
 }
 .catalog-slider::-webkit-scrollbar{
   display: none;
