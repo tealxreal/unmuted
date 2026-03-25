@@ -890,6 +890,7 @@ body.loading-lock {
   margin: 24px auto 0; 
   box-sizing: border-box;
   overflow: hidden;
+  padding-bottom: 34px;
 }
 
 .flow-slider{
@@ -900,7 +901,7 @@ body.loading-lock {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 
-  padding: 2px 11vw 12px 0;    /* 右邊多留一點，讓下一張露出邊邊 */
+  padding: 2px 0  20px;    /* 右邊多留一點，讓下一張露出邊邊 */
   box-sizing: border-box;
 
   scrollbar-width: none;
@@ -908,16 +909,19 @@ body.loading-lock {
 .flow-slider::-webkit-scrollbar{
   display: none;
 }
+.flow-spacer{
+  flex: 0 0 11vw;
+}
 .flow-card{
   flex: 0 0 78vw;              /* 每張卡不要滿版，才能露出下一張邊 */
-  min-height: 60vw;
+  min-height: 66vw;
   scroll-snap-align: center;
   align-items: center;
   border: 1px solid rgba(232,255,255,0.75);
   border-radius: 24px;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
-  padding: 22px 20px 24px;
+  padding: 22px 20px 56px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -925,7 +929,7 @@ body.loading-lock {
 }
 .flow-card-num{
   color: rgba(232,255,255,0.62);
-  font-size: clamp(20px, 6vw, 32px);
+  font-size: 4.8vw;
   font-weight: 900;
   letter-spacing: 0.08em;
   transform: scaleY(0.8);
@@ -935,7 +939,7 @@ body.loading-lock {
   margin: 0 0 14px;
   color: rgb(232,255,255);
   font-size: 5vw;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   font-weight: 700;
   line-height: 1.15;
 }
@@ -950,7 +954,7 @@ body.loading-lock {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 .flow-dots .dot{
   width: 6px;
