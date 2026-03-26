@@ -87,8 +87,7 @@ function parseTimestampFromFilename(filename) {
     const base = filename.replace(".mp3", "");
     return base.split("_")[0] || "";
 }
-const filename = extractFilenameFromUrl(data.audio_url);
-const timestamp = parseTimestampFromFilename(filename);
+
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -100,57 +99,7 @@ function loadImage(src) {
     img.src = src;
   });
 }
-//合成圖片
-async function composeTanzakuImage({ emotion, timestamp }) {
-  const config = TANZAKU_DATA[emotion];
-  if (!config) throw new Error(`No tanzaku config for emotion: ${emotion}`);
-  const bgSrc = pickRandom(config.backgrounds);
-  const rawText = pickRandom(config.texts);
-  const finalText = rawText.replaceAll("{timestamp}", timestamp);
-  const bgImg = await loadImage(bgSrc);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  // 短冊比例可再微調
-  canvas.width = 900;
-  canvas.height = 2500;
-  // 背景
-  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-  // 文字設定
-  ctx.fillStyle = "#111111";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
 
-  const lines = finalText.split("\n");
-  const lineHeight = 20;
-
-  const totalTextHeight = lines.length * lineHeight;
-  const startX = canvas.width / 2;
-  const startY = (canvas.height - totalTextHeight) / 2;
-
-  lines.forEach((line, index) => {
-    ctx.fillText(line, startX, startY + index * lineHeight);
-  });
-
-  return canvas.toDataURL("image/png");
-}
-viewTanzakuBtn.addEventListener("click", () => {
-    if (!currentTanzakuDataUrl) return;
-
-    tanzakuPreviewImg.src = currentTanzakuDataUrl;
-    tanzakuPreviewWrap.classList.remove("hidden");
-    tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
-});
-closeTanzakuPreviewBtn.addEventListener("click", () => {
-    tanzakuPreviewWrap.classList.add("hidden");
-    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-});
-tanzakuPreviewWrap.addEventListener("click", (e) => {
-    if (e.target === tanzakuPreviewWrap) {
-        tanzakuPreviewWrap.classList.add("hidden");
-        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-    }
-});
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
 async function generateMusic() {
     const text = textarea.value.trim();
@@ -224,6 +173,8 @@ viewTanzakuBtn.addEventListener("click", () => {
     tanzakuPreviewImg.src = currentTanzakuDataUrl;
     tanzakuPreviewWrap.hidden = false;
 });
+const filename = extractFilenameFromUrl(data.audio_url);
+const timestamp = parseTimestampFromFilename(filename);
 /* --- 5️⃣ 播放生成音樂 --- */
 playBtn.addEventListener("click", () => {
     if (playBtn.disabled) return;
@@ -363,6 +314,58 @@ function setMode(mode, targetPage = null) {
     });
   }
 }
+//合成圖片
+async function composeTanzakuImage({ emotion, timestamp }) {
+  const config = TANZAKU_DATA[emotion];
+  if (!config) throw new Error(`No tanzaku config for emotion: ${emotion}`);
+  const bgSrc = pickRandom(config.backgrounds);
+  const rawText = pickRandom(config.texts);
+  const finalText = rawText.replaceAll("{timestamp}", timestamp);
+  const bgImg = await loadImage(bgSrc);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  // 短冊比例可再微調
+  canvas.width = 900;
+  canvas.height = 2500;
+  // 背景
+  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+  // 文字設定
+  ctx.fillStyle = "#111111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
+
+  const lines = finalText.split("\n");
+  const lineHeight = 20;
+
+  const totalTextHeight = lines.length * lineHeight;
+  const startX = canvas.width / 2;
+  const startY = (canvas.height - totalTextHeight) / 2;
+
+  lines.forEach((line, index) => {
+    ctx.fillText(line, startX, startY + index * lineHeight);
+  });
+
+  return canvas.toDataURL("image/png");
+}
+viewTanzakuBtn.addEventListener("click", () => {
+    if (!currentTanzakuDataUrl) return;
+
+    tanzakuPreviewImg.src = currentTanzakuDataUrl;
+    tanzakuPreviewWrap.classList.remove("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
+});
+closeTanzakuPreviewBtn.addEventListener("click", () => {
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+});
+tanzakuPreviewWrap.addEventListener("click", (e) => {
+    if (e.target === tanzakuPreviewWrap) {
+        tanzakuPreviewWrap.classList.add("hidden");
+        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    }
+});
+
 let pageObserver = null;
 let currentPageId = null;
 function setupPageObserver() {
