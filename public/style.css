@@ -818,7 +818,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 7vw;
   background: rgba(5, 8, 18, 0.258);
   backdrop-filter: blur(6px);
   z-index: 6000;
@@ -837,6 +836,7 @@ body {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  gap:6vw
 }
 /* 大圓 */
 .double-ring {
@@ -974,7 +974,7 @@ body.loading-lock {
   display: flex;
   flex-direction: column;  
   justify-content: center;
-  padding-top: 6vw;
+  padding-top: 20vw;
   box-sizing: border-box;
   gap: 20px;
 }

@@ -189,10 +189,9 @@ function hideAnalysisResult() {
 };
 
 const interactionArtStops = {
-  "interaction-intro-view": 0,
-  "experience-view-1": 1/4,
-  "experience-view-2": 2/4,
-  "catalog-view": 3/4
+  "experience-view-1": 0,
+  "experience-view-2": 1/3,
+  "catalog-view": 2/3
 };
 function updateArtPosition(pageId){
   let activeArt = null;
@@ -353,8 +352,8 @@ sidebarLinks.forEach(link => {
     
     const targetId = link.dataset.target;
     let target = null;
-    if (targetId === "interaction-intro-view") {
-      target = interactionPages[0];
+    if (targetId === "home-view") {
+      target = mainPages[0];
     } else if (targetId === "experience-view-1") {
       target = interactionPages[1];
     } else if (targetId === "experience-view-2") {
