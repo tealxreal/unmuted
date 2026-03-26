@@ -88,6 +88,16 @@
                 <button type="button" id="clear-btn">清除</button>
                 <!-- ✅ 一開始就顯示，但 disabled -->
                 <button type="button" id="play-btn" disabled>播放 ▶︎</button>
+                <div class="tanzaku-actions">
+                    <button id="viewTanzakuBtn" class="ghost-btn" type="button" disabled>
+    查看您的短冊
+                    </button>
+                </div>
+
+                <div id="tanzakuPreviewWrap" class="tanzaku-preview-wrap" hidden>
+                    <img id="tanzakuPreviewImg" alt="短冊預覽圖">
+                    <p class="save-tip">長按圖片儲存</p>
+                </div>
             </div>
             <p class="glow-textt">「生成時間約15-60秒：」</p>   
         </div>
@@ -294,6 +304,7 @@
 <div id="tap-to-pause" class="tap-to-pause is-hidden" aria-live="polite">
   ⏸︎ 點擊任意處暫停
 </div>
+    <script src="/tanzaku.js"></script>
     <script src="/main.js"></script>
     
 </body>

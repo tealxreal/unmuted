@@ -63,6 +63,14 @@ const analysisResult = document.getElementById("analysisResult");
 const nonPassiveOption = { passive: false };
 let generatedAudioURL = null;
 let generatedAudio = new Audio();
+const viewTanzakuBtn = document.getElementById("viewTanzakuBtn");
+const tanzakuPreviewWrap = document.getElementById("tanzakuPreviewWrap");
+const tanzakuPreviewImg = document.getElementById("tanzakuPreviewImg");
+const downloadTanzakuBtn = document.getElementById("downloadTanzakuBtn");
+
+let currentTanzakuDataUrl = "";
+let currentTanzakuEmotion = "";
+let currentTanzakuTimestamp = "";
 playBtn.disabled = true;
 /* --- 3️⃣ 點擊確認送出 --- */
 generateBtn.addEventListener("click", () => {
@@ -75,6 +83,57 @@ textarea.addEventListener("input", () => {
   playBtn.disabled = true;
   playBtn.textContent = "播放 ▶︎";
 });
+function parseTimestampFromFilename(filename) {
+    const base = filename.replace(".mp3", "");
+    return base.split("_")[0] || "";
+}
+const filename = extractFilenameFromUrl(data.audio_url);
+const timestamp = parseTimestampFromFilename(filename);
+function pickRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+//合成圖片
+async function composeTanzakuImage({ emotion, timestamp }) {
+  const config = TANZAKU_DATA[emotion];
+  if (!config) throw new Error(`No tanzaku config for emotion: ${emotion}`);
+  const bgSrc = pickRandom(config.backgrounds);
+  const rawText = pickRandom(config.texts);
+  const finalText = rawText.replaceAll("{timestamp}", timestamp);
+  const bgImg = await loadImage(bgSrc);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  // 短冊比例可再微調
+  canvas.width = 900;
+  canvas.height = 2500;
+  // 背景
+  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+  // 文字設定
+  ctx.fillStyle = "#111111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
+
+  const lines = finalText.split("\n");
+  const lineHeight = 20;
+
+  const totalTextHeight = lines.length * lineHeight;
+  const startX = canvas.width / 2;
+  const startY = (canvas.height - totalTextHeight) / 2;
+
+  lines.forEach((line, index) => {
+    ctx.fillText(line, startX, startY + index * lineHeight);
+  });
+
+  return canvas.toDataURL("image/png");
+}
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
 async function generateMusic() {
     const text = textarea.value.trim();
@@ -106,10 +165,30 @@ async function generateMusic() {
         } else {
             hideAnalysisResult();
         }
+        currentTanzakuEmotion = data.emotion || "";
+        currentTanzakuTimestamp = timestamp || "";
+
+        // 若有情緒結果，就先生成短冊圖
+        if (data.emotion && timestamp) {
+            currentTanzakuDataUrl = await composeTanzakuImage({
+                emotion: data.emotion,
+                timestamp: timestamp
+            });
+
+            tanzakuPreviewImg.src = currentTanzakuDataUrl;
+            downloadTanzakuBtn.href = currentTanzakuDataUrl;
+            downloadTanzakuBtn.download = `unmuted_${filename.replace(".mp3", ".png")}`;
+        } else {
+            currentTanzakuDataUrl = "";
+        }
         // 顯示播放鍵
         playBtn.classList.add("visible-btn");
         playBtn.classList.remove("hidden-btn");
         playBtn.disabled = false;
+        // 同步啟用短冊按鈕
+        viewTanzakuBtn.classList.add("visible-btn");
+        viewTanzakuBtn.classList.remove("hidden-btn");
+        viewTanzakuBtn.disabled = !currentTanzakuDataUrl;
         hideLoading();
     } catch (err) {
         alert("生成失敗，請再試一次");
@@ -120,6 +199,12 @@ async function generateMusic() {
     generateBtn.disabled = false;
     generateBtn.textContent = "確認送出";
 }
+viewTanzakuBtn.addEventListener("click", () => {
+    if (!currentTanzakuDataUrl) return;
+
+    tanzakuPreviewImg.src = currentTanzakuDataUrl;
+    tanzakuPreviewWrap.hidden = false;
+});
 /* --- 5️⃣ 播放生成音樂 --- */
 playBtn.addEventListener("click", () => {
     if (playBtn.disabled) return;
