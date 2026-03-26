@@ -351,30 +351,27 @@ sidebarLinks.forEach(link => {
     
     const targetId = link.dataset.target;
     let target = null;
-    if (targetId === "experience-view-1") {
-      target = interactionPages[0];
-    } else if (targetId === "experience-view-2") {
-      target = interactionPages[1];
-    } else if (targetId === "catalog-view") {
-      target = interactionPages[2];
-    }
-    if (!target) return;
-    /* 先把焦點移回 toggle，再關閉 */
-    if (document.activeElement && typeof document.activeElement.blur === "function") {
-      document.activeElement.blur();
-    }
-    closeSidebar();
-    setMode("interaction", target);
+    let mode = null;
     if (targetId === "home-view") {
       target = mainPages[0];
+      mode = "main";
+    } else if (targetId === "experience-view-1") {
+      target = interactionPages[0];
+      mode = "interaction";
+    } else if (targetId === "experience-view-2") {
+      target = interactionPages[1];
+      mode = "interaction";
+    } else if (targetId === "catalog-view") {
+      target = interactionPages[2];
+      mode = "interaction";
     }
-    if (!target) return;
+    if (!target || !mode) return;
     /* 先把焦點移回 toggle，再關閉 */
     if (document.activeElement && typeof document.activeElement.blur === "function") {
       document.activeElement.blur();
     }
     closeSidebar();
-    setMode("main", target);
+    setMode(mode, target);
   });
 });
 })();
