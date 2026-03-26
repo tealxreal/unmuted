@@ -66,7 +66,6 @@ let generatedAudio = new Audio();
 const viewTanzakuBtn = document.getElementById("viewTanzakuBtn");
 const tanzakuPreviewWrap = document.getElementById("tanzakuPreviewWrap");
 const tanzakuPreviewImg = document.getElementById("tanzakuPreviewImg");
-const downloadTanzakuBtn = document.getElementById("downloadTanzakuBtn");
 const closeTanzakuPreviewBtn = document.getElementById("closeTanzakuPreview");
 let currentTanzakuDataUrl = "";
 let currentTanzakuEmotion = "";
@@ -82,6 +81,18 @@ textarea.addEventListener("input", () => {
   hideAnalysisResult();
   playBtn.disabled = true;
   playBtn.textContent = "播放 ▶︎";
+  currentTanzakuDataUrl = "";
+  currentTanzakuEmotion = "";
+  currentTanzakuTimestamp = "";
+
+  if (viewTanzakuBtn) viewTanzakuBtn.disabled = true;
+  if (tanzakuPreviewWrap) {
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+  }
+  if (tanzakuPreviewImg) {
+    tanzakuPreviewImg.removeAttribute("src");
+  }
 });
 function extractFilenameFromUrl(url) {
     if (!url) return "";
@@ -91,8 +102,7 @@ function parseTimestampFromFilename(filename) {
     const base = filename.replace(".mp3", "");
     return base.split("_")[0] || "";
 }
-const filename = extractFilenameFromUrl(data.audio_url);
-const timestamp = parseTimestampFromFilename(filename);
+
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -103,6 +113,50 @@ function loadImage(src) {
     img.onerror = reject;
     img.src = src;
   });
+}
+closeTanzakuPreviewBtn.addEventListener("click", () => {
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+});
+tanzakuPreviewWrap.addEventListener("click", (e) => {
+    if (e.target === tanzakuPreviewWrap) {
+        tanzakuPreviewWrap.classList.add("hidden");
+        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    }
+});
+//合成圖片
+async function composeTanzakuImage({ emotion, timestamp }) {
+  const config = TANZAKU_DATA[emotion];
+  if (!config) throw new Error(`No tanzaku config for emotion: ${emotion}`);
+  const bgSrc = pickRandom(config.backgrounds);
+  const rawText = pickRandom(config.texts);
+  const finalText = rawText.replaceAll("{timestamp}", timestamp);
+  const bgImg = await loadImage(bgSrc);
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  // 短冊比例可再微調
+  canvas.width = 900;
+  canvas.height = 2500;
+  // 背景
+  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+  // 文字設定
+  ctx.fillStyle = "#111111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
+
+  const lines = finalText.split("\n");
+  const lineHeight = 20;
+
+  const totalTextHeight = lines.length * lineHeight;
+  const startX = canvas.width / 2;
+  const startY = (canvas.height - totalTextHeight) / 2;
+
+  lines.forEach((line, index) => {
+    ctx.fillText(line, startX, startY + index * lineHeight);
+  });
+
+  return canvas.toDataURL("image/png");
 }
 
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
@@ -124,7 +178,6 @@ async function generateMusic() {
         });
 
         if (!response.ok) throw new Error("生成失敗");
-        hideLoading();
         //const blob = await response.blob();
         const data = await response.json();
         if (!data.audio_url) {
@@ -132,12 +185,14 @@ async function generateMusic() {
         }
         generatedAudio.src = `${API_BASE}${data.audio_url}`;
         generatedAudio.load();
-
+        
         if (data.emotion) {
             showAnalysisResult(`分析結果：${data.emotion}`);
         } else {
             hideAnalysisResult();
         }
+        const filename = extractFilenameFromUrl(data.audio_url);
+        const timestamp = parseTimestampFromFilename(filename);
         currentTanzakuEmotion = data.emotion || "";
         currentTanzakuTimestamp = timestamp || "";
 
@@ -147,10 +202,9 @@ async function generateMusic() {
                 emotion: data.emotion,
                 timestamp: timestamp
             });
-
-            tanzakuPreviewImg.src = currentTanzakuDataUrl;
-            downloadTanzakuBtn.href = currentTanzakuDataUrl;
-            downloadTanzakuBtn.download = `unmuted_${filename.replace(".mp3", ".png")}`;
+            if (tanzakuPreviewImg) {
+                tanzakuPreviewImg.src = currentTanzakuDataUrl;
+            }
         } else {
             currentTanzakuDataUrl = "";
         }
@@ -176,8 +230,10 @@ viewTanzakuBtn.addEventListener("click", () => {
     if (!currentTanzakuDataUrl) return;
 
     tanzakuPreviewImg.src = currentTanzakuDataUrl;
-    tanzakuPreviewWrap.hidden = false;
+    tanzakuPreviewWrap.classList.remove("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
 });
+
 /* --- 5️⃣ 播放生成音樂 --- */
 playBtn.addEventListener("click", () => {
     if (playBtn.disabled) return;
@@ -317,57 +373,8 @@ function setMode(mode, targetPage = null) {
     });
   }
 }
-//合成圖片
-async function composeTanzakuImage({ emotion, timestamp }) {
-  const config = TANZAKU_DATA[emotion];
-  if (!config) throw new Error(`No tanzaku config for emotion: ${emotion}`);
-  const bgSrc = pickRandom(config.backgrounds);
-  const rawText = pickRandom(config.texts);
-  const finalText = rawText.replaceAll("{timestamp}", timestamp);
-  const bgImg = await loadImage(bgSrc);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  // 短冊比例可再微調
-  canvas.width = 900;
-  canvas.height = 2500;
-  // 背景
-  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-  // 文字設定
-  ctx.fillStyle = "#111111";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
-  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
 
-  const lines = finalText.split("\n");
-  const lineHeight = 20;
 
-  const totalTextHeight = lines.length * lineHeight;
-  const startX = canvas.width / 2;
-  const startY = (canvas.height - totalTextHeight) / 2;
-
-  lines.forEach((line, index) => {
-    ctx.fillText(line, startX, startY + index * lineHeight);
-  });
-
-  return canvas.toDataURL("image/png");
-}
-viewTanzakuBtn.addEventListener("click", () => {
-    if (!currentTanzakuDataUrl) return;
-
-    tanzakuPreviewImg.src = currentTanzakuDataUrl;
-    tanzakuPreviewWrap.classList.remove("hidden");
-    tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
-});
-closeTanzakuPreviewBtn.addEventListener("click", () => {
-    tanzakuPreviewWrap.classList.add("hidden");
-    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-});
-tanzakuPreviewWrap.addEventListener("click", (e) => {
-    if (e.target === tanzakuPreviewWrap) {
-        tanzakuPreviewWrap.classList.add("hidden");
-        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-    }
-});
 
 let pageObserver = null;
 let currentPageId = null;
@@ -764,6 +771,21 @@ clearBtn.addEventListener("click", () => {
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
     hideAnalysisResult();
+    currentTanzakuDataUrl = "";
+    currentTanzakuEmotion = "";
+    currentTanzakuTimestamp = "";
+    if (viewTanzakuBtn) {
+      viewTanzakuBtn.classList.add("hidden-btn");
+      viewTanzakuBtn.classList.remove("visible-btn");
+      viewTanzakuBtn.disabled = true;
+    }
+    if (tanzakuPreviewWrap) {
+      tanzakuPreviewWrap.classList.add("hidden");
+      tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    }
+    if (tanzakuPreviewImg) {
+      tanzakuPreviewImg.removeAttribute("src");
+    }
 });
 //計算字數
 
