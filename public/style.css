@@ -657,6 +657,7 @@ body {
 }
             .hidden { 
                 opacity: 0; 
+                display: none !important;
                 pointer-events: none; }
             
             
@@ -1051,36 +1052,89 @@ body.interaction-mode #scroll-orb{
             position: relative;
         } 
 .tanzaku-actions{
-  margin-top: 16px;
   display: flex;
   justify-content: center;
 }
+
 #viewTanzakuBtn:disabled{
   opacity: 0.45;
   cursor: not-allowed;
 }
+
+/* 讓浮層能以 experience-block 為定位基準 */
+.experience-block{
+  position: relative;
+}
+
+/* 整個預覽遮罩層 */
 .tanzaku-preview-wrap{
-  margin-top: 18px;
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(6px);
+}
+
+/* 用 class 控制顯示/隱藏 */
+.tanzaku-preview-wrap.hidden{
+  display: none;
+}
+
+/* 內部面板 */
+.tanzaku-preview-panel{
+  position: relative;
+  width: min(86vw, 360px);
+  max-height: 84vh;
+  padding: 18px 16px 14px;
+  border-radius: 18px;
+  background: rgba(20,20,20,0.72);
+  box-shadow: 0 12px 32px rgba(0,0,0,.28);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
+
+/* 圖片本身 */
 #tanzakuPreviewImg{
-  width: min(78vw, 320px);
-  aspect-ratio: 9 / 25;
+  display: block;
+  width: min(72vw, 240px);
+  height: auto;
+  max-height: 62vh;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0,0,0,.18);
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.06);
 }
 
+/* 關閉按鈕 */
+.tanzaku-close-btn{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* 提示字 */
 .save-tip{
   font-size: 13px;
   line-height: 1.5;
-  opacity: 0.78;
+  opacity: 0.82;
   text-align: center;
   margin: 0;
+  color: rgba(255,255,255,0.88);
 }
 @media (min-width: 768px){
     .container {

@@ -90,16 +90,18 @@
                 <button type="button" id="play-btn" disabled>播放 ▶︎</button>
                 <div class="tanzaku-actions">
                     <button id="viewTanzakuBtn" class="ghost-btn" type="button" disabled>
-    查看您的短冊
+                    查看您的短冊
                     </button>
-                </div>
-
-                <div id="tanzakuPreviewWrap" class="tanzaku-preview-wrap" hidden>
-                    <img id="tanzakuPreviewImg" alt="短冊預覽圖">
-                    <p class="save-tip">長按圖片儲存</p>
                 </div>
             </div>
             <p class="glow-textt">「生成時間約15-60秒：」</p>   
+            <div id="tanzakuPreviewWrap" class="tanzaku-preview-wrap hidden" aria-hidden="true">
+            <div class="tanzaku-preview-panel">
+                <button type="button" id="closeTanzakuPreview" class="tanzaku-close-btn">×</button>
+                <img id="tanzakuPreviewImg" alt="短冊預覽圖">
+                <p class="save-tip">長按圖片儲存</p>
+            </div>
+        </div>
         </div>
         <div id="loadingOverlay" class="loading-overlay hidden" aria-hidden="true">
             <div class="loading-ring-wrap">

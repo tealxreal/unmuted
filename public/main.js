@@ -67,7 +67,7 @@ const viewTanzakuBtn = document.getElementById("viewTanzakuBtn");
 const tanzakuPreviewWrap = document.getElementById("tanzakuPreviewWrap");
 const tanzakuPreviewImg = document.getElementById("tanzakuPreviewImg");
 const downloadTanzakuBtn = document.getElementById("downloadTanzakuBtn");
-
+const closeTanzakuPreviewBtn = document.getElementById("closeTanzakuPreview");
 let currentTanzakuDataUrl = "";
 let currentTanzakuEmotion = "";
 let currentTanzakuTimestamp = "";
@@ -134,6 +134,23 @@ async function composeTanzakuImage({ emotion, timestamp }) {
 
   return canvas.toDataURL("image/png");
 }
+viewTanzakuBtn.addEventListener("click", () => {
+    if (!currentTanzakuDataUrl) return;
+
+    tanzakuPreviewImg.src = currentTanzakuDataUrl;
+    tanzakuPreviewWrap.classList.remove("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
+});
+closeTanzakuPreviewBtn.addEventListener("click", () => {
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+});
+tanzakuPreviewWrap.addEventListener("click", (e) => {
+    if (e.target === tanzakuPreviewWrap) {
+        tanzakuPreviewWrap.classList.add("hidden");
+        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    }
+});
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
 async function generateMusic() {
     const text = textarea.value.trim();
@@ -141,6 +158,8 @@ async function generateMusic() {
     generateBtn.disabled = true;
     generateBtn.textContent = "生成中...";
     playBtn.disabled = true;
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
     try {
         showLoading();
         const API_BASE = "https://unmuted.onrender.com";
