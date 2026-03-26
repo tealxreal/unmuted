@@ -83,11 +83,16 @@ textarea.addEventListener("input", () => {
   playBtn.disabled = true;
   playBtn.textContent = "播放 ▶︎";
 });
+function extractFilenameFromUrl(url) {
+    if (!url) return "";
+    return url.split("/").pop() || "";
+}
 function parseTimestampFromFilename(filename) {
     const base = filename.replace(".mp3", "");
     return base.split("_")[0] || "";
 }
-
+const filename = extractFilenameFromUrl(data.audio_url);
+const timestamp = parseTimestampFromFilename(filename);
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -173,8 +178,6 @@ viewTanzakuBtn.addEventListener("click", () => {
     tanzakuPreviewImg.src = currentTanzakuDataUrl;
     tanzakuPreviewWrap.hidden = false;
 });
-const filename = extractFilenameFromUrl(data.audio_url);
-const timestamp = parseTimestampFromFilename(filename);
 /* --- 5️⃣ 播放生成音樂 --- */
 playBtn.addEventListener("click", () => {
     if (playBtn.disabled) return;
