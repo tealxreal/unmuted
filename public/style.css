@@ -1071,13 +1071,13 @@ body.interaction-mode #scroll-orb{
 .tanzaku-preview-wrap{
   position: absolute;
   inset: 0;
-  z-index: 6000;
+  z-index: 5000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
   background: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(6px);
+  backdrop-filter: none;
 }
 
 /* 用 class 控制顯示/隱藏 */
@@ -1088,12 +1088,13 @@ body.interaction-mode #scroll-orb{
 /* 內部面板 */
 .tanzaku-preview-panel{
   position: relative;
-  width: 82vw;
-  max-height: 70vh;
+  width: 76vw;
+  max-height: 64vh;
   padding: 18px 16px 14px;
   border-radius: 18px;
-  background: rgba(20, 20, 20, 0);
+  background: rgba(0, 0, 0, 0.358);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.358);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1131,8 +1132,8 @@ body.interaction-mode #scroll-orb{
 .ghost-btn{
   border: 2px solid #ffffff;
   border-radius: 999px;
-  background-color: #ffffffaf;
-  color: #ffffff31;
+  background-color: #ffffff6a;
+  color: #ffffff;
 }
 /* 提示字 */
 .save-tip{
