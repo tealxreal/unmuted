@@ -40,6 +40,16 @@ const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
 const containerEl = document.querySelector(".container");
+function lockScroll(){
+  window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.addEventListener("touchmove", preventScrollAction, nonPassiveOption);
+}
+function unlockScroll(){
+  window.removeEventListener("keydown", preventScrollKeys, nonPassiveOption);
+  window.removeEventListener("wheel", preventScrollAction, nonPassiveOption);
+  window.removeEventListener("touchmove", preventScrollAction, nonPassiveOption);
+}
 function clamp(v, min, max){
   return Math.max(min, Math.min(max, v));
 }
@@ -114,16 +124,7 @@ function loadImage(src) {
     img.src = src;
   });
 }
-closeTanzakuPreviewBtn.addEventListener("click", () => {
-    tanzakuPreviewWrap.classList.add("hidden");
-    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-});
-tanzakuPreviewWrap.addEventListener("click", (e) => {
-    if (e.target === tanzakuPreviewWrap) {
-        tanzakuPreviewWrap.classList.add("hidden");
-        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
-    }
-});
+
 //合成圖片
 async function composeTanzakuImage({ emotion, timestamp }) {
   const config = TANZAKU_DATA[emotion];
@@ -247,8 +248,20 @@ viewTanzakuBtn.addEventListener("click", () => {
     tanzakuPreviewImg.src = currentTanzakuDataUrl;
     tanzakuPreviewWrap.classList.remove("hidden");
     tanzakuPreviewWrap.setAttribute("aria-hidden", "false");
+    lockScroll();
 });
-
+closeTanzakuPreviewBtn.addEventListener("click", () => {
+    tanzakuPreviewWrap.classList.add("hidden");
+    tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    unlockScroll();
+});
+tanzakuPreviewWrap.addEventListener("click", (e) => {
+    if (e.target === tanzakuPreviewWrap) {
+        tanzakuPreviewWrap.classList.add("hidden");
+        tanzakuPreviewWrap.setAttribute("aria-hidden", "true");
+    }
+    unlockScroll();
+});
 /* --- 5️⃣ 播放生成音樂 --- */
 playBtn.addEventListener("click", () => {
     if (playBtn.disabled) return;
@@ -610,16 +623,7 @@ stopAllAudio = function(){
   _stopAllAudio();
   showTapHint(false);
 };
-function lockScroll(){
-  window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
-  window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
-  window.addEventListener("touchmove", preventScrollAction, nonPassiveOption);
-}
-function unlockScroll(){
-  window.removeEventListener("keydown", preventScrollKeys, nonPassiveOption);
-  window.removeEventListener("wheel", preventScrollAction, nonPassiveOption);
-  window.removeEventListener("touchmove", preventScrollAction, nonPassiveOption);
-}
+
 let sidebarClosingTimer = null;
 function openSidebar(){
   clearTimeout(sidebarClosingTimer);

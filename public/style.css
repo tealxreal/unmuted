@@ -1061,15 +1061,9 @@ body.interaction-mode #scroll-orb{
   opacity: 0.45;
   cursor: not-allowed;
 }
-
-/* 讓浮層能以 experience-block 為定位基準 */
-.experience-block{
-  position: relative;
-}
-
 /* 整個預覽遮罩層 */
 .tanzaku-preview-wrap{
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 5000;
   display: flex;
@@ -1082,7 +1076,7 @@ body.interaction-mode #scroll-orb{
 
 /* 用 class 控制顯示/隱藏 */
 .tanzaku-preview-wrap.hidden{
-  display: none;
+  display: none !important;
 }
 
 /* 內部面板 */
