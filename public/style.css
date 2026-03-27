@@ -851,7 +851,7 @@ body {
   width: 100%;
   height: 100%;
   border: 4px solid transparent;
-  border-top-color: #aeffec;
+  border-top-color: #629fa0;
   border-radius: 50%;
   animation: spin-double 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
@@ -861,7 +861,7 @@ body {
   height: 80%;
   top: 10%;
   left: 10%;
-  border-top-color: #d5a5ff;
+  border-top-color: #745b8a;
   animation-duration: 2s;
 }
 
@@ -987,6 +987,7 @@ body.loading-lock {
   scroll-snap-align: center;
   border:none;
   background: none;
+  backdrop-filter: none;
   padding: 22px 10px 10px;
 }
 .catalog-slider::-webkit-scrollbar{
@@ -1087,11 +1088,11 @@ body.interaction-mode #scroll-orb{
 /* 內部面板 */
 .tanzaku-preview-panel{
   position: relative;
-  width: 86vw;
-  max-height: 78vh;
+  width: 82vw;
+  max-height: 70vh;
   padding: 18px 16px 14px;
   border-radius: 18px;
-  background: rgba(20, 20, 20, 0.179);
+  background: rgba(20, 20, 20, 0);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.358);
   display: flex;
   flex-direction: column;
@@ -1129,6 +1130,9 @@ body.interaction-mode #scroll-orb{
 }
 .ghost-btn{
   border: 2px solid #ffffff;
+  border-radius: 999px;
+  background-color: #ffffffaf;
+  color: #ffffff31;
 }
 /* 提示字 */
 .save-tip{

@@ -146,7 +146,7 @@ async function composeTanzakuImage({ emotion, timestamp }) {
   ctx.font = "45px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
 
   const lines = finalText.split("\n");
-  const lineHeight = 30;
+  const lineHeight = 55;
 
   const totalTextHeight = lines.length * lineHeight;
   const startX = canvas.width / 2;
