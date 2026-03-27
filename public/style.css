@@ -87,7 +87,7 @@ body {
   border-radius: 50%;
   line-height: 1;
   background: #e8ffff0e;
-  box-shadow: 0 0 6px #e8ffffbe;
+  box-shadow: none;
   cursor: pointer;
   z-index: 5000;
   display: flex;
@@ -97,6 +97,41 @@ body {
   transform-origin: center center;
   pointer-events: auto;
   transition: transform 0.35s ease;
+  isolation: isolate;
+}
+/* 外圈彩虹光 */
+.sidebar-toggle::before{
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #ff7d7d,
+    #fffda1,
+    #a5ffff,
+    #d199ff,
+    #ff7d7d
+  );
+  animation: sidebar-rainbow-spin 8s linear infinite;
+  z-index: -2;
+  filter:
+    blur(4px)
+    drop-shadow(0 0 6px #ff7d7d45)
+    drop-shadow(0 0 6px #fffda14d)
+    drop-shadow(0 0 6px #a5ffff46)
+    drop-shadow(0 0 6px #d199ff4f);
+  opacity: 0.75;
+}
+.sidebar-toggle::after{
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: #0f141600;
+  z-index: -1;
+  box-shadow:
+    inset 0 0 0 6px rgba(10, 14, 18, 0.92);
 }
 .sidebar-toggle-icon{
   display: block;
@@ -109,6 +144,14 @@ body {
 }
 .sidebar-toggle.is-open{
   transform: rotate(90deg);
+}
+@keyframes sidebar-rainbow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 /* 全頁覆蓋選單 */
 .sidebar-overlay{
@@ -862,6 +905,7 @@ body {
   height: 85%;
   top: 7.5%;
   left: 7.5%;
+  border-left-color: none;
   border-top-color: #e8ffff;
   filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
   animation-duration: 2s;
@@ -872,6 +916,7 @@ body {
   top: 15%;
   left: 15%;
   border-bottom-color: #768fcf;
+  border-left-color: none;
   filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.604));
   animation-duration: 2.4s;
 }

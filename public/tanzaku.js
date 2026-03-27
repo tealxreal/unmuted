@@ -5,7 +5,7 @@ JOY: {
         "/pic/bg_joy_02.png"
     ],
 texts: [
-`UNMUTED:
+`「UNMUTED：」
 ------------------------
 {timestamp}
 mood of the day:
@@ -51,7 +51,7 @@ SADNESS: {
         "/pic/bg_sadness_02.png"
     ],
 texts: [
-    `UNMUTED:
+    `「UNMUTED：」
 ------------------------
 {timestamp}
 mood of the day:

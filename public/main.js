@@ -144,18 +144,23 @@ async function composeTanzakuImage({ emotion, timestamp }) {
   ctx.fillStyle = "#000000";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.font = "45px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
-
   const lines = finalText.split("\n");
   const lineHeight = 55;
-
   const totalTextHeight = lines.length * lineHeight;
   const startX = canvas.width / 2;
   const startY = (canvas.height - totalTextHeight) / 2;
 
   lines.forEach((line, index) => {
-  if (
-    line.includes("「UNMUTED：」") ||
+    // 預設
+  let fontWeight = "normal";
+  let fontSize = 45;  
+  // 你要粗體的條件（自己定）
+  if (line.includes("「UNMUTED：」")) {
+    fontWeight = "bold";
+    fontSize = 48;   // ← 這裡放大
+  }
+  // ⭐ 情緒名稱
+  else if (
     line === "JOY" ||
     line === "ANGER" ||
     line === "SADNESS" ||
@@ -163,8 +168,10 @@ async function composeTanzakuImage({ emotion, timestamp }) {
     line === "FEAR" ||
     line === "SURPRISE"
   ) {
-    ctx.font = "'Courier'";
+    fontWeight = "bold";
+    fontSize = 45;
   }
+    ctx.font = `${fontWeight} ${fontSize}px 'IBM Plex Mono','JetBrains Mono',  monospace`;
     ctx.fillText(line, startX, startY + index * lineHeight);
   });
 
