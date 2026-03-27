@@ -116,11 +116,11 @@ body {
   animation: sidebar-rainbow-spin 6s linear infinite;
   z-index: -2;
   filter:
-    blur(6px)
-    drop-shadow(0 0 6px #ff7d7d45)
-    drop-shadow(0 0 6px #fffda14d)
-    drop-shadow(0 0 6px #a5ffff46)
-    drop-shadow(0 0 6px #d199ff4f);
+    blur(8px)
+    drop-shadow(0 0 2.5px #ff7d7d45)
+    drop-shadow(0 0 2.5px #fffda14d)
+    drop-shadow(0 0 2.5px #a5ffff46)
+    drop-shadow(0 0 2.5px #d199ff4f);
   opacity: 0.55;
 }
 .sidebar-toggle::after{
