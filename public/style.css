@@ -103,7 +103,7 @@ body {
 .sidebar-toggle::before{
   content: "";
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
