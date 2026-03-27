@@ -47,8 +47,8 @@ JOY
 },
 SADNESS: {
     backgrounds: [
-        "/static/pic/bg_sadness_01.png",
-        "/static/pic/bg_sadness_02.png"
+        "/pic/bg_sadness_01.png",
+        "/pic/bg_sadness_02.png"
     ],
 texts: [
     `UNMUTED:
