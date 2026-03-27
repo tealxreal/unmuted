@@ -3,6 +3,7 @@ import re
 from pypinyin import pinyin, Style
 from pydub import AudioSegment
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from .chord_test import combine_audio, distribute_beats
 from .melody_test import assign_rhythm_lengths, get_rhythm_pattern
 #from .effect_test import insert_effect, get_effect_index
@@ -125,7 +126,7 @@ async def generate_music(sentence: str, emotion: str):
     #emotion = analyze_emotion(_)
     emotion = emotion
     sentence = sentence
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    timestamp = datetime.now(ZoneInfo("Asia/Taipei")).strftime("%Y%m%d.%H%M%S")
     final_audio_path = os.path.join(OUTPUT_DIR, f"{timestamp}_{emotion}.mp3")
     print(final_audio_path)
     # 轉換並分析

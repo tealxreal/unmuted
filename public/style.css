@@ -975,7 +975,7 @@ body.loading-lock {
   display: flex;
   flex-direction: column;  
   justify-content: center;
-  padding-top: 20vw;
+  padding-top: 28vw;
   box-sizing: border-box;
   gap: 20px;
 }
@@ -1070,12 +1070,12 @@ body.interaction-mode #scroll-orb{
 .tanzaku-preview-wrap{
   position: absolute;
   inset: 0;
-  z-index: 30;
+  z-index: 6000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.38);
+  background: rgba(0, 0, 0, 0);
   backdrop-filter: blur(6px);
 }
 
@@ -1087,12 +1087,12 @@ body.interaction-mode #scroll-orb{
 /* 內部面板 */
 .tanzaku-preview-panel{
   position: relative;
-  width: min(86vw, 360px);
-  max-height: 84vh;
+  width: 86vw;
+  max-height: 78vh;
   padding: 18px 16px 14px;
   border-radius: 18px;
-  background: rgba(20,20,20,0.72);
-  box-shadow: 0 12px 32px rgba(0,0,0,.28);
+  background: rgba(20, 20, 20, 0.179);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.358);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1107,8 +1107,8 @@ body.interaction-mode #scroll-orb{
   max-height: 62vh;
   object-fit: contain;
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.18);
-  background: rgba(255,255,255,.06);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.114);
+  background: rgba(255, 255, 255, 0);
 }
 
 /* 關閉按鈕 */
@@ -1118,15 +1118,18 @@ body.interaction-mode #scroll-orb{
   right: 10px;
   width: 32px;
   height: 32px;
-  border: none;
+  border: 1px solid #ffffff;
   border-radius: 999px;
   background: rgba(255,255,255,.14);
+  backdrop-filter: blur(6px);
   color: #fff;
   font-size: 20px;
   line-height: 1;
   cursor: pointer;
 }
-
+.ghost-btn{
+  border: 2px solid #ffffff;
+}
 /* 提示字 */
 .save-tip{
   font-size: 13px;

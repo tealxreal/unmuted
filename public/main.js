@@ -140,13 +140,13 @@ async function composeTanzakuImage({ emotion, timestamp }) {
   // 背景
   ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
   // 文字設定
-  ctx.fillStyle = "#111111";
+  ctx.fillStyle = "#000000";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.font = "20px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
+  ctx.font = "45px 'Courier New', 'JetBrains Mono', 'IBM Plex Mono', monospace";
 
   const lines = finalText.split("\n");
-  const lineHeight = 20;
+  const lineHeight = 30;
 
   const totalTextHeight = lines.length * lineHeight;
   const startX = canvas.width / 2;
@@ -763,7 +763,6 @@ requestAnimationFrame(() => {
 });
 
 //清除
-
 clearBtn.addEventListener("click", () => {
     textarea.value = "";
     counter.textContent = 0;
