@@ -154,10 +154,6 @@ async function composeTanzakuImage({ emotion, timestamp }) {
   const startY = (canvas.height - totalTextHeight) / 2;
 
   lines.forEach((line, index) => {
-    // 預設
-  let fontWeight = "normal";
-
-  // 你要粗體的條件（自己定）
   if (
     line.includes("「UNMUTED：」") ||
     line === "JOY" ||
@@ -167,7 +163,7 @@ async function composeTanzakuImage({ emotion, timestamp }) {
     line === "FEAR" ||
     line === "SURPRISE"
   ) {
-    fontWeight = "bold";
+    ctx.font = "'Courier'";
   }
     ctx.fillText(line, startX, startY + index * lineHeight);
   });
