@@ -852,7 +852,6 @@ body {
   height: 100%;
   border: 3.5px solid transparent;
   border-top-color: #d88181;
-  border-left-color: #e58484;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.758));
   border-radius: 50%;
   animation: spin-double 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
