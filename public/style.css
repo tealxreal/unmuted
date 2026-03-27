@@ -103,7 +103,7 @@ body {
 .sidebar-toggle::before{
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -1px;
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
@@ -117,11 +117,11 @@ body {
   z-index: -2;
   filter:
     blur(8px)
-    drop-shadow(0 0 2.5px #ff7d7d45)
-    drop-shadow(0 0 2.5px #fffda14d)
-    drop-shadow(0 0 2.5px #a5ffff46)
-    drop-shadow(0 0 2.5px #d199ff4f);
-  opacity: 0.55;
+    drop-shadow(0 0 2px #ff7d7d45)
+    drop-shadow(0 0 2px #fffda14d)
+    drop-shadow(0 0 2px #a5ffff46)
+    drop-shadow(0 0 2px #d199ff4f);
+  opacity: 0.35;
 }
 .sidebar-toggle::after{
   content: "";
