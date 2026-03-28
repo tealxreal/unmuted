@@ -111,6 +111,7 @@ textarea.addEventListener("input", () => {
     tanzakuPreviewImg.removeAttribute("src");
   }
 });
+updateGenerateBtnState();
 function extractFilenameFromUrl(url) {
     if (!url) return "";
     return url.split("/").pop() || "";

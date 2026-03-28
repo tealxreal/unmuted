@@ -669,8 +669,8 @@ body {
         textarea {
             display: block;
             width: 100%;
-            max-width: 580px;
-            height: 100px;
+            max-width: 640px;
+            height: 150px;
             resize: none;
             padding: 12px;
             margin: 0 auto;
@@ -679,7 +679,7 @@ body {
             box-sizing: border-box;
             border: none;
             border-radius: 4px;
-            font-size: 3vw;
+            font-size: 16px;
             color: #e8ffff;
             box-shadow:
                 0 0 1px rgba(255,255,255,0.8),
@@ -689,7 +689,7 @@ body {
         }
         textarea::placeholder {
             color: rgba(232, 255, 255, 0.483);
-            font-size: 3vw;
+            font-size: 16px;
             }
             .char-counter{
     margin-bottom: 6px;
