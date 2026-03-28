@@ -669,7 +669,7 @@ body {
         textarea {
             display: block;
             width: 100%;
-            max-width: 200px;
+            width: 70vw;
             height: 150px;
             resize: none;
             padding: 12px;
@@ -811,6 +811,15 @@ body {
 /* ✅ Play 按鈕：disabled 時一定暗 */
 #play-btn:disabled,
 #play-btn[disabled]{
+  opacity: 0.28;
+  filter: grayscale(1) brightness(0.7);
+  background: rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.25);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+#generate-btn-disabled,
+#generate-btn[disabled]{
   opacity: 0.28;
   filter: grayscale(1) brightness(0.7);
   background: rgba(0,0,0,0.55);
