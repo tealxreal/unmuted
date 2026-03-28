@@ -40,6 +40,8 @@ const container = document.querySelector(".container");
 const enterInteractionBtn = document.getElementById("enter-interaction-btn");
 const closeInteractionBtns = document.querySelectorAll(".close-interaction-btn");
 const containerEl = document.querySelector(".container");
+const inputAlertModal = document.getElementById("inputAlertModal");
+const inputAlertConfirmBtn = document.getElementById("inputAlertConfirmBtn");
 function lockScroll(){
   window.addEventListener("keydown", preventScrollKeys, nonPassiveOption);
   window.addEventListener("wheel", preventScrollAction, nonPassiveOption);
@@ -174,14 +176,37 @@ async function composeTanzakuImage({ emotion, timestamp }) {
     ctx.font = `${fontWeight} ${fontSize}px 'IBM Plex Mono','JetBrains Mono',  monospace`;
     ctx.fillText(line, startX, startY + index * lineHeight);
   });
-
   return canvas.toDataURL("image/png");
 }
-
+function containsChineseOrEnglish(text) {
+    return /[A-Za-z\u4E00-\u9FFF]/.test(text);
+}
+function showInputAlert() {
+    inputAlertModal.classList.remove("hidden");
+    inputAlertModal.setAttribute("aria-hidden", "false");
+}
+function hideInputAlert() {
+    inputAlertModal.classList.add("hidden");
+    inputAlertModal.setAttribute("aria-hidden", "true");
+}
+inputAlertConfirmBtn.addEventListener("click", () => {
+    hideInputAlert();
+    textarea.focus();
+});
+inputAlertModal.addEventListener("click", (e) => {
+    if (e.target === inputAlertModal) {
+        hideInputAlert();
+        textarea.focus();
+    }
+});
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
 async function generateMusic() {
     const text = textarea.value.trim();
     if (!text) return;
+    if (!containsChineseOrEnglish(text)) {
+        showInputAlert();
+        return;
+    }
     generateBtn.disabled = true;
     generateBtn.textContent = "生成中...";
     playBtn.disabled = true;
@@ -231,6 +256,7 @@ async function generateMusic() {
         playBtn.classList.add("visible-btn");
         playBtn.classList.remove("hidden-btn");
         playBtn.disabled = false;
+        generateBtn.disabled = true;
         // 同步啟用短冊按鈕
         viewTanzakuBtn.classList.add("visible-btn");
         viewTanzakuBtn.classList.remove("hidden-btn");
@@ -241,6 +267,7 @@ async function generateMusic() {
         playBtn.disabled = true;
         hideLoading();
         hideAnalysisResult();
+        generateBtn.disabled = false;
     }
     generateBtn.disabled = false;
     generateBtn.textContent = "確認送出";

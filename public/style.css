@@ -895,7 +895,7 @@ body {
   height: 100%;
   border: 3.5px solid transparent;
   border-top-color: #a887d7;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.758));
+  filter: drop-shadow(0 0 6px #a887d7b4);
   border-radius: 50%;
   animation: spin-double 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
@@ -906,7 +906,7 @@ body {
   top: 7.5%;
   left: 7.5%;
   border-top-color: #e8ffff;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+  filter: drop-shadow(0 0 4px #e8ffff9d);
   animation-duration: 2s;
 }
 .double-ring div:nth-child(3) {
@@ -915,7 +915,7 @@ body {
   top: 15%;
   left: 15%;
   border-top-color: #768fcf;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.604));
+  filter: drop-shadow(0 0 2px #768fcf96);
   animation-duration: 2.4s;
 }
 
@@ -1192,6 +1192,33 @@ body.interaction-mode #scroll-orb{
   margin: 0;
   color: rgba(255,255,255,0.88);
 }
+.input-alert-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 7, 16, 0);
+  backdrop-filter: blur(8px);
+}
+.input-alert-modal.hidden{
+  display: none !important;
+}
+.input-alert-box{
+  width: 70vw;
+  padding: 24px 20px 18px;
+  border-radius: 18px;
+  background: rgba(6, 4, 15, 0.66);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+  text-align: center;
+}
+.input-alert-text{
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.6;
+}
 @media (min-width: 768px){
     .container {
     width: min(100vw, 75vh);
@@ -1199,13 +1226,10 @@ body.interaction-mode #scroll-orb{
   }
 }
 *, *::before, *::after { box-sizing: border-box; }
-/* ===== 完全隱藏 scrollbar ===== */
-
 html, body, .container {
   scrollbar-width: none;       /* Firefox */
   -ms-overflow-style: none;    /* IE / 舊 Edge */
 }
-
 html::-webkit-scrollbar,
 .container::-webkit-scrollbar,
 body::-webkit-scrollbar {
