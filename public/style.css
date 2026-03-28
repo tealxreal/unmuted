@@ -668,12 +668,12 @@ body {
 
         textarea {
             display: block;
-            width: 100%;
             width: 70vw;
             height: 150px;
             resize: none;
             padding: 12px;
-            margin: 0 auto;
+            margin: 0;
+            align-self: center;
             background: #00000031;
             box-sizing: border-box;
             border: none;
