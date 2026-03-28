@@ -506,6 +506,7 @@ body {
             width: 100%;
             max-width: 100dvw;
             min-height: 90dvh;
+            padding-top: 28vw;
             display: flex;
             flex-direction: column;  
             justify-content: center;  
