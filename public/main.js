@@ -87,8 +87,13 @@ playBtn.disabled = true;
 generateBtn.addEventListener("click", () => {
     generateMusic();
 });
+function updateGenerateBtnState() {
+    const text = textarea.value.trim();
+    generateBtn.disabled = !text || !containsChineseOrEnglish(text);
+}
 /* ✅ 如果文字改了：舊音檔作廢，播放鍵回到灰 */
 textarea.addEventListener("input", () => {
+  updateGenerateBtnState();
   generatedAudioURL = null;
   hideAnalysisResult();
   playBtn.disabled = true;
@@ -202,7 +207,10 @@ inputAlertModal.addEventListener("click", (e) => {
 /* --- 4️⃣ 呼叫後端生成音樂 --- */
 async function generateMusic() {
     const text = textarea.value.trim();
-    if (!text) return;
+    if (!text) {
+    updateGenerateBtnState(); // 保險
+    return;
+    }
     if (!containsChineseOrEnglish(text)) {
         showInputAlert();
         return;
@@ -256,7 +264,7 @@ async function generateMusic() {
         playBtn.classList.add("visible-btn");
         playBtn.classList.remove("hidden-btn");
         playBtn.disabled = false;
-        generateBtn.disabled = true;
+        
         // 同步啟用短冊按鈕
         viewTanzakuBtn.classList.add("visible-btn");
         viewTanzakuBtn.classList.remove("hidden-btn");
@@ -267,9 +275,8 @@ async function generateMusic() {
         playBtn.disabled = true;
         hideLoading();
         hideAnalysisResult();
-        generateBtn.disabled = false;
     }
-    generateBtn.disabled = false;
+    updateGenerateBtnState();
     generateBtn.textContent = "確認送出";
 }
 viewTanzakuBtn.addEventListener("click", () => {
