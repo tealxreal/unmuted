@@ -427,21 +427,16 @@ function setMode(mode, targetPage = null) {
     document.body.classList.remove("main-mode");
     document.body.classList.add("interaction-mode");
   }
-
   stopAllAudio();
   hideAnalysisResult();
   setupPageObserver();
   updateArtGroup();
-
   if (target && target.id) {
     requestAnimationFrame(() => {
       updateArtPosition(target.id);
     });
   }
 }
-
-
-
 let pageObserver = null;
 let currentPageId = null;
 function setupPageObserver() {
@@ -575,47 +570,35 @@ emotionButtons.forEach(btn => {
 (function bgScroller(){
   const track = document.getElementById("bgTrack");
   if (!track) return;
-
   const slideH = () => window.innerHeight;
   let y = 0;
   let last = performance.now();
-
   const baseSpeed = 15;
   const fastSpeed = 200;
   const accelAt = 0.15;
-
   let paused = false;
   let scrollTimer = null;
-
   function tick(now){
     const dt = (now - last) / 1000;
     last = now;
-
-    if (!paused){
+    if (!paused && currentMode === "interaction"){
       const h = slideH();
       const progress = (y % h) / h;
       const speed = progress < accelAt ? baseSpeed : fastSpeed;
       y += speed * dt;
-
       const loopH = h * (track.children.length / 2);
       if (y >= loopH) y -= loopH;
-
       track.style.transform = `translate3d(0, ${-y}px, 0)`;
     }
-
     requestAnimationFrame(tick);
   }
-
   requestAnimationFrame(tick);
-
   // ✅ 捲動時暫停背景動畫，提升順暢度
-  
   scroller.addEventListener("scroll", () => {
     paused = true;
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => { paused = false; }, 120);
   }, { passive: true });
-
   window.addEventListener("resize", () => {
     const h = slideH();
     const loopH = h * (track.children.length / 2);
