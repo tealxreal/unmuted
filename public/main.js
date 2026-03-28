@@ -810,6 +810,7 @@ clearBtn.addEventListener("click", () => {
     playBtn.classList.remove("visible-btn");
     playBtn.disabled = true;
     hideAnalysisResult();
+    updateGenerateBtnState();
     currentTanzakuDataUrl = "";
     currentTanzakuEmotion = "";
     currentTanzakuTimestamp = "";
