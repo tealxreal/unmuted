@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi import Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -10,6 +11,7 @@ import asyncio
 import time
 
 app = FastAPI()
+interaction_logs = []
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,7 +20,6 @@ app.add_middleware(
         "https://www.unmuted.tw",
         "https://unmuted.tw",
         "https://unmuted.onrender.com/",
-         # 之後如果綁自己的網域
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -52,7 +53,13 @@ class GenerateRequest(BaseModel):
     sentence: str
 
 @app.post("/generate")
-async def generate(req: GenerateRequest):
+@app.get("/logs")
+
+def get_logs():
+    
+    return interaction_logs
+
+async def generate(req: GenerateRequest, request: Request):
     try:
         sentence = req.sentence
         #CALM
@@ -74,6 +81,18 @@ async def generate(req: GenerateRequest):
         filename=os.path.basename(audio_path)
         audio_url = f"/output/{filename}"
         print(audio_url)
+
+        # 👉 取得裝置資訊（user-agent）
+        user_agent = request.headers.get("user-agent", "unknown")
+        # 👉 存 log
+        log = {
+            time.strftime("%Y-%m-%d %H:%M:%S"),
+            user_agent,
+            sentence,
+            emotion
+        }
+        interaction_logs.insert(0, log)
+        interaction_logs[:] = interaction_logs[:250]
         return {
             "emotion": emotion,
             "audio_url": audio_url
@@ -98,8 +117,6 @@ async def delete_old_files():
                     os.remove(file_path)
                     print(f"Deleted old file: {file_path}")
         await asyncio.sleep(3600)  # 每小時掃一次
-
-
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
