@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi import Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+import json
 from fastapi.staticfiles import StaticFiles
 import os
 from .main_test import generate_music
@@ -9,6 +10,7 @@ from .gptapi import analyze_emotion
 from pydantic import BaseModel
 import asyncio
 import time
+from datetime import datetime, timezone, timedelta
 
 app = FastAPI()
 interaction_logs = []
@@ -54,7 +56,10 @@ class GenerateRequest(BaseModel):
 
 @app.get("/logs")
 def get_logs():
-    return interaction_logs
+    return JSONResponse(
+        content=json.loads(json.dumps(interaction_logs, ensure_ascii=False)),
+        media_type="application/json; charset=utf-8"
+    )
 
 @app.post("/generate")
 async def generate(req: GenerateRequest, request: Request):
@@ -83,8 +88,9 @@ async def generate(req: GenerateRequest, request: Request):
         # 👉 取得裝置資訊（user-agent）
         user_agent = request.headers.get("user-agent", "unknown")
         # 👉 存 log
+        taiwan_time = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")
         log = {
-            "time": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "time": taiwan_time,
             "device": user_agent,
             "text": sentence,
             "emotion": emotion
