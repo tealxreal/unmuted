@@ -52,13 +52,11 @@ class SentenceInput(BaseModel):
 class GenerateRequest(BaseModel):
     sentence: str
 
-@app.post("/generate")
 @app.get("/logs")
-
 def get_logs():
-    
     return interaction_logs
 
+@app.post("/generate")
 async def generate(req: GenerateRequest, request: Request):
     try:
         sentence = req.sentence
@@ -86,10 +84,10 @@ async def generate(req: GenerateRequest, request: Request):
         user_agent = request.headers.get("user-agent", "unknown")
         # 👉 存 log
         log = {
-            time.strftime("%Y-%m-%d %H:%M:%S"),
-            user_agent,
-            sentence,
-            emotion
+            "time": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "device": user_agent,
+            "text": sentence,
+            "emotion": emotion
         }
         interaction_logs.insert(0, log)
         interaction_logs[:] = interaction_logs[:250]
